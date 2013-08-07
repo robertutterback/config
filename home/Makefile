@@ -13,12 +13,12 @@ all:
 	@echo Usage:
 	@echo make install - Run default command set in the Makefile \(default is to symlink\)
 
-.PHONY: install uninstall $(FILES) $(UNFILES)
+.PHONY: install uninstall $(FILES) %.uninstall
 install: $(FILES)
 uninstall: $(FILES:=.uninstall)
 
 $(FILES):
-	@echo Installing $(DEST)/$@
+	@echo $(DEST)/$@
 	@if test ! -d `dirname "$(DEST)/$@"`; then \
 		mkdir -p `dirname "$(DEST)/$@"`; \
 	fi
@@ -28,10 +28,7 @@ $(FILES):
 	@$(COMMAND) "$(CURDIR)/$@" "$(DEST)/$@"
 
 %.uninstall:
-	@echo Reverting $(DEST)/$@
-	@if test -e "$(DEST)/$@"; then \
-		rm "$(DEST)/$@"; \
-	fi
+	@echo Reverting $(DEST)/${@:.uninstall=}
 	@if test -e "$(DEST)/${@:.uninstall=.orig}"; then \
 		mv "$(DEST)/${@:.uninstall=.orig}" "$(DEST)/${@:.uninstall=}"; \
 	fi
