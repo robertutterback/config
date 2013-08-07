@@ -1,0 +1,22 @@
+[user]
+	name = Robert Utterback
+	email = robertu13@gmail.com
+[core]
+	editor = emacsclient
+[merge]
+	tool = diff
+[color]
+	status = auto
+	branch = auto
+	interactive = auto
+	diff = auto
+[credential]
+	helper = cache --timeout=3600
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	visual = !gitk
