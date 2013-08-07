@@ -1,4 +1,4 @@
-GIT_LS_COMMAND= git ls-files | grep -v -e Makefile
+GIT_LS_COMMAND= git ls-files | grep -v -e Makefile | grep -v -e README
 GIT_FILES=      $(shell $(GIT_LS_COMMAND))   # GNU Make compatible
 GIT_FILES!=     $(GIT_LS_COMMAND)            # BSD Make compatible
 
