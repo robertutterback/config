@@ -1,4 +1,4 @@
-GIT_DIR_COMMAND= git ls-tree --name-only master | grep -v -e Makefile | grep -v -e README
+GIT_DIR_COMMAND= ./gitdirs.sh
 GIT_DIRS= $(shell $(GIT_DIR_COMMAND))
 GIT_DIRS!= $(GIT_DIR_COMMAND)
 
