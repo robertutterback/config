@@ -4,14 +4,14 @@
     (setq package-user-dir (concat config-dir "elpa"))
   #+END_SRC
 
-* ELPA archive repositories 
+* ELPA archive repositories
   #+BEGIN_SRC emacs-lisp
         (setq package-archives
               '(("melpa"       . "http://melpa.milkbox.net/packages/")
                 ("gnu"         . "http://elpa.gnu.org/packages/")
                 ("original"    . "http://tromey.com/elpa/")
-                ("org"         . "http://orgmode.org/elpa/")
-                ("marmalade"   . "http://marmalade-repo.org/packages/")))
+		;("marmalade"   . "http://marmalade-repo.org/packages/")
+                ("org"         . "http://orgmode.org/elpa/")))
         (package-initialize)
   #+END_SRC
 
@@ -19,9 +19,13 @@
   #+BEGIN_SRC emacs-lisp
     (defvar packages-list
       '(color-theme color-theme-solarized
-        flymake-easy flymake-python-pyflakes pyflakes pylint pymacs python-mode python-pylint
-        magit markdown-mode yasnippet melpa tomatinho hlinum)
+                    flymake-easy flymake-python-pyflakes pylint
+                    magit markdown-mode yasnippet melpa tomatinho hlinum)
       "List of packages I want installed at launch")
+;; Maybe these are only available with marmalade?
+;; Marmalade seems to be down as of 16082013 1502
+;; python-mode pyflakes pymacs python-pylint
+    
     
     (defun packages-installed-p ()
       (loop for p in packages-list
