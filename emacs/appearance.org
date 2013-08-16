@@ -1,0 +1,56 @@
+* Color Theme
+#+BEGIN_SRC emacs-lisp
+  (require 'color-theme)
+ 
+  ;; select theme - first list element is for windowing system, second is for console/terminal
+  (setq color-theme-choices 
+        '(color-theme-solarized-dark ))
+
+  ;; test for each frame or console
+  (lexical-let ( (cols color-theme-choices) )
+    (defun test-win-sys (frame)
+      (color-theme-initialize)
+      (let ( (color-theme-is-global nil) )
+        (select-frame frame)
+        (eval (append '(if (window-system frame)) 
+                      (mapcar (lambda (x) (cons x nil)) cols))))))
+
+  ;; hook on after-make-frame-functions
+  (add-hook 'after-make-frame-functions 'test-win-sys)  
+
+#+END_SRC
+
+* Doc-View
+#+BEGIN_SRC emacs-lisp
+  (setq doc-view-continuous t)
+#+END_SRC
+* Other minor stuff
+#+BEGIN_SRC emacs-lisp
+  (setq display-time-day-and-date t display-time-24hr-format t)
+  (display-time)
+
+  ;; Highlight line numbers
+  (require 'hlinum)
+  (hlinum-activate)
+#+END_SRC
+* Text and org-mode appearance
+#+BEGIN_SRC emacs-lisp
+  (defun text-mode-appearance ()
+    (interactive)
+    (turn-on-visual-line-mode)
+    (flyspell-mode 1)
+    (line-tail-highlight-off))
+
+  (add-hook 'text-mode-hook 'text-mode-appearance)
+  (add-hook 'org-mode-hook 'text-mode-appearance)
+#+END_SRC
+* Web Browsing in Emacs
+- w3 won't work in an OSX graphical frame
+- Something to do with the font device
+- I'm not going to mess with it, hopefully
+- someone will eventually fix it.
+#+BEGIN_SRC emacs-lisp
+  (setq w3-user-fonts-take-precedence t)
+  (setq w3-use-terminal-characters t)
+  (setq w3-use-terminal-glyphs t)
+#+END_SRC

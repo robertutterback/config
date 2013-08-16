@@ -1,0 +1,30 @@
+#+TITLE: Miscellaneous Customizations
+
+* Unfortunately, the "Edit with Emacs" extension doesn't seem to be
+	working for me right now. So I've uninstalled edit-server.el.
+	Maybe in a few months I'll try again; until then this code
+	does nothing.
+* Open "Edit with Emacs" using emacs daemon
+#+BEGIN_SRC emacs-lisp
+  (when (and (daemonp) (locate-library "edit-server"))
+    (require 'edit-server)
+    (edit-server-start))
+#+END_SRC
+
+* Buffers are edited in `text-mode' by default; to use a different
+major mode, change `edit-server-default-major-mode' or customize
+`edit-server-url-major-mode-alist' to specify major modes based
+on the remote URL:
+#+BEGIN_SRC emacs-lisp
+  ;; (setq edit-server-url-major-mode-alist
+  ;;       '(("github\\.com" . markdown-mode)))
+#+END_SRC
+
+* Alternatively, set the mode in `edit-server-start-hook'.  For
+example:
+#+BEGIN_SRC emacs-lisp
+  ;; (add-hook 'edit-server-start-hook
+  ;;          (lambda ()
+  ;;            (when (string-match "github.com" (buffer-name))
+  ;;              (markdown-mode))))
+#+END_SRC

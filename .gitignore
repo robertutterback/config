@@ -1,0 +1,13 @@
+# Ignore files I don't need to track
+.DS*
+*~
+*#
+emacs/*.el
+emacs/*.elc
+emacs/auto-save-list
+emacs/auto-save-list/*
+emacs/elpa
+emacs/elpa/*
+
+# Except:
+!emacs/init.el

@@ -1,0 +1,40 @@
+#+TITLE: Package Management
+
+  #+BEGIN_SRC emacs-lisp
+    (setq package-user-dir (concat config-dir "elpa"))
+  #+END_SRC
+
+* ELPA archive repositories 
+  #+BEGIN_SRC emacs-lisp
+        (setq package-archives
+              '(("melpa"       . "http://melpa.milkbox.net/packages/")
+                ("gnu"         . "http://elpa.gnu.org/packages/")
+                ("original"    . "http://tromey.com/elpa/")
+                ("org"         . "http://orgmode.org/elpa/")
+                ("marmalade"   . "http://marmalade-repo.org/packages/")))
+        (package-initialize)
+  #+END_SRC
+
+* Automatically install a list of packages
+  #+BEGIN_SRC emacs-lisp
+    (defvar packages-list
+      '(color-theme color-theme-solarized
+        flymake-easy flymake-python-pyflakes pyflakes pylint pymacs python-mode python-pylint
+        magit markdown-mode yasnippet melpa tomatinho hlinum)
+      "List of packages I want installed at launch")
+    
+    (defun packages-installed-p ()
+      (loop for p in packages-list
+            when (not (package-installed-p p)) do (return nil)
+            finally (return t)))
+    
+    (unless (packages-installed-p)
+      ;; check for new packages (package versions)
+      (message "%s" "Now refreshing package database...")
+      (package-refresh-contents)
+      (message "%s" " done.")
+      ;; Install the missing packages
+      (dolist (p packages-list)
+        (when (not (package-installed-p p))
+          (package-install p))))
+  #+END_SRC

@@ -1,0 +1,40 @@
+#+TITLE: Functions (and aliases)
+#OPTIONS: toc:nil num:nil ^:nil
+
+Function definitions and aliases
+
+* Aliases
+** Replacing things
+#+BEGIN_SRC emacs-lisp
+(defalias 'rr 'replace-regexp)
+(defalias 'qrr 'query-replace-regexp)
+#+END_SRC
+
+
+* Functions
+** Highlight line tails
+In prog-mode, I want to know if any lines are longer than 80 characters.
+#+BEGIN_SRC emacs-lisp
+(defun line-tail-highlight ()
+  "Highlight line tails longer than 80 characters (easier to comprehend and print)"
+  (interactive)
+  (require 'whitespace)
+  (setq whitespace-style '(face empty lines-tail trailing))
+  (global-whitespace-mode t))
+#+END_SRC
+** Turn off highlight line tails
+In other modes, like org-mode, I don't want to highlight line tails.
+#+BEGIN_SRC emacs-lisp
+(defun line-tail-highlight-off ()
+  (interactive)
+  (require 'whitespace)
+  (setq whitespace-style '(face empty trailing))
+  (global-whitespace-mode t))
+#+END_SRC
+** Turn on flyspell
+#+BEGIN_SRC emacs-lisp
+  (defun turn-on-flyspell ()
+    "Force flyspell-mode on using a positive arg. For use in hooks."
+    (interactive)
+    (flyspell-mode 1))
+#+END_SRC

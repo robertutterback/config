@@ -1,0 +1,4 @@
+My emacs configuration. This will initially be heavily based on the LIterate Programming fork of the original Emacs Starter Kit, available at 
+http://eschulte.github.com/emacs24-starter-kit/
+
+My plan is to move through the Starter Kit file-by-file, learning about and deciding which features to integrate. Then I'll move on to other configurations.

@@ -1,0 +1,141 @@
+#+TITLE: Global Key Bindings
+#+OPTIONS: toc:nil num:nil ^:nil
+
+Mode-specific bindings must go in their respective mode configuration files.
+* Easier Killing
+#+BEGIN_SRC emacs-lisp 
+(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key "\C-c\C-k" 'kill-region)
+#+END_SRC
+
+* Different way to close frames/buffers
+#+BEGIN_SRC emacs-lisp 
+(global-set-key (kbd "\C-x\C-q") 'save-buffers-kill-terminal)
+(global-set-key (kbd "\C-x\C-c") 'delete-frame)
+;(global-set-key (kbd "\C-x\C-\d") 'kill-buffer)
+#+END_SRC
+
+* Turn on cua mode
+(global-set-key "\C-c\C-u" 'cua-mode)
+* Tab completion
+#+BEGIN_SRC emacs-lisp 
+(global-set-key (kbd "TAB") 'smart-tab)
+(global-set-key (kbd "M-/") 'hippie-expand)
+#+END_SRC
+
+* Function Keys
+- Turn on the menu bar for exploring new modes
+  #+BEGIN_SRC emacs-lisp 
+    (global-set-key [f1] 'menu-bar-mode)
+  #+END_SRC
+- Macros
+  #+BEGIN_SRC emacs-lisp 
+    (global-set-key [f2] 'kmacro-start-macro-or-insert-counter)
+    (global-set-key [f3] 'kmacro-end-macro)
+    (global-set-key [f4] 'call-last-kbd-macro)
+  #+END_SRC
+- Programming Tools
+  #+BEGIN_SRC emacs-lisp 
+	(global-set-key [f5] 'compile)
+	(global-set-key [f6] 'gdb)
+  #+END_SRC
+
+* Font size
+#+BEGIN_SRC emacs-lisp 
+(define-key global-map (kbd "C-+") 'text-scale-increase)
+(define-key global-map (kbd "C--") 'text-scale-decrease)
+#+END_SRC
+
+* Use regex searches by default.
+#+BEGIN_SRC emacs-lisp 
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "\C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+#+END_SRC
+
+* If you want to be able to M-x without meta
+#+BEGIN_SRC emacs-lisp 
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\C-c\C-m" 'execute-extended-command)
+#+END_SRC
+   
+* Help should search more than just commands
+#+BEGIN_SRC emacs-lisp 
+  (global-set-key (kbd "C-h a") 'apropos)
+#+END_SRC
+
+* Org-mode
+Some global binding for Org-mode
+
+-The [[http://orgmode.org/manual/Agenda-Views.html#Agenda-Views][Org-mode agenda]] is good to have close at hand
+#+BEGIN_SRC emacs-lisp
+  (define-key global-map "\C-ca" 'org-agenda)
+#+END_SRC
+
+-Org-mode supports [[http://orgmode.org/manual/Hyperlinks.html#Hyperlinks][links]], this command allows you to store links
+globally for later insertion into an Org-mode buffer.  See
+[[http://orgmode.org/manual/Handling-links.html#Handling-links][Handling-links]] in the Org-mode manual.
+#+BEGIN_SRC emacs-lisp
+  (define-key global-map "\C-cl" 'org-store-link)
+#+END_SRC
+
+-Should be able to capture notes any time.
+#+BEGIN_SRC emacs-lisp
+(define-key global-map "\C-cc" 'org-capture)
+#+END_SRC
+
+- ?
+#+BEGIN_SRC emacs-lisp
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-cb" 'org-iswitchb)
+#+END_SRC
+
+* Align your code in a pretty way.
+#+BEGIN_SRC emacs-lisp 
+(global-set-key (kbd "C-x \\") 'align-regexp)
+#+END_SRC
+* File finding
+#+BEGIN_SRC emacs-lisp 
+;  (global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
+;  (global-set-key (kbd "C-x C-p") 'find-file-at-point)
+;  (global-set-key (kbd "C-c y") 'bury-buffer)
+;  (global-set-key (kbd "C-c r") 'revert-buffer)
+;  (global-set-key (kbd "M-`") 'file-cache-minibuffer-complete)
+;  (global-set-key (kbd "C-x C-b") 'ibuffer)
+;  (global-set-key (kbd "C-x f") 'recentf-ido-find-file)  
+#+END_SRC
+
+* Window Management
+#+BEGIN_SRC emacs-lisp 
+  (global-set-key (kbd "C-x O") (lambda () (interactive) (other-window -1))) ;; back one
+  (global-set-key (kbd "M-s-<left>") 'shrink-window-horizontally)
+  (global-set-key (kbd "M-s-<right>") 'enlarge-window-horizontally)
+  (global-set-key (kbd "M-s-<down>") 'shrink-window)
+  (global-set-key (kbd "M-s-<up>") 'enlarge-window)
+#+END_SRC
+
+* Indentation help
+#+BEGIN_SRC emacs-lisp 
+(global-set-key (kbd "C-x ^") 'join-line)
+#+END_SRC
+
+* Activate occur easily inside isearch
+#+BEGIN_SRC emacs-lisp 
+  (define-key isearch-mode-map (kbd "C-o")
+    (lambda () (interactive)
+      (let ((case-fold-search isearch-case-fold-search))
+        (occur (if isearch-regexp
+                   isearch-string
+                 (regexp-quote isearch-string))))))
+#+END_SRC
+
+* Rgrep
+Rgrep is infinitely useful in multi-file projects.
+
+(see [[elisp:(describe-function 'rgrep)]])
+
+#+BEGIN_SRC emacs-lisp
+  (define-key global-map "\C-x\C-r" 'rgrep)
+#+END_SRC

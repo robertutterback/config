@@ -1,0 +1,6 @@
+# Some user-specific settings
+#+BEGIN_SRC emacs-lisp
+(setq user-full-name "Robert Utterback")
+(setq user-login-name "rob")
+(setq user-mail-address "robert.utterback@wustl.edu")
+#+END_SRC

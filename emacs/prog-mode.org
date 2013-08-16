@@ -1,0 +1,139 @@
+#+TITLE: Programming Language Modes
+
+If any get too big, I'll put it in a separate file and load it from here.
+
+* General Programming Mode
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (add-hook 'prog-mode-hook 'line-tail-highlight)
+  (add-hook 'prog-mode-hook 'show-paren-mode)
+#+END_SRC
+
+* General Flymake stuff
+#+BEGIN_SRC emacs-lisp
+  (require 'flymake)
+  ;; Overwrite flymake-display-warning so that no annoying dialog box is
+  ;; used.
+  
+  ;; This doesn't seem to work:
+  ;; Using lwarn might be kind of annoying on its own, popping up windows and
+  ;; what not. If you prefer to recieve the warnings in the mini-buffer, use:
+  (defun flymake-display-warning (warning)
+    "Display a warning to the user, using lwarn"
+    (message warning))
+  
+  (custom-set-variables
+   '(flymake-gui-warnings-enabled nil)
+   '(help-at-pt-timer-delay 0.9)
+   '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt)))'
+  
+  (defun my-flymake-show-next-error()
+    (interactive)
+    (flymake-goto-next-error)
+    (flymake-display-err-menu-for-current-line))
+  
+  (add-hook 'prog-mode-hook 
+            (lambda ()
+              (flymake-mode t)
+              (global-set-key "\M-p" 'flymake-goto-prev-error)
+              (global-set-key "\M-n" 'flymake-goto-next-error)))
+  
+#+END_SRC
+* C
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
+* Cilk
+#+BEGIN_SRC emacs-lisp
+  ;; Add .cilk extension to c-mode
+  (add-to-list 'auto-mode-alist '("\\.cilk\\'" . c-mode))
+  (add-to-list 'auto-mode-alist '("\\.cilkh\\'" . c-mode))
+
+  (add-to-list 'flymake-allowed-file-name-masks
+               '(".+\\.cilk$" flymake-simple-make-init
+                 flymake-simple-cleanup flymake-get-real-file-name))
+#+END_SRC
+
+* C++
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
+* C common
+#+BEGIN_SRC emacs-lisp
+(setq c-basic-offset 5)
+#+END_SRC
+  
+* Python
+#+BEGIN_SRC emacs-lisp
+;; pyflakes+flymake
+(when (load "flymake" t)
+(defun flymake-pyflakes-init ()
+  (let* ((temp-file (flymake-init-create-temp-buffer-copy
+  'flymake-create-temp-inplace))
+  (local-file (file-relative-name
+  temp-file
+  (file-name-directory buffer-file-name))))
+  (list "pyflakes" (list local-file))))
+
+  (add-to-list 'flymake-allowed-file-name-masks
+  '("\\.py\\'" flymake-pyflakes-init)))
+
+;(add-hook 'python-mode-hook 'flymake-pyflakes-init)
+(add-hook 'find-file-hook 'flymake-find-file-hook)
+#+END_SRC
+
+* Shell
+#+BEGIN_SRC emacs-lisp
+  ;; (add-hook 'shell-mode-hook 'shell-mode-init)
+  
+  ;; (defun shell-mode-init()
+  ;;  (interactive)
+  ;;  (ansi-color-for-comint-mode-on)
+  ;;  (setq sh-basic-offset 2))
+  
+#+END_SRC
+
+* Octave
+#+BEGIN_SRC emacs-lisp
+; Not sure what this does
+(autoload 'octave-mode "octave-mod" nil t)
+
+; Load octave mode for matlab
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
+(add-hook 'octave-mode-hook
+	  (lambda ()
+	    (abbrev-mode 1)
+	    (auto-fill-mode 1)
+	    (if (eq window-system 'x)
+		(font-lock-mode 1))))
+
+#+END_SRC
+ 
+* Java
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
+* Lisp
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
+* LaTeX
+#+BEGIN_SRC emacs-lisp
+(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
+#+END_SRC
+
+* CSS
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'css-mode-hook 'css-mode-init)
+  
+  (defun css-mode-init()
+   (interactive)
+   (setq css-indent-offset 2))
+  
+#+END_SRC emacs-lisp

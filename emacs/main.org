@@ -1,0 +1,246 @@
+#+TITLE: My Emacs Customizations
+#+OPTIONS: toc:2 num:nil ^:nil
+
+#+begin_quote
+Control over the use of one's ideas really constitutes control
+over other people's lives; and it is usually used to make their
+lives more difficult.
+
+--Richard Stallman
+#+end_quote
+
+* Introduction
+  :PROPERTIES:
+  :CUSTOM_ID: introduction
+  :END:
+
+  My emacs setup. Right now heavily based on the Emacs Starter Kit.
+
+* Basic Setup
+- Load path
+  #+name: load-paths
+  #+BEGIN_SRC emacs-lisp
+    (add-to-list 'load-path config-dir)
+;    (setq autoload-file (concat config-dir "loaddefs.el")) ; what's this for?***
+    (setq custom-file (concat config-dir "custom.el"))
+  #+END_SRC
+
+- Commonly used packages to be loaded on startup
+*** Do I really need all of these?
+  #+name: load-on-startup
+  #+BEGIN_SRC emacs-lisp
+    (require 'cl)
+    (require 'saveplace)
+    (require 'ffap)
+    (require 'uniquify)
+    (require 'ansi-color)
+    (require 'recentf)
+    (require 'linum)
+  #+END_SRC
+
+- Miscellaneous Preferences (move?) 
+  #+BEGIN_SRC emacs-lisp
+    (ido-mode 1)
+    (recentf-mode 1)
+    (menu-bar-mode -1)
+    (line-number-mode 1)
+    (column-number-mode 1) ;; Line numbers on left most column
+    (global-linum-mode 1)
+    (fset 'yes-or-no-p 'y-or-n-p)
+    (setq read-file-name-completion-ignore-case t)
+    (setq shell-file-name "bash")
+    (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
+    (add-hook 'message-mode-hook 'turn-on-flyspell)
+    (setq visible-bell t)
+    (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+                                            ;(setq scroll-margin 10) ; scroll much sooner
+                                            ;(setq scroll-conservatively 5) ; scroll the minimum amount
+    (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  #+END_SRC
+
+- Remote Editing
+#+BEGIN_SRC emacs-lisp
+  (require 'tramp)
+  (setq tramp-debug-buffer t)
+  (setq tramp-verbose 10)
+  (setq tramp-copy-size-limit -1)
+  (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+#+END_SRC
+* Core Files
+  :PROPERTIES:
+  :CUSTOM_ID: core
+  :END:
+- Package Management
+  #+BEGIN_SRC emacs-lisp
+    (org-babel-load-file (expand-file-name "packages.org" config-dir))
+  #+END_SRC
+
+- Function definitions in [[file:defuns.org][defuns]]
+  #+BEGIN_SRC emacs-lisp
+(org-babel-load-file (expand-file-name "defuns.org" config-dir))
+  #+END_SRC
+
+- Global Key Bindings in [[file:global-keys.org][global-keys]] 
+  Note that mode-specific key bindings go in the specified mode file.
+  #+BEGIN_SRC emacs-lisp
+(org-babel-load-file (expand-file-name "global-keys.org" config-dir))
+  #+END_SRC
+- ***mark29
+
+- Tab stuff in [[file:tabs.org][tabs]]
+  #+BEGIN_SRC emacs-lisp
+(org-babel-load-file (expand-file-name "tabs.org" config-dir))
+  #+END_SRC
+
+- Programming Language settings in [[file:prog-mode.org][prog-mode]]
+  #+BEGIN_SRC emacs-lisp
+(org-babel-load-file (expand-file-name "prog-mode.org" config-dir))
+  #+END_SRC
+
+- Org mode settings in [[file:org-mode.org][org-mode]]
+  #+BEGIN_SRC emacs-lisp
+(org-babel-load-file (expand-file-name "org-mode.org" config-dir))
+  #+END_SRC
+
+- Miscellaneous settings in [[file:misc.org][misc]]
+  #+BEGIN_SRC emacs-lisp
+(org-babel-load-file (expand-file-name "misc.org" config-dir))
+  #+END_SRC
+
+- Registers for jumping to commonly used files in [[file:registers.org][registers]]
+  #+BEGIN_SRC emacs-lisp
+    ; I should learn how to use this.
+    ;(org-babel-load-file (expand-file-name "registers.org" config-dir))
+  #+END_SRC
+
+- Personal settings
+#+BEGIN_SRC emacs-lisp
+  (org-babel-load-file (expand-file-name "rob.org" config-dir))
+#+END_SRC
+
+* Other Files
+#+BEGIN_SRC emacs-lisp
+;  (autoload 'pianobar "pianobar" nil t)
+;  (load "~/.emacs.d/private.el")
+#+END_SRC
+* Load User/System Specific Files
+** System/User specific customizations
+   You can keep system- and user-specific customizations here, either as raw emacs-lisp 
+   files or as embedded elisp in org-mode files (as done in this document).
+
+   Elisp source should be kept in the =src= directory.  Packages loaded
+   from here will override those installed by ELPA.  This is useful if
+   you want to track the development versions of a project, or if a
+   project is not in elpa.
+
+   After we've loaded all the defaults, let's load more specific stuff.
+   #+name: load-files
+   #+BEGIN_SRC emacs-lisp
+   (cl-flet ((load-file (base)
+            (let* ((path          (expand-file-name base config-dir))
+                   (literate      (concat path ".org"))
+                   (encrypted-org (concat path ".org.gpg"))
+                   (plain         (concat path ".el"))
+                   (encrypted-el  (concat path ".el.gpg")))
+              (cond
+               ((file-exists-p encrypted-org) (org-babel-load-file encrypted-org))
+               ((file-exists-p encrypted-el)  (load encrypted-el))
+               ((file-exists-p literate)      (org-babel-load-file literate))
+               ((file-exists-p plain)         (load plain)))))
+          (remove-extension (name)
+            (string-match "\\(.*?\\)\.\\(org\\(\\.el\\)?\\|el\\)\\(\\.gpg\\)?$" name)
+         (match-string 1 name)))
+     (let ((elisp-dir (expand-file-name "src" config-dir))
+           (user-dir (expand-file-name user-login-name config-dir)))
+       ;; add the src directory to the load path
+       (add-to-list 'load-path elisp-dir)
+       ;; load specific files
+       (when (file-exists-p elisp-dir)
+         (let ((default-directory elisp-dir))
+           (normal-top-level-add-subdirs-to-load-path)))
+       ;; load system-specific config
+       (load-file system-name)
+       ;; load system-type-specific config
+       (cond ((equal system-type 'darwin) (load-file "mac"))
+             ((equal system-type 'gnu/linux) (load-file "linux")))
+       ;; load user-specific config
+       (load-file user-login-name)
+       ;; load any files in the user's directory
+       (when (file-exists-p user-dir)
+        (add-to-list 'load-path user-dir)
+         (mapc #'load-file
+               (remove-duplicates
+                (mapcar #'remove-extension
+                        (directory-files user-dir t ".*\.\\(org\\|el\\)\\(\\.gpg\\)?$"))
+                :test #'string=)))))
+   #+END_SRC
+
+** Settings from M-x customize
+   #+name: m-x-customize-customizations
+   #+BEGIN_SRC emacs-lisp
+  (load custom-file 'noerror)
+   #+END_SRC
+
+
+* TO DO
+  :PROPERTIES:
+  :CUSTOM_ID: todo
+  :END:
+** Smex package
+** Fix color theme on startup
+** Make everything look pretty in the org files
+- Especially the way code is displayed
+** Add an org-mode hook for flyspell
+- Will flyspell-prog-mode work well to ignore things like #+STARTUP: showall?
+** Configure/learn to use YASNIPPET
+- [[http://code.google.com/p/yasnippet/][yasnippet]] is yet another snippet expansion system for Emacs.  It is
+  inspired by TextMate's templating syntax.
+  - watch the [[http://www.youtube.com/watch?v=vOj7btx3ATg][video on YouTube]]
+  - see the [[http://yasnippet.googlecode.com/svn/trunk/doc/index.html][intro and tutorial]]
+
+  load the yasnippet bundle
+  #+BEGIN_SRC emacs-lisp
+;    (add-to-list 'load-path
+;                 (expand-file-name  "yasnippet"
+;                                    (expand-file-name "src"
+;                                                      config-dir)))
+;    (require 'yasnippet)
+;    (yas/initialize)
+  #+END_SRC
+
+  load the snippets defined in the =./snippets/= directory
+  #+BEGIN_SRC emacs-lisp
+;   (yas/load-directory (expand-file-name "snippets" config-dir))
+  #+END_SRC
+
+  The latest version of yasnippets doesn't play well with Org-mode, the
+  following function allows these two to play nicely together.
+  #+BEGIN_SRC emacs-lisp
+;    (defun yas/org-very-safe-expand ()
+;      (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+   
+;    (defun yas/org-setup ()
+      ;; yasnippet (using the new org-cycle hooks)
+;      (make-variable-buffer-local 'yas/trigger-key)
+;      (setq yas/trigger-key [tab])
+;      (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+;      (define-key yas/keymap [tab] 'yas/next-field))
+    
+;    (add-hook 'org-mode-hook #'yas/org-setup)
+  #+END_SRC
+
+** Use new, Better flymake configure it
+** Fix Tramp mode - it currently hangs whenever I try to connect
+
+* Resources
+  :PROPERTIES:
+  :CUSTOM_ID: resources
+  :END:
+
+  [[http://emacswiki.org][Emacs Wiki]]
+  
+* Footnotes
+- Appearance settings in [[file:appearance.org][appearance]]
+  #+BEGIN_SRC emacs-lisp
+(org-babel-load-file (expand-file-name "appearance.org" config-dir))
+  #+END_SRC
