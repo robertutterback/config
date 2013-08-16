@@ -1,0 +1,42 @@
+Host cec
+     HostName shell.cec.wustl.edu
+     User rsu1
+
+Host seas
+     HostName ssh.seas.wustl.edu
+     User utterbackr
+
+Host seas2
+     HostName ssh2.seas.wustl.edu
+     User utterbackr
+
+Host scloud
+     HostName cloud.seas.wustl.edu
+     User utterbackr
+
+Host rig
+     HostName rigoletto.cse.wustl.edu
+     User utterbackr
+
+Host pag
+     HostName pagliacci.cse.wustl.edu
+     User utterbackr
+
+Host aida
+     HostName aida.cse.wustl.edu
+     User utterbackr
+
+Host austen
+     HostName austen.cse.wustl.edu
+     User utterbackr
+
+Host 341
+     HostName cse341-1.cec.wustl.edu
+     User rsu1
+
+Host dickens
+     HostName dickens.seas.wustl.edu
+     User rob
+
+HashKnownHosts no
+ForwardX11Trusted yes
