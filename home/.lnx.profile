@@ -26,7 +26,7 @@ alias cilkc='cilkc -D_XOPEN_SOURCE=600 -D_POSIX_C_SOURCE=200809L'
 alias say='echo "$1" | espeak -s 120 2>/dev/null'
 alias eg='emacsclient -c'
 alias et='emacsclient -c -nw'
-alias starte='/usr/bin/emacs --daemon'
+alias starte='/usr/bin/emacs --daemon &'
 alias kille='/usr/bin/emacsclient -e "(kill-emacs)"'
 
 # This opens a new terminal with the Pro profile
