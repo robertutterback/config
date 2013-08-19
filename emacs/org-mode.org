@@ -3,15 +3,16 @@
 #+BEGIN_SRC emacs-lisp
   (setq org-directory "~/org")
   (setq org-agenda-files (list (concat org-directory "/work.org")
-             (concat org-directory "/me.org")
-             (concat org-directory "/media.org")
-             (concat org-directory "/shop.org")
-             (concat org-directory "/agendas.org")
-             (concat org-directory "/ref.org")
-             (concat org-directory "/refile.org")))
+                               (concat org-directory "/me.org")
+                               (concat org-directory "/media.org")
+                               (concat org-directory "/shop.org")
+                               (concat org-directory "/agendas.org")
+                               (concat org-directory "/ref.org")
+                               (concat org-directory "/refile.org")))
   (setq org-default-notes-file (concat org-directory "/refile.org"))
-
-(setq org-return-follows-link t)
+  (setq org-archive-location (concat org-directory "/archive.org" "::" "* From %s"))
+  
+  (setq org-return-follows-link t)
 #+END_SRC
 * Mobile Setup
 #+BEGIN_SRC emacs-lisp
