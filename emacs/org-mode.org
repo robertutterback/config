@@ -10,6 +10,8 @@
              (concat org-directory "/ref.org")
              (concat org-directory "/refile.org")))
   (setq org-default-notes-file (concat org-directory "/refile.org"))
+
+(setq org-return-follows-link t)
 #+END_SRC
 * Mobile Setup
 #+BEGIN_SRC emacs-lisp
