@@ -1,0 +1,15 @@
+#SqzS	VERSION = 1.0.0
+#SYMANTEC SCHEDULER CRON ENTRIES.  THESE ENTRIES ARE AUTOMATICALLY GENERATED
+#PLEASE DO NOT EDIT.
+# Enc=1 Name="Update Anti-Virus"  EvType1=1 EvType2=0 Sched=2 
+ 0 10 * * 5 "/Library/Application Support/Symantec/Scheduler/SymSecondaryLaunch.app/Contents/schedLauncher" -u  4 "/Applications/Symantec Solutions/LiveUpdate.app/Contents/MacOS/LiveUpdate" "    "  "oapp"  "aevt"  "exAG" "-update LUal"
+# Enc=1 Name="AntiVirus Scan"  EvType1=2 EvType2=0 Sched=2 
+ 0 11 * * 5 "/Library/Application Support/Symantec/Scheduler/SymSecondaryLaunch.app/Contents/schedLauncher" -n  5 "/Library/Application Support/Symantec/AntiVirus/ScanNotification.app/Contents/scheduledScanner" "    "  "NVsi"  "SCae"  "path" '/' "kydo" "niCE" "long" 0
+#SqzS END SYMANTEC CRON ENTRIES
+
+# Check if my external ip address has changed every half hour
+# If so, email it to myself
+30 * * * * /Users/rob/bin/send_ip.sh
+
+# Check email
+60 * * * * /opt/local/bin/offlineimap
