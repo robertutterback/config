@@ -1,0 +1,5 @@
+#+TITLE: Emacs Version Control Configuration
+
+#+BEGIN_SRC emacs-lisp
+(setq vc-follow-symlinks t)
+#+END_SRC

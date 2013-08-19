@@ -1,1 +1,5 @@
 escape ``
+
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%w%=%m/%d %c"

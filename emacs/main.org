@@ -70,6 +70,10 @@ lives more difficult.
   :PROPERTIES:
   :CUSTOM_ID: core
   :END:
+- Version Control
+#+BEGIN_SRC emacs-lisp
+    (org-babel-load-file (expand-file-name "vc.org" config-dir))
+#+END_SRC
 - Package Management
   #+BEGIN_SRC emacs-lisp
     (org-babel-load-file (expand-file-name "packages.org" config-dir))
