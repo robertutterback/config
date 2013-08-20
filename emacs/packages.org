@@ -20,11 +20,12 @@
     (defvar packages-list
       '(color-theme color-theme-solarized
                     flymake-easy flymake-python-pyflakes pylint
+                    ess
                     magit markdown-mode yasnippet melpa tomatinho hlinum)
       "List of packages I want installed at launch")
-;; Maybe these are only available with marmalade?
-;; Marmalade seems to be down as of 16082013 1502
-;; python-mode pyflakes pymacs python-pylint
+    ;; Maybe these are only available with marmalade?
+    ;; Marmalade seems to be down as of 16082013 1502
+    ;; python-mode pyflakes pymacs python-pylint
     
     
     (defun packages-installed-p ()
