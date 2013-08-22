@@ -4,3 +4,9 @@ git config --global user.email johndoe@example.com
 
 To enable color:
 git config --global color.ui true
+
+To create an annotated tag:
+git tag -a v1.4 -m 'my version 1.4'
+
+To create a new branch:
+git branch newbranchname

@@ -12,6 +12,8 @@ PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export PATH
 ### End Path ###
 
+export PINENTRY_USER_DATA="USE_CURSES=1"
+
 ### Aliases ###
 # Whenever I call a shell script, it's likely because I want to change the profile of the terminal.
 alias t.pro='osascript -e "tell application \"Terminal\" to set current settings of first window to settings set named \"Pro\""'
