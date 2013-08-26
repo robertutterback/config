@@ -6,7 +6,7 @@
                                (concat org-directory "/me.org")
                                (concat org-directory "/media.org")
                                (concat org-directory "/shop.org")
-                               (concat org-directory "/agendas.org")
+                               (concat org-directory "/discuss.org")
                                (concat org-directory "/ref.org")
                                (concat org-directory "/refile.org")))
   (setq org-default-notes-file (concat org-directory "/refile.org"))

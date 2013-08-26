@@ -2,6 +2,10 @@
 
 If any get too big, I'll put it in a separate file and load it from here.
 
+* Necessary Files
+#+BEGIN_SRC emacs-lisp
+  (require 'ess-site)
+#+END_SRC emacs-lisp
 * General Programming Mode
 #+BEGIN_SRC emacs-lisp
   (defun prepare-to-program ()
@@ -73,9 +77,8 @@ If any get too big, I'll put it in a separate file and load it from here.
 
 * C common
 #+BEGIN_SRC emacs-lisp
-(setq c-basic-offset 5)
+
 #+END_SRC
-  
 * Python
 #+BEGIN_SRC emacs-lisp
 ;; pyflakes+flymake
@@ -123,7 +126,6 @@ If any get too big, I'll put it in a separate file and load it from here.
 		(font-lock-mode 1))))
 
 #+END_SRC
- 
 * Java
 #+BEGIN_SRC emacs-lisp
 
@@ -138,7 +140,6 @@ If any get too big, I'll put it in a separate file and load it from here.
 #+BEGIN_SRC emacs-lisp
 (add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
 #+END_SRC
-
 * CSS
 #+BEGIN_SRC emacs-lisp
   (add-hook 'css-mode-hook 'css-mode-init)
@@ -147,4 +148,8 @@ If any get too big, I'll put it in a separate file and load it from here.
    (interactive)
    (setq css-indent-offset 2))
   
+#+END_SRC emacs-lisp
+* R
+#+BEGIN_SRC emacs-lisp
+
 #+END_SRC emacs-lisp
