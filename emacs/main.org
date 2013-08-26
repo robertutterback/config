@@ -78,50 +78,53 @@ lives more difficult.
   #+BEGIN_SRC emacs-lisp
     (org-babel-load-file (expand-file-name "packages.org" config-dir))
   #+END_SRC
-
+	
 - Function definitions in [[file:defuns.org][defuns]]
   #+BEGIN_SRC emacs-lisp
 (org-babel-load-file (expand-file-name "defuns.org" config-dir))
   #+END_SRC
-
+	
 - Global Key Bindings in [[file:global-keys.org][global-keys]] 
   Note that mode-specific key bindings go in the specified mode file.
   #+BEGIN_SRC emacs-lisp
 (org-babel-load-file (expand-file-name "global-keys.org" config-dir))
   #+END_SRC
 - ***mark29
-
+	
 - Tab stuff in [[file:tabs.org][tabs]]
   #+BEGIN_SRC emacs-lisp
 (org-babel-load-file (expand-file-name "tabs.org" config-dir))
   #+END_SRC
-
+	
 - Programming Language settings in [[file:prog-mode.org][prog-mode]]
   #+BEGIN_SRC emacs-lisp
 (org-babel-load-file (expand-file-name "prog-mode.org" config-dir))
   #+END_SRC
-
+	
 - Org mode settings in [[file:org-mode.org][org-mode]]
   #+BEGIN_SRC emacs-lisp
 (org-babel-load-file (expand-file-name "org-mode.org" config-dir))
   #+END_SRC
-
+	
 - Miscellaneous settings in [[file:misc.org][misc]]
   #+BEGIN_SRC emacs-lisp
 (org-babel-load-file (expand-file-name "misc.org" config-dir))
   #+END_SRC
-
+	
 - Registers for jumping to commonly used files in [[file:registers.org][registers]]
   #+BEGIN_SRC emacs-lisp
     ; I should learn how to use this.
     ;(org-babel-load-file (expand-file-name "registers.org" config-dir))
   #+END_SRC
-
+	
 - Personal settings
 #+BEGIN_SRC emacs-lisp
   (org-babel-load-file (expand-file-name "rob.org" config-dir))
 #+END_SRC
-
+- Appearance settings in [[file:appearance.org][appearance]]
+  #+BEGIN_SRC emacs-lisp
+(org-babel-load-file (expand-file-name "appearance.org" config-dir))
+  #+END_SRC
 * Other Files
 #+BEGIN_SRC emacs-lisp
 ;  (autoload 'pianobar "pianobar" nil t)
@@ -185,41 +188,16 @@ lives more difficult.
   (load custom-file 'noerror)
    #+END_SRC
 
-
-* TO DO
-  :PROPERTIES:
-  :CUSTOM_ID: todo
-  :END:
-** Smex package
-** Fix color theme on startup
-** Make everything look pretty in the org files
-- Especially the way code is displayed
-** Add an org-mode hook for flyspell
-- Will flyspell-prog-mode work well to ignore things like #+STARTUP: showall?
-** Configure/learn to use YASNIPPET
-- [[http://code.google.com/p/yasnippet/][yasnippet]] is yet another snippet expansion system for Emacs.  It is
-  inspired by TextMate's templating syntax.
-  - watch the [[http://www.youtube.com/watch?v=vOj7btx3ATg][video on YouTube]]
-  - see the [[http://yasnippet.googlecode.com/svn/trunk/doc/index.html][intro and tutorial]]
-
-  load the yasnippet bundle
-  #+BEGIN_SRC emacs-lisp
-;    (add-to-list 'load-path
-;                 (expand-file-name  "yasnippet"
-;                                    (expand-file-name "src"
-;                                                      config-dir)))
-;    (require 'yasnippet)
-;    (yas/initialize)
-  #+END_SRC
-
-  load the snippets defined in the =./snippets/= directory
-  #+BEGIN_SRC emacs-lisp
-;   (yas/load-directory (expand-file-name "snippets" config-dir))
-  #+END_SRC
-
-  The latest version of yasnippets doesn't play well with Org-mode, the
-  following function allows these two to play nicely together.
-  #+BEGIN_SRC emacs-lisp
+** Yasnippet
+- Initialize
+#+BEGIN_SRC emacs-lisp
+    (require 'yasnippet)
+    (setq yas/load-directory (expand-file-name "snippets" config-dir))
+    (yas-global-mode 1)
+#+END_SRC
+-   The latest version of yasnippets doesn't play well with Org-mode, the
+		following function allows these two to play nicely together.
+#+BEGIN_SRC emacs-lisp
 ;    (defun yas/org-very-safe-expand ()
 ;      (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
    
@@ -232,10 +210,19 @@ lives more difficult.
     
 ;    (add-hook 'org-mode-hook #'yas/org-setup)
   #+END_SRC
-
+		
+* TO DO
+  :PROPERTIES:
+  :CUSTOM_ID: todo
+  :END:
+** Smex package
+** Fix color theme on startup
+** Make everything look pretty in the org files
+- Especially the way code is displayed
+** Add an org-mode hook for flyspell
+- Will flyspell-prog-mode work well to ignore things like #+STARTUP: showall?
+** Configure/learn to use YASNIPPET
 ** Use new, Better flymake configure it
-** Fix Tramp mode - it currently hangs whenever I try to connect
-
 * Resources
   :PROPERTIES:
   :CUSTOM_ID: resources
@@ -244,7 +231,3 @@ lives more difficult.
   [[http://emacswiki.org][Emacs Wiki]]
   
 * Footnotes
-- Appearance settings in [[file:appearance.org][appearance]]
-  #+BEGIN_SRC emacs-lisp
-(org-babel-load-file (expand-file-name "appearance.org" config-dir))
-  #+END_SRC

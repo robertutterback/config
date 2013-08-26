@@ -13,6 +13,8 @@ github.com/rmm5t/dotfiles/emacs.d/rmm5t/tabs.el
 
 * Hippie Expand. Groovy vans with tie-dyes.
 #+BEGIN_SRC emacs-lisp
+  (require 'yasnippet)
+  
   (setq hippie-expand-try-functions-list
         '(yas-hippie-try-expand
           try-expand-dabbrev
