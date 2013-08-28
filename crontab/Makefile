@@ -25,3 +25,6 @@ cron:
 	@echo "Old system crontab saved in systemCrontab.old"
 	@echo "Setting crontab file."
 	@echo	crontab -f $(CRONFILE)
+
+install:
+	@echo NOT installing crontab. In development.

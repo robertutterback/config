@@ -23,4 +23,3 @@ uninstall: $(FILES:=.uninstall)
 	@if test -e "$(DEST)/${NAME:=.orig}"; then \
 		mv "$(DEST)/${NAME:=.orig}" "$(DEST)/$(NAME)"; \
 	fi
-
