@@ -1,4 +1,9 @@
-#unset HISTFILE # don't log history
+### TODO: Change prompt if I'm in a screen (or tmux?) session.
+###       If $STY is set, you're probably in screen.
+###       USE $TMUX for tmux
+
+
+
 export CLICOLOR=1 # enables coloring of terminal
 export LSCOLORS=GxFxCxDxBxegedabagaced # specifies how to color specific items
 export TERM="xterm-256color"

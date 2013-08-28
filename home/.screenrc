@@ -1,5 +1,15 @@
+# Change escape character to `, because C-a conflicts with emacs
 escape ``
+
+# Turn off the screen startup message
+startup_message off
 
 hardstatus on
 hardstatus alwayslastline
 hardstatus string "%w%=%m/%d %c"
+
+# Define format of bottom navigation/status/date/etc. line
+#hardstatus alwayslastline "%{yk}[ %H ] %-Lw%50>%{gk}(%{-}%n-%t%{gk})%{-}%+Lw%< %=%{yk}[ %c %d.%m.%Y ]"
+
+# Increase scrollback buffer to 30000 lines
+defscrollback 30000
