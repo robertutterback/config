@@ -13,7 +13,7 @@
         (load-theme (car (cdr color-theme-choices)))))
   
   ;; hook on after-make-frame-functions
-  (add-hook 'after-make-frame-functions 'set-frame-theme)  
+  ;;(add-hook 'after-make-frame-functions 'set-frame-theme)  
   
 #+END_SRC
 
