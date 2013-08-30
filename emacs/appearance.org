@@ -1,23 +1,20 @@
 * Color Theme
 #+BEGIN_SRC emacs-lisp
-  (require 'color-theme)
- 
   ;; select theme - first list element is for windowing system, second is for console/terminal
   (setq color-theme-choices 
-        '(color-theme-solarized-dark ))
-
+        '(solarized-dark tango-dark))
+  
   ;; test for each frame or console
-  (lexical-let ( (cols color-theme-choices) )
-    (defun test-win-sys (frame)
-      (color-theme-initialize)
-      (let ( (color-theme-is-global nil) )
-        (select-frame frame)
-        (eval (append '(if (window-system frame)) 
-                      (mapcar (lambda (x) (cons x nil)) cols))))))
-
+  (defun set-frame-theme (frame)
+    (color-theme-initialize)
+    (select-frame frame)
+    (if (display-graphic-p)
+        (load-theme (car color-theme-choices))
+        (load-theme (car (cdr color-theme-choices)))))
+  
   ;; hook on after-make-frame-functions
-  (add-hook 'after-make-frame-functions 'test-win-sys)  
-
+  (add-hook 'after-make-frame-functions 'set-frame-theme)  
+  
 #+END_SRC
 
 * Doc-View
