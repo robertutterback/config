@@ -19,16 +19,14 @@ uninstall: $(FILES:=.uninstall)
 
 $(FILES):
 	@echo $(DEST)/$@
-	@if test ! -d `dirname "$(DEST)/$@"`; then \
-		mkdir -p `dirname "$(DEST)/$@"`; \
-	fi
 	@if test -e "$(DEST)/$@"; then \
-		mv "$(DEST)/$@" "$(DEST)/${@:=.orig}"; \
+		mv "$(DEST)/$@" "$(DEST)/${@:=.bak}"; \
 	fi
+	mkdir "$(DEST)/$@"
 	@$(COMMAND) "$(CURDIR)/$@" "$(DEST)/$@"
 
 %.uninstall:
 	@echo Reverting $(DEST)/${@:.uninstall=}
-	@if test -e "$(DEST)/${@:.uninstall=.orig}"; then \
-		mv "$(DEST)/${@:.uninstall=.orig}" "$(DEST)/${@:.uninstall=}"; \
+	@if test -e "$(DEST)/${@:.uninstall=.bak}"; then \
+		mv "$(DEST)/${@:.uninstall=.bak}" "$(DEST)/${@:.uninstall=}"; \
 	fi

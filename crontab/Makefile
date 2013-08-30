@@ -15,7 +15,7 @@ cron:
 	@echo $(INFO)
 	@if test -e "$(CRONFILE)"; then \
 	 	echo "Moving old crontab file."; \
-		mv $(CRONFILE) $(CRONFILE:=.old); \
+		mv $(CRONFILE) $(CRONFILE:=.bak; \
 	fi
 	@for f in $(FILES); do \
 		echo "Adding $$f to crontab." ; \

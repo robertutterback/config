@@ -14,13 +14,12 @@ all:
 install:
 	@echo $(DEST)/$(NAME)
 	@if test -e "$(DEST)/$(NAME)"; then \
-		mv "$(DEST)/$(NAME)" "$(DEST)/${NAME:=.orig}"; \
+		mv "$(DEST)/$(NAME)" "$(DEST)/${NAME:=.bak}"; \
 	fi
 	@$(COMMAND) "$(CURDIR)" "$(DEST)/$(NAME)"
 
 uninstall: $(FILES:=.uninstall)
 	@echo Reverting $(DEST)/$(NAME)
-	@if test -e "$(DEST)/${NAME:=.orig}"; then \
-		mv "$(DEST)/${NAME:=.orig}" "$(DEST)/$(NAME)"; \
+	@if test -e "$(DEST)/${NAME:=.bak}"; then \
+		mv "$(DEST)/${NAME:=.bak}" "$(DEST)/$(NAME)"; \
 	fi
-
