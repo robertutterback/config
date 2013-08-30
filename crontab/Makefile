@@ -28,3 +28,6 @@ cron:
 
 install:
 	@echo NOT installing crontab. In development.
+
+uninstall:
+	@echo No uninstall necessary.

@@ -1,0 +1,17 @@
+To sign a file:
+gpg --sign foo
+gpg -s foo
+
+To sign a file with cleartex:
+gpg --clearsign foo
+
+To verify a sig:
+gpg --verify foo.gpg
+gpg --verify foo.asc
+
+Encrypt a file:
+gpg --encrypt foo
+Then enter recepient names.
+
+Decrypt a file:
+gpg --decrypt foo.gpg
