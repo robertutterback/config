@@ -19,7 +19,7 @@
   #+BEGIN_SRC emacs-lisp
     (defvar packages-list
       '(flymake-easy flymake-python-pyflakes pylint
-                    ess writeroom-mode gnuplot gnuplot-mode
+                    ess writeroom-mode gnuplot gnuplot-mode solarized-theme
                     magit markdown-mode yasnippet melpa tomatinho hlinum)
       "List of packages I want installed at launch")
     ;; Maybe these are only available with marmalade?
