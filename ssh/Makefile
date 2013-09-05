@@ -1,26 +1,33 @@
-COMMAND?=       ln -sf
-DEST?=          $(HOME)
-NAME?=		.ssh
+GIT_LS_COMMAND= git ls-files | grep -v -e Makefile
+GIT_FILES=      $(shell $(GIT_LS_COMMAND))   # GNU Make compatible
+GIT_FILES!=     $(GIT_LS_COMMAND)            # BSD Make compatible
+
+FILES?=         $(GIT_FILES)
 CURDIR?=        $(.CURDIR)                   # BSD Make compatibility
+#BASE=           $(shell basename $(CURDIR))
+
+COMMAND?=       ln -sf
+DEST?=          $(HOME)/.ssh
 
 .PHONY: all
 all:
 	@echo Usage:
 	@echo make install - Run default command set in the Makefile \(default is to symlink\)
 
-.PHONY: install uninstall
-
-# Just symlink the whole folder
-install:
-	@echo $(DEST)/$(NAME)
-	@if test -e "$(DEST)/$(NAME)"; then \
-		mv "$(DEST)/$(NAME)" "$(DEST)/${NAME:=.bak}"; \
-	fi
-	@$(COMMAND) "$(CURDIR)" "$(DEST)/$(NAME)"
-
+.PHONY: install uninstall $(FILES) %.uninstall
+install: $(FILES)
 uninstall: $(FILES:=.uninstall)
-	@echo Reverting $(DEST)/$(NAME)
-	@if test -e "$(DEST)/${NAME:=.bak}"; then \
-		mv "$(DEST)/${NAME:=.bak}" "$(DEST)/$(NAME)"; \
-	fi
 
+# Don't symlink the whole folder, because we've got private keys in there!
+$(FILES):
+	@echo $(DEST)/$@
+	@if test -e "$(DEST)/$@"; then \
+		mv "$(DEST)/$@" "$(DEST)/${@:=.bak}"; \
+	fi
+	@$(COMMAND) "$(CURDIR)/$@" "$(DEST)/$@"
+
+%.uninstall:
+	@echo Reverting $(DEST)/${@:.uninstall=}
+	@if test -e "$(DEST)/${@:.uninstall=.bak}"; then \
+		mv "$(DEST)/${@:.uninstall=.bak}" "$(DEST)/${@:.uninstall=}"; \
+	fi

@@ -22,7 +22,6 @@ $(FILES):
 	@if test -e "$(DEST)/$@"; then \
 		mv "$(DEST)/$@" "$(DEST)/${@:=.bak}"; \
 	fi
-	mkdir "$(DEST)/$@"
 	@$(COMMAND) "$(CURDIR)/$@" "$(DEST)/$@"
 
 %.uninstall:

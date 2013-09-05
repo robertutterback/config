@@ -2,6 +2,17 @@
 ###       If $STY is set, you're probably in screen.
 ###       USE $TMUX for tmux
 
+### Using GPG
+# gpg-agent --daemon --enable-ssh-support \
+# 		--write-env-file "${HOME}/.gpg-agent-info"
+if [ -f "${HOME}/.gpg-agent-info" ]; then
+		. "${HOME}/.gpg-agent-info"
+		export GPG_AGENT_INFO
+		export SSH_AUTH_SOCK
+fi
+GPG_TTY=$(tty)
+export GPG_TTY
+### End GPG
 
 
 export CLICOLOR=1 # enables coloring of terminal

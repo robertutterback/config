@@ -1,4 +1,5 @@
 # Platform-independent shell config
+# Only for login shells
 
 ## Aliases
 alias ..='cd ..'
