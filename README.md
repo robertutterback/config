@@ -11,10 +11,9 @@ TODO
 ----
 
 * Consider using GNU Stow instead of a set of Makefiles.
-** PRO: Seems cleaner
-** PRO: Less debugging makefiles
-** CON: Have to install Stow on each machine (could have git submodule of Stow source)
-** CON: Less flexibility? Sometimes I may actually want to copy files, not just symlink.
+ * PRO: Seems cleaner
+ * PRO: Less debugging makefiles
+ * CON: Have to install Stow on each machine (could have git submodule of Stow source)
+ * CON: Less flexibility? Sometimes I may actually want to copy files, not just symlink.
 * Increase portability
-1. Support for Cygwin would be nice.
-
+ 1. Support for Cygwin would be nice.
