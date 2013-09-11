@@ -30,10 +30,6 @@ Host austen
      HostName austen.cse.wustl.edu
      User utterbackr
 
-Host 341
-     HostName cse341-1.cec.wustl.edu
-     User rsu1
-
 Host dickens
      HostName dickens.seas.wustl.edu
      User rob
