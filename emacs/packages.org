@@ -17,27 +17,28 @@
 
 * Automatically install a list of packages
   #+BEGIN_SRC emacs-lisp
-    (defvar packages-list
-      '(flymake-easy flymake-python-pyflakes pylint
-                    ess writeroom-mode gnuplot gnuplot-mode solarized-theme
-                    magit markdown-mode yasnippet melpa tomatinho hlinum)
-      "List of packages I want installed at launch")
-    ;; Maybe these are only available with marmalade?
-    ;; Marmalade seems to be down as of 16082013 1502
-    ;; python-mode pyflakes pymacs python-pylint
-    
-    (defun packages-installed-p ()
-      (loop for p in packages-list
-            when (not (package-installed-p p)) do (return nil)
-            finally (return t)))
-    
-    (unless (packages-installed-p)
-      ;; check for new packages (package versions)
-      (message "%s" "Now refreshing package database...")
-      (package-refresh-contents)
-      (message "%s" " done.")
-      ;; Install the missing packages
-      (dolist (p packages-list)
-        (when (not (package-installed-p p))
-          (package-install p))))
+        (defvar packages-list
+          '(flymake-easy flymake-python-pyflakes pylint
+                        ess writeroom-mode gnuplot gnuplot-mode solarized-theme
+                        magit markdown-mode yasnippet melpa tomatinho hlinum
+                        irfc)
+          "List of packages I want installed at launch")
+        ;; Maybe these are only available with marmalade?
+        ;; Marmalade seems to be down as of 16082013 1502
+        ;; python-mode pyflakes pymacs python-pylint
+
+        (defun packages-installed-p ()
+          (loop for p in packages-list
+                when (not (package-installed-p p)) do (return nil)
+                finally (return t)))
+
+        (unless (packages-installed-p)
+          ;; check for new packages (package versions)
+          (message "%s" "Now refreshing package database...")
+          (package-refresh-contents)
+          (message "%s" " done.")
+          ;; Install the missing packages
+          (dolist (p packages-list)
+            (when (not (package-installed-p p))
+              (package-install p))))
   #+END_SRC
