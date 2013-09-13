@@ -5,10 +5,7 @@ GIT_FILES!=     $(GIT_LS_COMMAND)            # BSD Make compatible
 FILES?=         $(GIT_FILES)
 CURDIR?=        $(.CURDIR)                   # BSD Make compatibility
 
-#COMMAND?=       ln -sf
-# Unfortunately, it doesn't seem that Mac will follow symlinks to
-# install fonts.
-COMMAND?=        cp
+COMMAND?=        ln
 
 ifeq ($(shell uname -s), Darwin)
 	DEST=$(HOME)/Library/Fonts
