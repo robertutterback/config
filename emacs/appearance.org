@@ -17,6 +17,13 @@
 
 #+END_SRC
 
+* Fonts
+#+BEGIN_SRC emacs-lisp
+  (if (find-font (font-spec :name "Hermit"))
+      (progn (set-default-font "Hermit")))
+  (add-to-list 'default-frame-alist
+               '(font . "Hermit"))
+#+END_SRC
 * Doc-View
 #+BEGIN_SRC emacs-lisp
   (setq doc-view-continuous t)
