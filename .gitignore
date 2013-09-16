@@ -10,7 +10,7 @@ emacs/elpa
 emacs/elpa/*
 emacs/backups
 emacs/bakcups/*
-ssh/id_rsa      
+ssh/id_rsa
 known_hosts
 
 # Except:
