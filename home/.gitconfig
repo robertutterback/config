@@ -2,7 +2,7 @@
 	name = Robert Utterback
 	email = robertu13@gmail.com
 [core]
-	editor = emacsclient
+	editor = emacsclient -t
 [merge]
 	tool = diff
 [color]
