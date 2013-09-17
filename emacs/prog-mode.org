@@ -17,10 +17,6 @@ If any get too big, I'll put it in a separate file and load it from here.
     (setq comment-auto-fill-only-comments t))
 
   (add-hook 'prog-mode-hook 'prepare-to-program)
-  ;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-  ;; (add-hook 'prog-mode-hook 'line-tail-highlight)
-  ;; (add-hook 'prog-mode-hook 'show-paren-mode)
-  ;; (add-hook 'prog-mode-hook 'auto-fill-mode)
 #+END_SRC
 
 * General Flymake stuff
@@ -28,37 +24,41 @@ If any get too big, I'll put it in a separate file and load it from here.
   (require 'flymake)
   ;; Overwrite flymake-display-warning so that no annoying dialog box is
   ;; used.
-  
+
   ;; This doesn't seem to work:
   ;; Using lwarn might be kind of annoying on its own, popping up windows and
   ;; what not. If you prefer to recieve the warnings in the mini-buffer, use:
   (defun flymake-display-warning (warning)
     "Display a warning to the user, using lwarn"
     (message warning))
-  
+
   (custom-set-variables
    '(flymake-gui-warnings-enabled nil)
    '(help-at-pt-timer-delay 0.9)
    '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt)))'
-  
+
   (defun my-flymake-show-next-error()
     (interactive)
     (flymake-goto-next-error)
     (flymake-display-err-menu-for-current-line))
-  
-  (add-hook 'prog-mode-hook 
+
+  (add-hook 'prog-mode-hook
             (lambda ()
               (flymake-mode t)
               (global-set-key "\M-p" 'flymake-goto-prev-error)
               (global-set-key "\M-n" 'flymake-goto-next-error)))
-  
+
 #+END_SRC
 * C
 #+BEGIN_SRC emacs-lisp
   (setq c-set-style "Linux"
         c-basic-offset 2)
-#+END_SRC
 
+  (add-to-list 'flymake-allowed-file-name-masks
+               '(".+\\.c$" flymake-simple-make-init
+                 flymake-simple-cleanup flymake-get-real-file-name))
+
+#+END_SRC
 * Cilk
 #+BEGIN_SRC emacs-lisp
   ;; Add .cilk extension to c-mode
@@ -72,9 +72,10 @@ If any get too big, I'll put it in a separate file and load it from here.
 
 * C++
 #+BEGIN_SRC emacs-lisp
-
+  (add-to-list 'flymake-allowed-file-name-masks
+               '(".+\\.cpp$" flymake-simple-make-init
+                 flymake-simple-cleanup flymake-get-real-file-name))
 #+END_SRC
-
 * C common
 #+BEGIN_SRC emacs-lisp
 
@@ -101,12 +102,12 @@ If any get too big, I'll put it in a separate file and load it from here.
 * Shell
 #+BEGIN_SRC emacs-lisp
   ;; (add-hook 'shell-mode-hook 'shell-mode-init)
-  
+
   ;; (defun shell-mode-init()
   ;;  (interactive)
   ;;  (ansi-color-for-comint-mode-on)
   ;;  (setq sh-basic-offset 2))
-  
+
 #+END_SRC
 
 * Octave
@@ -143,13 +144,23 @@ If any get too big, I'll put it in a separate file and load it from here.
 * CSS
 #+BEGIN_SRC emacs-lisp
   (add-hook 'css-mode-hook 'css-mode-init)
-  
+
   (defun css-mode-init()
    (interactive)
    (setq css-indent-offset 2))
-  
+
 #+END_SRC emacs-lisp
 * R
 #+BEGIN_SRC emacs-lisp
 
 #+END_SRC emacs-lisp
+* Git Commit
+#+BEGIN_SRC emacs-lisp
+  (defun rob/prepare-to-commit ()
+    (interactive)
+    (flyspell-mode 1)
+    (longlines-mode 1)
+    (setq fill-column 72))
+
+    (add-hook 'git-commit-mode-hook 'rob/prepare-to-commit)
+#+END_SRC
