@@ -35,16 +35,16 @@ Host dickens
      User rob
 
 Host onl
-		 HostName onl.arl.wustl.edu
-		 User rob
+     HostName onl.arl.wustl.edu
+     User rob
 
 Host onlT
-		 HostName onl.arl.wustl.edu
-		 User rob
-		 LocalForward 7070 onlsrv:7070
+     HostName onl.arl.wustl.edu
+     User rob
+     LocalForward 7070 onlsrv:7070
 
 #Host github.com
-#			IdentityFile ~/.ssh/github.key
+#     IdentityFile ~/.ssh/github.key
 
 HashKnownHosts no
 ForwardX11Trusted yes
