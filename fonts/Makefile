@@ -6,9 +6,14 @@ FILES?=         $(GIT_FILES)
 CURDIR?=        $(.CURDIR)                   # BSD Make compatibility
 
 COMMAND?=        ln
+INSTRUCT=
 
 ifeq ($(shell uname -s), Darwin)
 	DEST=$(HOME)/Library/Fonts
+else
+	DEST=$(HOME)/.fonts
+# I should automate this later
+	INSTRUCT="You must run 'sudo fc-cache -f -v' in ~/.fonts to install"
 endif
 
 .PHONY: all
@@ -29,6 +34,7 @@ $(FILES):
 		mv "$(DEST)/$@" "$(DEST)/${@:=.bak}"; \
 	fi
 	@$(COMMAND) "$(CURDIR)/$@" "$(DEST)/$@"
+	@echo $(INSTRUCT)
 
 %.uninstall:
 	@echo Reverting $(DEST)/${@:.uninstall=}
