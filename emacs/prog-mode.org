@@ -129,9 +129,13 @@ If any get too big, I'll put it in a separate file and load it from here.
 #+END_SRC
 * Java
 #+BEGIN_SRC emacs-lisp
+  (defun rob/java-flymake-init()
+    (list "javac" (list (flymake-init-create-temp-buffer-copy
+                         'flymake-create-temp-with-folder-structure))))
 
+  (add-to-list 'flymake-allowed-file-name-masks '("\\.java$"
+                                                  rob/java-flymake-init flymake-simple-cleanup))
 #+END_SRC
-
 * Lisp
 #+BEGIN_SRC emacs-lisp
 
