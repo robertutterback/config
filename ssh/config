@@ -1,6 +1,6 @@
 Host cec
      HostName shell.cec.wustl.edu
-     User rsu1
+     User robert.utterback
 
 Host seas
      HostName ssh.seas.wustl.edu
