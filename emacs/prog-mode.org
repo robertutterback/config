@@ -15,8 +15,22 @@ If any get too big, I'll put it in a separate file and load it from here.
     (show-paren-mode)
     (auto-fill-mode)
     (setq comment-auto-fill-only-comments t))
-
+  
   (add-hook 'prog-mode-hook 'prepare-to-program)
+  
+  ;; Close the compilation window if there was no error at all.
+  (setq compilation-exit-message-function
+        (lambda (status code msg)
+          ;; If M-x compile exists with a 0
+          (when (and (eq status 'exit) (zerop code))
+            ;; then bury the *compilation* buffer, so that C-x b
+            ;; doesn't go there
+            (bury-buffer "*compilation*")
+            ;; and return to whatever were looking at before
+            (replace-buffer-in-windows "*compilation*"))
+          ;; Always return the anticipated result of
+          ;; compilation-exit-message-function
+          (cons msg code)))
 #+END_SRC
 
 * General Flymake stuff
