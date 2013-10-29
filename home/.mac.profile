@@ -6,7 +6,8 @@ PRINTER=Chocolate
 ### Path ###
 
 # MacPorts Installer addition on 2012-08-22_at_15:30:35: adding an appropriate PATH variable for use with MacPorts.
-PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export MANPATH=/opt/local/share/man:$MANPATH
 # Finished adapting your PATH environment variable for use with MacPorts.
 
 export PATH
