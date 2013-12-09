@@ -21,8 +21,9 @@ lives more difficult.
   #+name: load-paths
   #+BEGIN_SRC emacs-lisp
     (add-to-list 'load-path config-dir)
-;    (setq autoload-file (concat config-dir "loaddefs.el")) ; what's this for?***
+    ;(setq autoload-file (concat config-dir "loaddefs.el")) ; what's this for?***
     (setq custom-file (concat config-dir "custom.el"))
+    (setq enable-recursive-minibuffers t)
   #+END_SRC
 
 - Commonly used packages to be loaded on startup

@@ -32,3 +32,7 @@ alias kille='/usr/bin/emacsclient -e "(kill-emacs)"'
 # This opens a new terminal with the Pro profile
 # Unfortunately, I don't think it is currently possible to script a currently open Terminal
 alias t.pro='gnome-terminal --window-with-profile=Pro'
+
+### Environment Variables ###
+#export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/local/src/gmock-1.7.0/include:/opt/local/src/gmock-1.7.0/gtest/include
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/local/src/gmock-1.7.0/lib:/opt/local/src/gmock-1.7.0/gtest/lib
