@@ -42,7 +42,7 @@ alias starte='/Applications/Emacs.app/Contents/MacOS/Emacs --daemon &'
 alias junitc='javac -cp /usr/share/java/junit.jar:.'
 alias junit='java -cp .:/usr/share/java/junit.jar:. org.junit.runner.JUnitCore'
 
-alias coursera-dl='python /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/courseradownloader/courseradownloader.py'
+alias coursera-dl='python2.7 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/courseradownloader/courseradownloader.py'
 
 alias la='ls -A'
 alias ll='ls -l'

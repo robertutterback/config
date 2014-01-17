@@ -93,21 +93,27 @@ If any get too big, I'll put it in a separate file and load it from here.
 #+END_SRC
 * Python
 #+BEGIN_SRC emacs-lisp
-;; pyflakes+flymake
-(when (load "flymake" t)
-(defun flymake-pyflakes-init ()
-  (let* ((temp-file (flymake-init-create-temp-buffer-copy
-  'flymake-create-temp-inplace))
-  (local-file (file-relative-name
-  temp-file
-  (file-name-directory buffer-file-name))))
-  (list "pyflakes" (list local-file))))
-
-  (add-to-list 'flymake-allowed-file-name-masks
-  '("\\.py\\'" flymake-pyflakes-init)))
-
-;(add-hook 'python-mode-hook 'flymake-pyflakes-init)
-(add-hook 'find-file-hook 'flymake-find-file-hook)
+  ;; pyflakes+flymake
+  (when (load "flymake" t)
+    (defun flymake-pyflakes-init ()
+      (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                         'flymake-create-temp-inplace))
+             (local-file (file-relative-name
+                          temp-file
+                          (file-name-directory buffer-file-name))))
+        (list "pyflakes" (list local-file))))
+  
+    (add-to-list 'flymake-allowed-file-name-masks
+                 '("\\.py\\'" flymake-pyflakes-init)))
+  
+  
+  (add-hook 'find-file-hook 'flymake-find-file-hook)
+  (add-hook 'python-mode-hook 'flymake-pyflakes-init)
+  (add-hook 'python-mode-hook
+            (lambda ()
+  ;            (setq indent-tabs-mode t)
+              (setq tab-width 4)
+              (setq python-indent 4)))
 #+END_SRC
 
 * Shell
