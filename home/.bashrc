@@ -8,10 +8,20 @@ source ~/.profile
 
 ### Aliases ###
 
+
 # bash-specific aliases
 # none yet
 
 ### End Aliases ###
+
+### Key Bindings ###
+
+# I often don't want ^C-w to go all the way back to the previous space.
+# E.g. using ^C-w on 'this/long/file/directory' should give '/this/long/file/'
+stty werase undef
+bind '"\C-w": backward-kill-word'
+
+### End Key Bindings
 
 if [[ ! -n ${INSIDE_EMACS} ]]; then
     ### Prompt Definition ###

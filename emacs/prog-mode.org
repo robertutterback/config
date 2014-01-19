@@ -1,6 +1,8 @@
 #+TITLE: Programming Language Modes
 
 If any get too big, I'll put it in a separate file and load it from here.
+Tip: use subword-mode for handling languages with camelCase. I should put that
+into hooks for the right languages.
 
 * General Programming Mode
 #+BEGIN_SRC emacs-lisp
@@ -12,9 +14,9 @@ If any get too big, I'll put it in a separate file and load it from here.
       (show-paren-mode)
       (auto-fill-mode)
       (setq comment-auto-fill-only-comments t))
-  
+
     (add-hook 'prog-mode-hook 'prepare-to-program)
-  
+
   ;; Close the compilation window if there was no error at all.
   (setq compilation-exit-message-function
         (lambda (status code msg)
@@ -29,7 +31,7 @@ If any get too big, I'll put it in a separate file and load it from here.
           ;; compilation-exit-message-function
           (cons msg code)))
 #+END_SRC
-	
+
 * General Flymake stuff
 #+BEGIN_SRC emacs-lisp
   (require 'flymake)
@@ -69,6 +71,10 @@ If any get too big, I'll put it in a separate file and load it from here.
                '(".+\\.c$" flymake-simple-make-init
                  flymake-simple-cleanup flymake-get-real-file-name))
 
+  (eval-after-load "cc-mode"
+    (add-hook 'c-mode-hook electric-case-c-init))
+
+
 #+END_SRC
 * Cilk
 #+BEGIN_SRC emacs-lisp
@@ -102,11 +108,11 @@ If any get too big, I'll put it in a separate file and load it from here.
                           temp-file
                           (file-name-directory buffer-file-name))))
         (list "pyflakes" (list local-file))))
-  
+
     (add-to-list 'flymake-allowed-file-name-masks
                  '("\\.py\\'" flymake-pyflakes-init)))
-  
-  
+
+
   (add-hook 'find-file-hook 'flymake-find-file-hook)
   (add-hook 'python-mode-hook 'flymake-pyflakes-init)
   (add-hook 'python-mode-hook

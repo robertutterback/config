@@ -212,10 +212,20 @@ lives more difficult.
 ;    (add-hook 'org-mode-hook #'yas/org-setup)
   #+END_SRC
 		
-* TO DO
+* TODO
   :PROPERTIES:
   :CUSTOM_ID: todo
   :END:
+** Packages to mess around with/utilize:
+*** electric case (new-function => new_function)
+*** string-inflection (underscore => UPCASE => camelCase)
+*** Switch to aspell:
+#+BEGIN_SRC emacs-lisp
+  ;; (setq ispell-program-name "aspell")
+  ;;   ;; -C makes aspell accept run-together words
+  ;;   ;; --run-together-limit is maximum number of words that can be strung together.
+  ;;   (setq ispell-extra-args '("-C" "--sug-mode=ultra" "--run-together-limit=5"))
+#+END_SRC
 ** Smex package
 ** Fix color theme on startup
 ** Make everything look pretty in the org files
