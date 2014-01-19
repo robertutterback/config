@@ -1,8 +1,6 @@
 #+TITLE: Programming Language Modes
 
 If any get too big, I'll put it in a separate file and load it from here.
-Tip: use subword-mode for handling languages with camelCase. I should put that
-into hooks for the right languages.
 
 * General Programming Mode
 #+BEGIN_SRC emacs-lisp
@@ -13,6 +11,7 @@ into hooks for the right languages.
       (line-tail-highlight)
       (show-paren-mode)
       (auto-fill-mode)
+      (subword-mode)
       (setq comment-auto-fill-only-comments t))
 
     (add-hook 'prog-mode-hook 'prepare-to-program)
@@ -64,15 +63,12 @@ into hooks for the right languages.
 #+END_SRC
 * C
 #+BEGIN_SRC emacs-lisp
-  (setq c-set-style "Linux"
-        c-basic-offset 2)
-
   (add-to-list 'flymake-allowed-file-name-masks
                '(".+\\.c$" flymake-simple-make-init
                  flymake-simple-cleanup flymake-get-real-file-name))
 
-  (eval-after-load "cc-mode"
-    (add-hook 'c-mode-hook electric-case-c-init))
+  ;(eval-after-load "cc-mode"
+ ;(add-hook 'c-mode-hook electric-case-c-init))
 
 
 #+END_SRC
@@ -95,7 +91,13 @@ into hooks for the right languages.
 #+END_SRC
 * C common
 #+BEGIN_SRC emacs-lisp
-
+  (add-hook 'c-mode-common-hook
+            '(lambda ()
+               (c-toggle-syntactic-indentation 1)
+               (setq c-basic-offset 2)
+               (setq c-set-style "Linux")
+               (c-toggle-hungry-state 1)
+               (c-toggle-electric-state 1)))
 #+END_SRC
 * Python
 #+BEGIN_SRC emacs-lisp
