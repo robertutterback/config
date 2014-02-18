@@ -10,6 +10,10 @@ Currently seems to work for OSX and Linux (Ubuntu), though not thoroughly tested
 TODO
 ----
 
+* Cleanup/solidfy emacs configuration.
+* Support for general keyboard shortcuts, including tiling window managers.
+ * Slate for OSX.
+ * Either i3 or xmonad for Linux.
 * Consider using GNU Stow instead of a set of Makefiles.
  * PRO: Seems cleaner
  * PRO: Less debugging makefiles
@@ -17,3 +21,4 @@ TODO
  * CON: Less flexibility? Sometimes I may actually want to copy files, not just symlink.
 * Increase portability
  1. Support for Cygwin would be nice.
+ 2. Also FreeBSD, if I ever get around to actually using my FreeBSD laptop.
