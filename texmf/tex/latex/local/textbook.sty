@@ -1,0 +1,177 @@
+% If I ever need it, this will be a package with specification for
+% writing a textbook. Currently it is just the same as the 'homework'
+% style/package.
+
+\ProvidesPackage{textbook}
+
+% Packages to make things look nice.
+\usepackage{fancyhdr, setspace, lastpage}
+\usepackage[hmargin=0.8in,vmargin=.9in]{geometry}
+\usepackage{xifthen}% provides \isempty test
+\usepackage{amsmath,amsthm,amssymb,amsfonts,mathtools}
+\usepackage{enumerate, hyperref, xfrac}
+
+%% other math fonts
+%% \usepackage{euler}
+\usepackage{cmbright}
+%% \usepackage{ccfonts,eulervm} \usepackage[T1]{fontenc}
+
+% Header and footer layout.
+% Note: margins are set to 1in vertical, 0.8
+% horizontal by the geometry package above
+\onehalfspacing
+\pagestyle{fancy}
+\fancyhead[L]{\@assn}
+\fancyhead[C]{\@shortclass}
+\fancyhead[R]{ \@shortauthor}
+\fancyfoot[C]{\thepage \hspace{1pt} of \pageref{LastPage}}
+\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+
+% Define parameters to use in the title and header/footer.
+\newcommand\fullclass[1]{\renewcommand\@fullclass{#1}}
+\newcommand\@fullclass{Intro to Latex}
+\newcommand\shortclass[1]{\renewcommand\@shortclass{#1}}
+\newcommand\@shortclass{Latex 101}
+\newcommand\shortauthor[1]{\renewcommand\@shortauthor{#1}}
+\newcommand\@shortauthor{Noname}
+\newcommand\assn[1]{\renewcommand\@assn{#1}}
+\newcommand\@assn{Assignment 1}
+
+% Make the title with our set parameters.
+\makeatletter
+\renewcommand{\@maketitle}
+{
+    \thispagestyle{empty}
+    \singlespacing
+    \begin{center}
+        \@author \\
+        \@fullclass \\
+        \@assn \\
+        \@date \\
+    \end{center}
+}
+
+% Line spacing
+\onehalfspacing
+
+%% Important -- My custom command to combine emphasis and bold-face
+%% Note that some of the math fonts above do not have a boldface and italic font,
+%% so the imp command does not work as intended.
+\newcommand{\imp}[1]{\textbf{\emph{#1}}}
+
+%% sidways fraction for a small number of units in equations
+%% Ex: m/s
+\newcommand{\unitfrac}[2]{\;\sfrac{\textrm{#1}}{\textrm{#2}}}
+\newcommand{\unit}[1]{\;\textrm{#1}}
+\newcommand{\stepnote}[1]{\;&\textrm{(#1)}}
+
+%% independent symbol for probability
+\newcommand{\ind}{\perp}
+
+%% euler's constant
+\newcommand{\e}{\textrm{e}}
+
+%% derivative d
+\renewcommand{\d}[1]{\textrm{d}#1}
+
+%% conditional probability ``given''
+\newcommand{\given}{\hspace{1pt} \middle \vert \hspace{1pt}}
+%%\newcommand{\given}{ \; \middle \vert \; }
+
+%% distribution command
+%% example: \distro{uniform}{a,b}
+\newcommand{\distro}[2]{\textrm{#1}(#2)}
+
+%% drawn from probability distribution symbol
+\newcommand{\drawn}{\sim}
+
+%% evaluate expression at a fixed value
+\newcommand{\eval}{\biggr\rvert}
+
+%% Absolute value bars from StackOverflow
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\renewcommand{\Pr}[1]{\ensuremath{\textbf{P}\hspace{-2pt}\left\{#1\right\}}}
+\newcommand{\E}[1]{\ensuremath{\textbf{E}\hspace{-2pt}\left[#1\right]}}
+\newcommand{\Var}[1]{\ensuremath{\textbf{Var}\hspace{-2pt}\left(#1\right)}}
+\newcommand{\Cov}[2]{\ensuremath{\textbf{Cov}\hspace{-2pt}\left(#1,#2\right)}}
+\renewcommand{\max}[2]{\ensuremath{\textbf{max}\hspace{-2pt}\left(#1,#2\right)}}
+\renewcommand{\min}[2]{\ensuremath{\textbf{min}\hspace{-2pt}\left(#1,#2\right)}}
+
+
+%% \renewcommand{\Pr}[2][]{%
+%%   \ifthenelse{\isempty{#1}}%
+%%              {\ensuremath{\mathbf{P}\left\{#2\right\}}}
+%%              {\ensuremath{\mathbf{P}\left\{#2 \given #1\right\}}}
+%% }
+
+%%% Theorem stylings and counters
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem*{corollary}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[theorem]
+\newtheorem{conjecture}{Conjecture}[theorem]
+\newtheorem{example}{Example}[theorem]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{claim}{Claim}
+\newtheorem{case}{Case}
+
+\newcounter{ExerciseNum}
+\newtheoremstyle{exercise}
+{}% space above
+{}% space below
+{}% body font
+{}% indentation
+{}% head font
+{}% head punctuation
+{1em}% space after theorem head
+%{{\bf \thmname{#1}\thmnumber{ #2}:\thmnote{ #3}}}
+{{\bfseries \thmnumber{#2} \thmnote{\hspace{-5pt}#3}}}
+
+\theoremstyle{exercise}
+\newtheorem{exercise}[ExerciseNum]{Exercise}
+\newtheorem*{exercise*}{Exercise}
+
+\newenvironment{question}{}{\\\\}
+\newenvironment{solution}
+{{\it Solution:}\;}
+{}
+\newenvironment{claim*}
+{{\it Claim:}\;}
+
+
+\let\oldproofname=\proofname
+\renewcommand{\proofname}{\rm\it{\oldproofname:\nopunct}}
+
+
+%%% NOTE: The following three sets of definitions have different implications.
+%% This set means definition (and conjecture) will have their own global counter,
+%% starting at 1. 1, 2, 3, ...
+%% \newtheorem{definition}{Definition}
+%% \newtheorem{conjecture}{Conjecture}
+
+%% This set means they will have the same counter as the section, but increment the
+%% TENTHS place. e.g. Section 0, Def 0.1, Section 1, Def 1.1, Def 1.2
+%% \newtheorem{definition}{Definition}[section]
+%% \newtheorem{conjecture}{Conjecture}[section]
+
+%% This set means they will have the same counter as the section, but increment the
+%% ONES place. e.g. Section 0, Def 1, Section 2, Def 3, Def 4
+%% \newtheorem{definition}[section]{Definition}
+%% \newtheorem{conjecture}[section]{Conjecture}

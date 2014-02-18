@@ -1,0 +1,61 @@
+% A package for technical talks I may give. Requires beamer.
+
+\ProvidesPackage{present}
+
+% Packages to make things look nice.
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,breaklines=true}
+%% \usepackage{fancyhdr, setspace, lastpage}
+%% \usepackage[hmargin=0.8in,vmargin=.9in]{geometry}
+%% \usepackage{xifthen}% provides \isempty test
+%% \usepackage{amsmath,amsthm,amssymb,amsfonts,mathtools}
+%% \usepackage{enumerate, hyperref, xfrac}
+
+%-------------------------- Choose Presentation Theme -----------------------
+\usetheme{Dresden}	%There are many possible themes---see documentation.
+\usepackage{hanging}
+\beamertemplatenavigationsymbolsempty
+%-------------------------- Creating N-Up Handouts --------------------------
+% The options "2 on 1", "4 on 1", "8 on 1" or "16 on 1" are possible.
+% Outside programs like acrobat viewer (not full acrobat, last I checked) in
+% Windows or pdfnup in Linux will also print your notes several to a page,
+% even if you don't use this option.
+
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{8 on 1}[letterpaper,border shrink=5mm]  
+
+%---------------------- Choose Whether to Display Notes ---------------------
+
+%\setbeameroption{show notes}		% This option will show all notes pages
+%\setbeameroption{show only notes}	% This option will show only notes pages
+
+%--------------------------- Other Usefule Packages -------------------------
+%\usepackage{graphicx}  %The graphics package. Use the command
+                        %\includegraphics[width=?,height=?]{graphics_file}
+                        %to include graphics.  The width and height are
+                        %optional, and specifying one of them scales the other
+                        %dimension accordingly.  Includes pdf, png or jpg
+                        %files.
+%\usepackage{textcomp}	%Access extra typesetting symbols in text mode.
+
+% ---------------------------Using other typefaces --------------------------
+% Uncomment one of the typeface packages and both the \usefonttheme commands
+% to choose a serif font for text.
+
+%\usepackage{mathptm}   %Times font w/ math
+%\usepackage{mathpazo}  %Palatino font w/ math
+%\usepackage{fourier}   %Utopia font w/ accompanying math
+%\usefonttheme[stillsansseriflarge,stillsansserifsmall]{serif}
+\usefonttheme{professionalfonts}	% Tells Beamer not to fake math fonts.
+%% other math fonts
+%% \usepackage{euler}
+%% \usepackage{cmbright}
+%% \usepackage{ccfonts,eulervm} \usepackage[T1]{fontenc}
+
+% ---------------------- Changing the default bullets -----------------------
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[circle]
+
+% Header and Footer
+\setbeamerfont{page number in head/font}{size=\large}
+\setbeamertemplate{footline}[frame number]
