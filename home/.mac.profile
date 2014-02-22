@@ -19,6 +19,9 @@ export PRINTER=Chocolate
 #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/local/src/gmock-1.7.0/lib:/opt/local/src/gmock-1.7.0/gtest/lib
 export INFOPATH=$INFOPATH:/opt/local/share/info
 
+# Prevent hidden files from being copied, e.g. when using tar.
+export COPYFILE_DISABLE=true
+
 ### End Environment Variables ###
 
 ### Aliases ###
