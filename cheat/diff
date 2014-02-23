@@ -1,0 +1,2 @@
+Show the difference between files in unified diff format:
+diff -u [FILES]

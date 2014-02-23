@@ -1,0 +1,5 @@
+To patch a file with a diff file in the same directory:
+patch < patchfile
+
+To patch a file and strip slashes from the file location:
+patch -p<num> < patchfile
