@@ -17,6 +17,7 @@ export PATH
 export PINENTRY_USER_DATA="USE_CURSES=1"
 export PRINTER=Chocolate
 #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/local/src/gmock-1.7.0/lib:/opt/local/src/gmock-1.7.0/gtest/lib
+export LIBRARY_PATH=$LIBRARY_PATH:/opt/local/lib
 export INFOPATH=$INFOPATH:/opt/local/share/info
 
 # Prevent hidden files from being copied, e.g. when using tar.
