@@ -71,6 +71,10 @@ lives more difficult.
   :PROPERTIES:
   :CUSTOM_ID: core
   :END:
+- Web Browsing
+#+BEGIN_SRC emacs-lisp
+  (org-babel-load-file (expand-file-name "web.org" config-dir))
+#+END_SRC
 - Version Control
 #+BEGIN_SRC emacs-lisp
     (org-babel-load-file (expand-file-name "vc.org" config-dir))

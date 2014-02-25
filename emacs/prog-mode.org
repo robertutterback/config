@@ -1,4 +1,4 @@
-0;95;c#+TITLE: Programming Language Modes
+#+TITLE: Programming Language Modes
 
 If any get too big, I'll put it in a separate file and load it from here.
 
