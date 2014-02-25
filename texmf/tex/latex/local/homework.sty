@@ -165,6 +165,15 @@
 \newenvironment{claim*}
 {{\it Claim:}\;}
 
+\newenvironment{markovchain}
+{
+  \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,
+      node distance=2.8cm,semithick]
+    \tikzstyle{every state}=[fill=white,draw=black,thick,text=black,scale=1]
+}
+{
+  \end{tikzpicture}
+}
 
 \let\oldproofname=\proofname
 \renewcommand{\proofname}{\rm\it{\oldproofname:\nopunct}}
