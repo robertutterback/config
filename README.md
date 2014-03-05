@@ -12,6 +12,9 @@ thoroughly tested.
 TODO ----
 
 * Cleanup/solidfy emacs configuration.
+ * Use flycheck instead of flymake.
+ * latex-preview-pane package.
+ * Setup autocomplete (and in general a better programming environment).
 * I'd like a weekly summary script that uses my org-mode setup
  * Provides statistics on the previous week
  * Provides information about the upcoming week
