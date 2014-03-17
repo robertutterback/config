@@ -1,4 +1,5 @@
-User Configuration ==================
+# User Configuration #
+
 
 Version-controlled storage and installation of user configuration
 files, mostly dotfiles.
@@ -9,7 +10,7 @@ The current Makefile installation process comes from
 Currently seems to work for OSX and Linux (Ubuntu), though not
 thoroughly tested.
 
-TODO ----
+## TODO ##
 
 * Cleanup/solidfy emacs configuration.
  * Use flycheck instead of flymake.
