@@ -27,6 +27,10 @@
 * Doc-View
 #+BEGIN_SRC emacs-lisp
   (setq doc-view-continuous t)
+  (add-hook 'doc-view-mode-hook
+            (lambda ()
+              (linum-mode -1)
+              ))
 #+END_SRC
 * Other minor stuff
 #+BEGIN_SRC emacs-lisp
