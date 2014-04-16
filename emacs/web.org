@@ -4,6 +4,7 @@
 #+BEGIN_SRC emacs-lisp
   (add-hook 'w3m-mode-hook 'w3m-lnum-mode)
   (setq w3m-default-display-inline-images t)
+  (setq w3m-use-cookies t)
 
   ;;change default browser for 'browse-url'  to w3m
   (setq browse-url-browser-function 'w3m-goto-url-new-session)
