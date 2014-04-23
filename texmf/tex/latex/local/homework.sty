@@ -19,7 +19,7 @@
 \usepackage[hmargin=0.8in,vmargin=.9in]{geometry}
 \usepackage{xifthen}% provides \isempty test
 \usepackage{amsmath,amsthm,amssymb,amsfonts,mathtools}
-\usepackage{enumerate, hyperref, xfrac, paralist}
+\usepackage{enumerate, hyperref, xfrac, paralist, fp}
 
 %% other math fonts
 %% \usepackage{euler}
@@ -160,7 +160,8 @@
 
 \newenvironment{question}{}{\\}
 \newenvironment{solution}
-{{\it Solution:}\;}
+%{{\it Solution:}\;}
+{}
 {}
 \newenvironment{claim*}
 {{\it Claim:}\;}
@@ -168,12 +169,49 @@
 \newenvironment{markovchain}
 {
   \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,
-      node distance=4cm,semithick]
+      node distance=3cm,semithick]
     \tikzstyle{every state}=[fill=white,draw=black,thick,text=black,scale=1]
 }
 {
   \end{tikzpicture}
 }
+
+\newcommand{\simplebirthdeath}[3]
+{
+  \begin{markovchain}
+    \node[state] (0) {$0$};
+    \FPeval{\last}{clip(#1 - 1)}
+    \foreach \index in {1, ..., \last} {%
+      \FPeval{\prev}{clip(\index - 1)}
+      \node[state] (\index) [right of=\prev] {$\index$};%
+    }%
+    \foreach \index in {1, ..., \last} {%
+      \FPeval{\prev}{clip(\index - 1)}
+      \path (\prev) edge [bend left] node {#2} (\index);
+      \path (\index) edge [bend left] node {#3} (\prev);
+    }
+  \end{markovchain}\\
+}
+
+\newcommand{\closedmarkovmodel}[3]
+{
+  \begin{markovchain}
+    \node[state] (0) {$0$};
+    \FPeval{\last}{clip(#1 - 1)}
+    \foreach \index in {1, ..., \last} {%
+      \FPeval{\prev}{clip(\index - 1)}
+      \node[state] (\index) [right of=\prev] {$\index$};%
+    }%
+    \foreach \index in {1, ..., \last} {%
+      \FPeval{\prev}{clip(\index - 1)}
+      \FPeval{\mult}{clip(\last - \prev)}
+      \path (\prev) edge [bend left] node {$\mult$#2} (\index);
+      \path (\index) edge [bend left] node {#3} (\prev);
+    }
+  \end{markovchain}\\
+}
+
+
 
 \let\oldproofname=\proofname
 \renewcommand{\proofname}{\rm\it{\oldproofname:\nopunct}}
