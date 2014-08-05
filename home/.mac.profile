@@ -8,15 +8,16 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export MANPATH=/opt/local/share/man:$MANPATH
 export GMOCK_DIR=/opt/local/src/gmock-1.7.0
 export GTEST_DIR=$GMOCK_DIR/gtest
+export FPATH="$FPATH:/opt/local/share/zsh/site-functions"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
-export PATH
 ### End Path ###
 ### Environment Variables
 
 export PINENTRY_USER_DATA="USE_CURSES=1"
 export PRINTER=Chocolate
 #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/local/src/gmock-1.7.0/lib:/opt/local/src/gmock-1.7.0/gtest/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/local/lib
 export LIBRARY_PATH=$LIBRARY_PATH:/opt/local/lib
 export INFOPATH=$INFOPATH:/opt/local/share/info
 
@@ -43,6 +44,10 @@ alias eg='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c'
 alias kille='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -e "(kill-emacs)"'
 alias starte='/Applications/Emacs.app/Contents/MacOS/Emacs --daemon &'
 
+export EDITOR='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t -c'
+export MAILDIR='~/Mail'
+export MAILCONF='~/.mutt'
+
 alias junitc='javac -cp /usr/share/java/junit.jar:.'
 alias junit='java -cp .:/usr/share/java/junit.jar:. org.junit.runner.JUnitCore'
 
@@ -54,9 +59,15 @@ alias ll='ls -l'
 alias run='open -a'
 
 ### End Aliases
+
 ### Enhancements
 # Completion should be /Applications/ aware
 compctl -f -x 'p[2]' -s "`/bin/ls -d1 /Applications/*/*.app \
 					 /Applications/*.app | sed 's|^.*/\([^/]*\)\.app.*|\\1|;s/ /\\\\ /g'`" \
 					 -- open
 ### End Enhancements
+
+## Autojump
+if [ -f /opt/local/etc/profile.d/autojump.zsh ]; then
+    . /opt/local/etc/profile.d/autojump.zsh
+fi
