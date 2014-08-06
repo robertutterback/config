@@ -1,4 +1,4 @@
-1;2802;0cif [ "$SHELL" = "zsh" ]; then
+if [ "$SHELL" = "zsh" ]; then
 	 zstyle ':completion:*' menu select=2 eval "$(dircolors -b)"
 fi;
 
