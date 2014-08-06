@@ -23,19 +23,6 @@ export GREP_OPTIONS='--color=auto'
 # Platform-independent shell config
 source ~/.profile
 
-case "$OSTYPE" in
-linux-gnu)
-	if [ -f ~/.lnx.profile ]; then
-		. ~/.lnx.profile
-	fi
-	;;
-darwin*)
-	if [ -f ~/.mac.profile ]; then
-  		. ~/.mac.profile
-  	fi
-	;;
-esac
-
 autoload -Uz compinit
 compinit
 

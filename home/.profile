@@ -31,3 +31,16 @@ man() {
 		    LESS_TERMCAP_us=$(printf "\e[1;32m") \
 			  man "$@"
 }
+
+case "$OSTYPE" in
+linux-gnu)
+	if [ -f ~/.lnx.profile ]; then
+		. ~/.lnx.profile
+	fi
+	;;
+darwin*)
+	if [ -f ~/.mac.profile ]; then
+  		. ~/.mac.profile
+  	fi
+	;;
+esac

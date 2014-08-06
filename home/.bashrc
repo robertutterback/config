@@ -2,7 +2,7 @@ unset HISTFILE # don't log bash history
 export CLICOLOR=1 # enables coloring of terminal
 export LSCOLORS=GxFxCxDxBxegedabagaced # specifies how to color specific items
 export TERM="xterm-256color"
-]50;SetProfile=ssh^G
+#]50;SetProfile=ssh^G
 # Platform-independent shell config
 source ~/.profile
 
