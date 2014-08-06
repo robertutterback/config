@@ -38,6 +38,10 @@ Host shake
 		 HostName shakespeare.cse.wustl.edu
 		 User utterbackr
 
+Host stop
+		 HostName stoppard.seas.wustl.edu
+		 User rob
+
 Host onl
      HostName onl.arl.wustl.edu
      User rob

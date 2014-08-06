@@ -15,21 +15,21 @@ Function definitions and aliases
 ** Highlight line tails
 In prog-mode, I want to know if any lines are longer than 80 characters.
 #+BEGIN_SRC emacs-lisp
-(defun line-tail-highlight ()
-  "Highlight line tails longer than 80 characters (easier to comprehend and print)"
-  (interactive)
-  (require 'whitespace)
-  (setq whitespace-style '(face empty lines-tail trailing))
-  (global-whitespace-mode t))
+  (defun line-tail-highlight ()
+    "Highlight line tails longer than 80 characters (easier to comprehend and print)"
+    (interactive)
+    (require 'whitespace)
+    (setq whitespace-style '(face empty lines-tail trailing))
+    (whitespace-mode t))
 #+END_SRC
 ** Turn off highlight line tails
 In other modes, like org-mode, I don't want to highlight line tails.
 #+BEGIN_SRC emacs-lisp
-(defun line-tail-highlight-off ()
-  (interactive)
-  (require 'whitespace)
-  (setq whitespace-style '(face empty trailing))
-  (global-whitespace-mode t))
+  (defun line-tail-highlight-off ()
+    (interactive)
+    (require 'whitespace)
+    (setq whitespace-style '(face empty trailing))
+    (whitespace-mode t))
 #+END_SRC
 ** Turn on flyspell
 #+BEGIN_SRC emacs-lisp

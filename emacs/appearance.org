@@ -13,7 +13,7 @@
         (load-theme (car (cdr color-theme-choices)))))
 
   ;; hook on after-make-frame-functions
-  ;;(add-hook 'after-make-frame-functions 'set-frame-theme)  
+  ;;(add-hook 'after-make-frame-functions 'set-frame-theme)
 
 #+END_SRC
 
@@ -42,16 +42,22 @@
   (hlinum-activate)
 #+END_SRC
 * Text and org-mode appearance
+** TODO I should really move this to a text.org file.
 #+BEGIN_SRC emacs-lisp
+  (setq synonyms-file "/opt/local/etc/thesaurus/mthesaur.txt")
+  (setq synonyms-cache-file "~/.emacs.d/mthesaur.txt.cache")
+
   (defun text-mode-appearance ()
     (interactive)
     (turn-on-visual-line-mode)
     (flyspell-mode 1)
     (line-tail-highlight-off)
-    (auto-fill-mode -1))
+    (auto-fill-mode -1)
+    (require 'synonyms))
 
   (add-hook 'text-mode-hook 'text-mode-appearance)
   (add-hook 'org-mode-hook 'text-mode-appearance)
+  (add-hook 'LaTeX-mode-hook 'text-mode-appearance)
 #+END_SRC
 * Web Browsing in Emacs
 - w3 won't work in an OSX graphical frame

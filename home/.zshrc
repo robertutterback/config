@@ -20,6 +20,9 @@ export LSCOLORS=GxFxCxDxBxegedabagaced # specifies how to color specific items
 export TERM="xterm-256color"
 export GREP_OPTIONS='--color=auto'
 
+# Platform-independent shell config
+source ~/.profile
+
 case "$OSTYPE" in
 linux-gnu)
 	if [ -f ~/.lnx.profile ]; then
@@ -216,8 +219,6 @@ fi
 
 ### End Promp Definition ###
 
-# Platform-independent shell config
-source ~/.profile
 
 ### Aliases ###
 
