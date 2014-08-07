@@ -216,33 +216,29 @@ lives more difficult.
 ;    (add-hook 'org-mode-hook #'yas/org-setup)
   #+END_SRC
 		
-* TODO
+* Improvements
   :PROPERTIES:
   :CUSTOM_ID: todo
   :END:
 ** Packages to mess around with/utilize:
-*** electric case (new-function => new_function)
-*** string-inflection (underscore => UPCASE => camelCase)
-*** Switch to aspell:
+*** TODO electric case (new-function => new_function)
+*** TODO string-inflection (underscore => UPCASE => camelCase)
+*** TODO Switch to aspell:
 #+BEGIN_SRC emacs-lisp
   ;; (setq ispell-program-name "aspell")
   ;;   ;; -C makes aspell accept run-together words
   ;;   ;; --run-together-limit is maximum number of words that can be strung together.
   ;;   (setq ispell-extra-args '("-C" "--sug-mode=ultra" "--run-together-limit=5"))
 #+END_SRC
-** Smex package
-** Fix color theme on startup
-** Make everything look pretty in the org files
+** TODO Smex package
+** TODO Make everything look pretty in the org files
 - Especially the way code is displayed
-** Add an org-mode hook for flyspell
+** TODO Add an org-mode hook for flyspell
 - Will flyspell-prog-mode work well to ignore things like #+STARTUP: showall?
-** Configure/learn to use YASNIPPET
-** Use new, Better flymake configure it
+** TODO Configure/learn to use YASNIPPET
+** TODO Use new, Better flymake configure it
 * Resources
   :PROPERTIES:
   :CUSTOM_ID: resources
   :END:
-
   [[http://emacswiki.org][Emacs Wiki]]
-  
-* Footnotes
