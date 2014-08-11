@@ -36,3 +36,6 @@ alias t.pro='gnome-terminal --window-with-profile=Pro'
 ### Environment Variables ###
 #export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/local/src/gmock-1.7.0/include:/opt/local/src/gmock-1.7.0/gtest/include
 #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/local/src/gmock-1.7.0/lib:/opt/local/src/gmock-1.7.0/gtest/lib
+
+# Load Autojump
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
