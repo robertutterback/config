@@ -4,32 +4,35 @@ If any get too big, I'll put it in a separate file and load it from here.
 
 * General Programming Mode
 #+BEGIN_SRC emacs-lisp
-    (defun prepare-to-program ()
-      "Set up a general programming environment"
-      (flyspell-prog-mode)
-      (setq indent-tabs-mode nil)
-      (line-tail-highlight)
-      (show-paren-mode)
-      (auto-fill-mode)
-      (setq comment-auto-fill-only-comments t))
+  (defun prepare-to-program ()
+           "Set up a general programming environment"
+           (flyspell-prog-mode)
+           (setq indent-tabs-mode nil)
+           (line-tail-highlight)
+           (show-paren-mode)
+           (auto-fill-mode)
+           (subword-mode)
+           (setq comment-auto-fill-only-comments t)
+           (highlight-current-line-minor-mode)
+           (light-symbol-mode))
   
-    (add-hook 'prog-mode-hook 'prepare-to-program)
+         (add-hook 'prog-mode-hook 'prepare-to-program)
   
-  ;; Close the compilation window if there was no error at all.
-  (setq compilation-exit-message-function
-        (lambda (status code msg)
-          ;; If M-x compile exists with a 0
-          (when (and (eq status 'exit) (zerop code))
-            ;; then bury the *compilation* buffer, so that C-x b
-            ;; doesn't go there
-            (bury-buffer "*compilation*")
-            ;; and return to whatever were looking at before
-            (replace-buffer-in-windows "*compilation*"))
-          ;; Always return the anticipated result of
-          ;; compilation-exit-message-function
-          (cons msg code)))
+       ;; Close the compilation window if there was no error at all.
+       (setq compilation-exit-message-function
+             (lambda (status code msg)
+               ;; If M-x compile exists with a 0
+               (when (and (eq status 'exit) (zerop code))
+                 ;; then bury the *compilation* buffer, so that C-x b
+                 ;; doesn't go there
+                 (bury-buffer "*compilation*")
+                 ;; and return to whatever were looking at before
+                 (replace-buffer-in-windows "*compilation*"))
+               ;; Always return the anticipated result of
+               ;; compilation-exit-message-function
+               (cons msg code)))
 #+END_SRC
-	
+
 * General Flymake stuff
 #+BEGIN_SRC emacs-lisp
   (require 'flymake)
@@ -62,13 +65,12 @@ If any get too big, I'll put it in a separate file and load it from here.
 #+END_SRC
 * C
 #+BEGIN_SRC emacs-lisp
-  (setq c-set-style "Linux"
-        c-basic-offset 2)
-
   (add-to-list 'flymake-allowed-file-name-masks
                '(".+\\.c$" flymake-simple-make-init
                  flymake-simple-cleanup flymake-get-real-file-name))
 
+  ;(eval-after-load "cc-mode"
+ ;(add-hook 'c-mode-hook electric-case-c-init))
 #+END_SRC
 * Cilk
 #+BEGIN_SRC emacs-lisp
@@ -89,25 +91,50 @@ If any get too big, I'll put it in a separate file and load it from here.
 #+END_SRC
 * C common
 #+BEGIN_SRC emacs-lisp
-
+  (add-hook 'c-mode-common-hook
+            '(lambda ()
+               (c-toggle-syntactic-indentation 1)
+               (setq c-basic-offset 2)
+               (setq c-set-style "Linux")
+               (c-toggle-hungry-state 1)
+               (c-toggle-electric-state 1)))
 #+END_SRC
 * Python
 #+BEGIN_SRC emacs-lisp
-;; pyflakes+flymake
-(when (load "flymake" t)
-(defun flymake-pyflakes-init ()
-  (let* ((temp-file (flymake-init-create-temp-buffer-copy
-  'flymake-create-temp-inplace))
-  (local-file (file-relative-name
-  temp-file
-  (file-name-directory buffer-file-name))))
-  (list "pyflakes" (list local-file))))
+  ;; pyflakes+flymake
+  (when (load "flymake" t)
+    (defun flymake-pyflakes-init ()
+      (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                         'flymake-create-temp-inplace))
+             (local-file (file-relative-name
+                          temp-file
+                          (file-name-directory buffer-file-name))))
+        (list "pyflakes" (list local-file))))
 
-  (add-to-list 'flymake-allowed-file-name-masks
-  '("\\.py\\'" flymake-pyflakes-init)))
+    (add-to-list 'flymake-allowed-file-name-masks
+                 '("\\.py\\'" flymake-pyflakes-init)))
 
-;(add-hook 'python-mode-hook 'flymake-pyflakes-init)
-(add-hook 'find-file-hook 'flymake-find-file-hook)
+
+  (add-hook 'find-file-hook 'flymake-find-file-hook)
+  (add-hook 'python-mode-hook 'flymake-pyflakes-init)
+  (add-hook 'python-mode-hook
+            (lambda ()
+              ; (setq indent-tabs-mode t)
+              (setq tab-width 4)
+              (setq python-indent 4)))
+
+  (when (executable-find "ipython")
+    (setq
+     python-shell-interpreter "ipython"
+     python-shell-interpreter-args ""
+     python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+     python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+     python-shell-completion-setup-code
+     "from IPython.core.completerlib import module_completion"
+     python-shell-completion-module-string-code
+     "';'.join(module_completion('''%s'''))\n"
+     python-shell-completion-string-code
+     "';'.join(get_ipython().Completer.all_completions('''%s'''))\n"))
 #+END_SRC
 
 * Shell
@@ -154,7 +181,11 @@ If any get too big, I'll put it in a separate file and load it from here.
 
 * LaTeX
 #+BEGIN_SRC emacs-lisp
-(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
+  ;; (add-to-list 'flymake-allowed-file-name-masks
+  ;;              '(".+\\.tex$" flymake-simple-make-init
+  ;;                flymake-simple-cleanup flymake-get-real-file-name))
+
+  ;;(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
 #+END_SRC
 * Makefiles
 #+BEGIN_SRC emacs-lisp

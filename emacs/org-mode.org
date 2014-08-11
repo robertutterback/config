@@ -65,6 +65,7 @@
   (require 'org-habit)
   (add-to-list 'org-modules 'org-habit)
   (setq org-habit-graph-column 80)
+  (setq org-log-into-drawer "LOGBOOK")
 #+END_SRC
 * Time Tracking and Pomodoro
 #+BEGIN_SRC emacs-lisp

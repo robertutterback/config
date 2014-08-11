@@ -20,18 +20,8 @@ export LSCOLORS=GxFxCxDxBxegedabagaced # specifies how to color specific items
 export TERM="xterm-256color"
 export GREP_OPTIONS='--color=auto'
 
-case "$OSTYPE" in
-linux-gnu)
-	if [ -f ~/.lnx.profile ]; then
-		. ~/.lnx.profile
-	fi
-	;;
-darwin*)
-	if [ -f ~/.mac.profile ]; then
-  		. ~/.mac.profile
-  	fi
-	;;
-esac
+# Platform-independent shell config
+source ~/.profile
 
 #autoload -Uz compinit
 #compinit
@@ -58,6 +48,11 @@ setopt completealiases
 setopt histignorealldups sharehistory
 bindkey -e
 
+# I often don't want ^C-w to go all the way back to the previous space.
+# E.g. using ^C-w on 'this/long/file/directory' should give '/this/long/file/'
+autoload -U select-word-style
+select-word-style bash
+
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
@@ -70,13 +65,13 @@ function precmd {
 
     ###
     # Truncate the path if it's too long.
-    
+
     PR_FILLBAR=""
     PR_PWDLEN=""
-    
+
     local promptsize=${#${(%):---(%n@%m:%l)---()--}}
     local pwdsize=${#${(%):-%~}}
-    
+
     if [[ "$promptsize + $pwdsize" -gt $TERMWIDTH ]]; then
 	((PR_PWDLEN=$TERMWIDTH - $promptsize))
     else
@@ -126,7 +121,7 @@ setprompt () {
 
     ###
     # See if we can use extended characters to look nicer.
-    
+
     typeset -A altchar
     set -A altchar ${(s..)terminfo[acsc]}
     PR_SET_CHARSET="%{$terminfo[enacs]%}"
@@ -138,10 +133,10 @@ setprompt () {
     PR_LRCORNER=${altchar[j]:--}
     PR_URCORNER=${altchar[k]:--}
 
-    
+
     ###
     # Decide if we need to set titlebar text.
-    
+
     case $TERM in
 	xterm*)
 	    PR_TITLEBAR=$'%{\e]0;%(!.-=*[ROOT]*=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} | %y\a%}'
@@ -153,8 +148,8 @@ setprompt () {
 	    PR_TITLEBAR=''
 	    ;;
     esac
-    
-    
+
+
     ###
     # Decide whether to set a screen title
     if [[ "$TERM" == "screen" ]]; then
@@ -162,11 +157,11 @@ setprompt () {
     else
 	PR_STITLE=''
     fi
-    
-    
+
+
     ###
     # APM detection
-    
+
     if which ibam > /dev/null; then
 	PR_APM='$PR_RED${${PR_APM_RESULT[(f)1]}[(w)-2]}%%(${${PR_APM_RESULT[(f)3]}[(w)-1]})$PR_LIGHT_BLUE:'
     elif which apm > /dev/null; then
@@ -174,8 +169,8 @@ setprompt () {
     else
 	PR_APM=''
     fi
-    
-    
+
+
     ###
     # Finally, the prompt.
     PROMPT='$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}\
@@ -212,8 +207,6 @@ fi
 
 ### End Promp Definition ###
 
-# Platform-independent shell config
-source ~/.profile
 
 ### Aliases ###
 

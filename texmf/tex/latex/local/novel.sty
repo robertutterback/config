@@ -1,0 +1,141 @@
+% If I ever need it, this will be a package with specification for
+% writing a novel.
+\ProvidesPackage{novel}
+
+\usepackage[T1]{fontenc}
+\usepackage{makeidx}
+\usepackage{bold-extra}
+\usepackage{lipsum}
+\usepackage{datetime}
+\usepackage{lettrine}
+\usepackage{kpfonts}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{calc, blindtext}
+
+\definecolor{chaptercolor}{gray}{0.8}
+% helper macros
+\newcommand\numlifter[1]{\raisebox{-2cm}[0pt][0pt]{\smash{#1}}}
+\newcommand\numindent{\kern37pt}
+\newlength\chaptertitleboxheight
+\makechapterstyle{hansen}{
+  \renewcommand\printchaptername{\raggedleft}
+  \renewcommand\printchapternum{%
+    \begingroup%
+    \leavevmode%
+    \chapnumfont%
+    \strut%
+    \numlifter{\thechapter}%
+    \numindent%
+\endgroup%
+}
+
+\renewcommand*{\printchapternonum}{%
+    \vphantom{\begingroup%
+      \leavevmode%
+      \chapnumfont%
+      \numlifter{\vphantom{9}}%
+      \numindent%
+      \endgroup}
+    \afterchapternum}
+  \setlength\midchapskip{0pt}
+  \setlength\beforechapskip{0.5\baselineskip}
+  \setlength{\afterchapskip}{3\baselineskip}
+  \renewcommand\chapnumfont{%
+    \fontsize{4cm}{0cm}%
+    \bfseries%
+    \sffamily%
+    \color{chaptercolor}%
+  }
+  \renewcommand\chaptitlefont{%
+    \normalfont%
+    \huge%
+    \bfseries%
+    \raggedleft%
+  }%
+  \settototalheight\chaptertitleboxheight{%
+    \parbox{\textwidth}{\chaptitlefont \strut bg\\bg\strut}}
+  \renewcommand\printchaptertitle[1]{%
+    \parbox[t][\chaptertitleboxheight][t]{\textwidth}{%
+      %\microtypesetup{protrusion=false}% add this if you use microtype
+      \chaptitlefont\strut ##1\strut}%
+}}
+\chapterstyle{hansen}
+\aliaspagestyle{chapter}{empty} % just to save some space
+
+\newlength\drop
+\makeatletter
+\newcommand\subtitle[1]{\renewcommand\@subtitle{#1}}
+\newcommand\@subtitle{}
+\newcommand\publisher[1]{\renewcommand\@publisher{#1}}
+\newcommand\@publisher{}
+
+\newcommand*\covertitle{\begingroup
+  \thispagestyle{empty}
+  \setlength\drop{0.1\textheight}
+  %% \vspace*{\baselineskip}
+  \vfill
+  \hbox{%
+    \hspace*{0.2\textwidth}
+    \rule{1pt}{\textheight}
+    \hspace*{0.05\textwidth}
+    \parbox[b]{0.75\textwidth}{
+      \vbox{%
+        \vspace{\drop}
+        {\noindent\HUGE\bfseries\scshape \@title}\\[2\baselineskip]
+        {\Large\itshape \@subtitle}\\[4\baselineskip]
+        {\Large \@author}\par
+        \vspace{0.5\textheight}
+        {\noindent \@publisher}\\[\baselineskip]
+      }
+    }
+   } % end hbox
+\endgroup}
+\makeatother
+
+
+\parindent20pt
+%\parskip10pt
+%\raggedright
+
+\newdateformat{printdate}{%
+\monthname[\THEMONTH] \THEYEAR}
+
+\newcommand\makecover{%
+  \begin{titlingpage}
+    \covertitle
+  \end{titlingpage}
+}
+
+\newenvironment{dedication}
+{
+  \clearpage
+  \thispagestyle{empty}
+  \vspace*{\stretch{1}}
+  \itshape
+  \raggedleft
+}
+{
+  \par
+  \vspace{\stretch{3}}
+  \clearpage
+}
+
+\makeatletter
+\newcommand\makecopyright{%
+  \begin{titlingpage}
+    \makeatletter
+    \clearpage
+    ~\vfill
+    \thispagestyle{empty}
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{\baselineskip}
+    Copyright \the\year \ \@author
+
+    \par\textsc{Published by \@publisher}
+
+    \par\textit{First printing, \printdate\today}
+    \clearpage
+    \makeatother
+  \end{titlingpage}
+}
+\makeatother

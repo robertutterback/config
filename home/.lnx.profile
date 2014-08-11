@@ -29,6 +29,9 @@ alias et='emacsclient -c -nw'
 alias starte='/usr/bin/emacs --daemon &'
 alias kille='/usr/bin/emacsclient -e "(kill-emacs)"'
 
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
 # This opens a new terminal with the Pro profile
 # Unfortunately, I don't think it is currently possible to script a currently open Terminal
 alias t.pro='gnome-terminal --window-with-profile=Pro'
