@@ -16,6 +16,7 @@ export EDITOR='emacsclient'
 export ALTERNATE_EDITOR="vim"
 
 # For the future:
+# @TODO
 # lynx -nonumbers -nolist -dump "http://m.4info.com/search?searchQuery=StLouis+Cardinals" | grep -i -B2 -A4 "Status"
 #  lynx -nonumbers -dump 'http://scores.espn.go.com/mlb/standings' |
 # egrep -A12 "National League"
@@ -42,5 +43,13 @@ darwin*)
 	if [ -f ~/.mac.profile ]; then
   		. ~/.mac.profile
   	fi
+	;;
+cygwin)
+	if [ -f ~/.cyg.profile ]; then
+		. ~/.cyg.profile
+	fi
+	;;
+*)
+	@echo "Unsupported OS."
 	;;
 esac
