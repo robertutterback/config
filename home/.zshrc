@@ -18,7 +18,8 @@ export GPG_TTY
 export CLICOLOR=1 # enables coloring of terminal
 export LSCOLORS=GxFxCxDxBxegedabagaced # specifies how to color specific items
 export TERM="xterm-256color"
-export GREP_OPTIONS='--color=auto'
+#export GREP_OPTIONS='--color=auto'
+
 
 # Platform-independent shell config
 source ~/.profile

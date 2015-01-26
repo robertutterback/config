@@ -20,11 +20,37 @@
 \usepackage{xifthen}% provides \isempty test
 \usepackage{amsmath,amsthm,amssymb,amsfonts,mathtools}
 \usepackage{enumerate, hyperref, xfrac, paralist, fp}
+\usepackage{totcount,everypage,changepage,centernot}
+\usepackage{listings,kvoptions,xstring}
 
 %% other math fonts
 %% \usepackage{euler}
 \usepackage{cmbright}
 %% \usepackage{ccfonts,eulervm} \usepackage[T1]{fontenc}
+
+\SetupKeyvalOptions{
+  family=hw,
+  prefix=hw@
+}
+
+\DeclareStringOption[]{class}[549]
+\ProcessKeyvalOptions*
+
+\newcounter{PageForThisExercise}
+\regtotcounter{PageForThisExercise}
+\setcounter{PageForThisExercise}{0}
+
+\let\oldnewpage\newpage
+\renewcommand{\newpage}{
+  \oldnewpage
+  \setcounter{PageForThisExercise}{0}
+}
+\AddEverypageHook{%
+  \stepcounter{PageForThisExercise}
+}
+
+\newcounter{TotalPagesForThisExercise}
+\setcounter{TotalPagesForThisExercise}{0}
 
 % Header and footer layout.
 % Note: margins are set to 1in vertical, 0.8
@@ -33,8 +59,14 @@
 \pagestyle{fancy}
 \fancyhead[L]{\@assn}
 \fancyhead[C]{\@shortclass}
-\fancyhead[R]{ \@shortauthor}
+\fancyhead[R]{\@shortauthor}
+%% \IfStrEq{\hw@class}{549}{%
 \fancyfoot[C]{\thepage \hspace{1pt} of \pageref{LastPage}}
+%% }{%
+  %% \fancyfoot[L]{Problem \theExerciseNum \hspace{1pt} of \total{ExerciseNum}}
+  %% \fancyfoot[C]{Page \thePageForThisExercise \hspace{1pt} of \theTotalPagesForThisExercise}
+  %% \fancyfoot[R]{Total page \thepage \hspace{1pt} of \pageref{LastPage}}
+%% }
 \renewcommand{\footrulewidth}{0.4pt}% default is 0pt
 
 % Define parameters to use in the title and header/footer.
@@ -46,6 +78,8 @@
 \newcommand\@shortauthor{Noname}
 \newcommand\assn[1]{\renewcommand\@assn{#1}}
 \newcommand\@assn{Assignment 1}
+\newcommand\collab[1]{\renewcommand\@collab{#1}}
+\newcommand\@collab{-}
 
 % Make the title with our set parameters.
 \makeatletter
@@ -58,6 +92,9 @@
         \@fullclass \\
         \@assn \\
         \@date \\
+        \IfStrEq{\@collab}{-}{}{%
+          Collaborators: \@collab \\
+        }
     \end{center}
 }
 
@@ -110,7 +147,10 @@
 \def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
 \makeatother
 
-\renewcommand{\Pr}[1]{\ensuremath{\textbf{P}\hspace{-2pt}\left\{#1\right\}}}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\renewcommand{\Pr}[1]{\ensuremath{\textbf{Pr}\hspace{-2pt}\left\{#1\right\}}}
 \newcommand{\E}[1]{\ensuremath{\textbf{E}\hspace{-2pt}\left[#1\right]}}
 \newcommand{\Var}[1]{\ensuremath{\textbf{Var}\hspace{-2pt}\left(#1\right)}}
 \newcommand{\Cov}[2]{\ensuremath{\textbf{Cov}\hspace{-2pt}\left(#1,#2\right)}}
@@ -143,6 +183,7 @@
 \newtheorem{case}{Case}
 
 \newcounter{ExerciseNum}
+\regtotcounter{ExerciseNum}
 \newtheoremstyle{exercise}
 {}% space above
 {}% space below
@@ -215,7 +256,6 @@
 
 \let\oldproofname=\proofname
 \renewcommand{\proofname}{\rm\it{\oldproofname:\nopunct}}
-
 
 %%% NOTE: The following three sets of definitions have different implications.
 %% This set means definition (and conjecture) will have their own global counter,
