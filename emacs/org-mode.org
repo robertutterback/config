@@ -8,11 +8,40 @@
                                (concat org-directory "/shop.org")
                                (concat org-directory "/discuss.org")
                                (concat org-directory "/ref.org")
+                               (concat org-directory "/journal.org")
                                (concat org-directory "/refile.org")))
   (setq org-default-notes-file (concat org-directory "/refile.org"))
   (setq org-archive-location (concat org-directory "/archive.org" "::" "* From %s"))
   
   (setq org-return-follows-link t)
+#+END_SRC
+* Journal
+- From [[http://metajack.im/2009/01/01/journaling-with-emacs-orgmode/][here]]
+#+BEGIN_SRC emacs-lisp
+  (defvar org-journal-file (concat org-directory "/journal.org")
+    "Path to OrgMode journal file.")
+  (defvar org-journal-date-format "%Y-%m-%d"
+    "Date format string for journal headings.")
+
+  (defun org-journal-entry ()
+    "Create a new diary entry for today or append to an existing one."
+    (interactive)
+    (switch-to-buffer (find-file org-journal-file))
+    (widen)
+    (let ((today (format-time-string org-journal-date-format)))
+      (beginning-of-buffer)
+      (unless (org-goto-local-search-headings today nil t)
+        ((lambda ()
+           (org-insert-heading)
+           (insert today)
+           (insert "\n\n  \n"))))
+      (beginning-of-buffer)
+      (org-show-entry)
+      (org-narrow-to-subtree)
+      (end-of-buffer)
+      (backward-char 2)
+      (unless (= (current-column) 2)
+        (insert "\n\n  "))))
 #+END_SRC
 * Mobile Setup
 #+BEGIN_SRC emacs-lisp
