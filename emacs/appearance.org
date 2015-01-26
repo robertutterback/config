@@ -1,28 +1,14 @@
-* Color Theme
+* Theme
+** TODO set default to load cyberpunk theme and set current line highlight color
 #+BEGIN_SRC emacs-lisp
-  ;; select theme - first list element is for windowing system, second is for console/terminal
-  (setq color-theme-choices
-        '(solarized-dark tango-dark))
-
-  ;; test for each frame or console
-  (defun set-frame-theme (frame)
-    (color-theme-initialize)
-    (select-frame frame)
-    (if (display-graphic-p)
-        (load-theme (car color-theme-choices))
-        (load-theme (car (cdr color-theme-choices)))))
-
-  ;; hook on after-make-frame-functions
-  ;;(add-hook 'after-make-frame-functions 'set-frame-theme)
 
 #+END_SRC
-
 * Fonts
 #+BEGIN_SRC emacs-lisp
   (if (find-font (font-spec :name "Hermit"))
-      (progn (set-default-font "Hermit")))
-  (add-to-list 'default-frame-alist
-               '(font . "Hermit"))
+      (progn (set-default-font "Hermit")
+             (add-to-list 'default-frame-alist
+                          '(font . "Hermit"))))
 #+END_SRC
 * Doc-View
 #+BEGIN_SRC emacs-lisp
@@ -43,6 +29,7 @@
 #+END_SRC
 * Text and org-mode appearance
 ** TODO I should really move this to a text.org file.
+** TODO Only load the synonyms file if it exists!
 #+BEGIN_SRC emacs-lisp
   (setq synonyms-file "/opt/local/etc/thesaurus/mthesaur.txt")
   (setq synonyms-cache-file "~/.emacs.d/mthesaur.txt.cache")

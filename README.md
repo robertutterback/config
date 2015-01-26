@@ -1,8 +1,7 @@
 # User Configuration #
 
-
 Version-controlled storage and installation of user configuration
-files, mostly dotfiles.
+files.
 
 The current Makefile installation process comes from
 [here](http://ostanin.org/blog/2012/01/25/managing-config-files-with-git/).
@@ -11,18 +10,19 @@ Currently seems to work for OSX and Linux (Ubuntu), though not
 thoroughly tested.
 
 ## TODO ##
-
 * Fix my shell configuration
  * Currently, .zshrc and .bashrc load .profile
  * But .profile should be for login terminals, for things that need to happen just once.
  * Most of the user config per shell should be in the .rc files
  * .profile should instead source the correct .rc file (?)
  * Terminals will automatically call .bashrc/.zshrc if the shell is interactive but not login.
+* The install should do a diff with each file, and only create a backup file if the original is different.
 * Cleanup/solidfy emacs configuration.
  * Use flycheck instead of flymake.
  * latex-preview-pane, auctex packages.
  * Setup autocomplete (and in general a better programming environment).
 * I'd like a weekly summary script that uses my org-mode setup
+ * This is better suited for a separate project, rather than contained here.
  * Provides statistics on the previous week
  * Provides information about the upcoming week
  * Ideally, this will include:
@@ -42,8 +42,9 @@ thoroughly tested.
    but I haven't found it yet.
 * Support for general keyboard shortcuts, including tiling window
   managers.
- * Slate for OSX.
+ * Slate for OSX?
  * Either i3 or xmonad for Linux.
+ * bug.n for Windows? This worked fine for a day, then got really buggy on my work (Win7) laptop.
 * Consider using GNU Stow instead of a set of Makefiles.
  * PRO: Seems cleaner
  * PRO: Less debugging makefiles
@@ -52,6 +53,4 @@ thoroughly tested.
  * CON: Less flexibility? Sometimes I may actually want to copy files,
    not just symlink.
 * Increase portability
- 1. Support for Cygwin would be nice.
- 2. Also FreeBSD, if I ever get around to actually using my FreeBSD
-    laptop.
+ 1. Better cygwin config + powershell.
