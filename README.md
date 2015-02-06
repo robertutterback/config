@@ -12,6 +12,7 @@ thoroughly tested.
 
 ## TODO ##
 
+* Add dired config so that it opens a file/directory in the same buffer by default, for all normal commands
 * The install should do a diff with each file, and only create a backup file if the original is different.
 * Cleanup/solidfy emacs configuration.
  * Use flycheck instead of flymake.
