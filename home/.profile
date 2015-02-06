@@ -4,11 +4,17 @@
 ## Aliases
 alias ..='cd ..'
 alias ...='cd ../..'
+alias grep='grep --color=auto'
 
 ## Environment variables
 
 PATH=~/bin:~/.scripts:$PATH
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+if [ -z "$LD_LIBRARY_PATH" ]; then
+    LD_LIBRARY_PATH=/usr/local/lib
+else
+    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+fi
 
 export PATH
 export LD_LIBRARY_PATH
