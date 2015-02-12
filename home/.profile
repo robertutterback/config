@@ -40,7 +40,7 @@ man() {
 }
 
 case "$OSTYPE" in
-linux-gnu)
+linux*)
 	if [ -f ~/.lnx.profile ]; then
 		. ~/.lnx.profile
 	fi
