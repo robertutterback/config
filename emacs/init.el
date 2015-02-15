@@ -13,3 +13,4 @@
     (org-babel-load-file (expand-file-name "main.org" config-dir))))
 (put 'downcase-region 'disabled nil)
 (put 'scroll-left 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
