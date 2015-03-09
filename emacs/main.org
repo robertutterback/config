@@ -82,7 +82,7 @@ lives more difficult.
 #+END_SRC
 - Package Management
   #+BEGIN_SRC emacs-lisp
-    (org-babel-load-file (expand-file-name "packages.org" config-dir))
+   (org-babel-load-file (expand-file-name "packages.org" config-dir))
   #+END_SRC
 	
 - Function definitions in [[file:defuns.org][defuns]]
