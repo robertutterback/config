@@ -224,3 +224,16 @@ if [[ -n ${INSIDE_EMACS} ]]; then
 fi
 
 [[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ '
+
+# Make ctrl-z toggle back to fg
+fancy-ctrl-z () {
+    if [[ $#BUFFER -eq 0 ]]; then
+        BUFFER="fg"
+        zle accept-line
+    else
+        zle push-input
+        zle clear-screen
+    fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
