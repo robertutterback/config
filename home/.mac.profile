@@ -4,7 +4,7 @@
 ### Path ###
 
 # MacPorts Installer addition on 2012-08-22_at_15:30:35: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=$HOME/.cabal/bin:/opt/local/bin:/opt/local/sbin:$PATH
 export MANPATH=/opt/local/share/man:$MANPATH
 export GMOCK_DIR=/opt/local/src/gmock-1.7.0
 export GTEST_DIR=$GMOCK_DIR/gtest
