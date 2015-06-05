@@ -20,5 +20,13 @@
 	unstage = reset HEAD --
 	last = log -1 HEAD
 	visual = !gitk
+	spull = !git pull && git submodule sync --recursive && git submodule update --init --recursive
+	spush = push --recursive-submodules=on-demand
 [push]
 	default = simple
+[status]
+	submoduleSummary = true
+[diff]
+	submodule = log
+[fetch]
+	recursiveSubmodules = on-demand
