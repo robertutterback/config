@@ -1,11 +1,13 @@
 [user]
 	name = Robert Utterback
-	email = robertu13@gmail.com
+	email = Robert.Utterback@huawei.com
 [core]
 	editor = emacsclient -t
+	pager = less -r
 [merge]
 	tool = diff
 [color]
+	ui = true
 	status = auto
 	branch = auto
 	interactive = auto
