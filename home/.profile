@@ -8,7 +8,8 @@ alias grep='grep --color=auto'
 
 ## Environment variables
 
-PATH=~/bin:~/.scripts:$PATH
+export GOPATH=$HOME/go
+PATH=~/bin:~/.scripts:$PATH:$GOPATH/bin
 
 if [ -z "$LD_LIBRARY_PATH" ]; then
     LD_LIBRARY_PATH=/usr/local/lib
