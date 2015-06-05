@@ -217,3 +217,22 @@ If any get too big, I'll put it in a separate file and load it from here.
 
     (add-hook 'git-commit-mode-hook 'rob/prepare-to-commit)
 #+END_SRC
+* HTML
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.html" . jekyll-html-mode))
+#+END_SRC
+* Markdown
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.md$" . jekyll-markdown-mode))
+#+END_SRC
+* Poly
+#+BEGIN_SRC emacs-lisp
+  (define rmd-mode ()
+    "ESS Markdown mode for rmd files"
+    (interactive)
+    (require 'poly-R)
+    (require 'poly-markdown)
+    (poly-markdown+r-mode))
+
+  (add-to-list 'auto-mode-alist '("\\.Rmd$" . rmd-mode))
+#+END_SRC
