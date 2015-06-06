@@ -54,4 +54,8 @@ thoroughly tested.
  * CON: Less flexibility? Sometimes I may actually want to copy files,
    not just symlink.
 * Increase portability
- 1. Better cygwin config + powershell.
+1. Better cygwin config + powershell.
+* Upgrade to powerline
+- https://powerline.readthedocs.org/en/latest/overview.html
+- https://github.com/bhilburn/powerlevel9k
+- (low priority)
