@@ -21,6 +21,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/local/lib
 export LIBRARY_PATH=$LIBRARY_PATH:/opt/local/lib
 export INFOPATH=$INFOPATH:/opt/local/share/info
 
+# Script to output battery charge level.
+export BAT_CHARGE=batcharge.py
+
 # Prevent hidden files from being copied, e.g. when using tar.
 export COPYFILE_DISABLE=true
 
