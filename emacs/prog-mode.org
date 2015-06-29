@@ -15,7 +15,7 @@ If any get too big, I'll put it in a separate file and load it from here.
            (setq comment-auto-fill-only-comments t)
            (highlight-current-line-minor-mode)
            (highlight-current-line-set-bg-color "blue")
-           (highlight-current-line-set-fg-color "white")
+           (highlight-current-line-set-fg-color "none")
            (light-symbol-mode))
 
          (add-hook 'prog-mode-hook 'prepare-to-program)
