@@ -1,14 +1,6 @@
 #+TITLE: My Emacs Customizations
 #+OPTIONS: toc:2 num:nil ^:nil
 
-#+begin_quote
-Control over the use of one's ideas really constitutes control
-over other people's lives; and it is usually used to make their
-lives more difficult.
-
---Richard Stallman
-#+end_quote
-
 * Introduction
   :PROPERTIES:
   :CUSTOM_ID: introduction
@@ -25,9 +17,7 @@ lives more difficult.
     (setq custom-file (concat config-dir "custom.el"))
     (setq enable-recursive-minibuffers t)
   #+END_SRC
-
 - Commonly used packages to be loaded on startup
-*** Do I really need all of these?
   #+name: load-on-startup
   #+BEGIN_SRC emacs-lisp
     (require 'cl)
@@ -38,7 +28,6 @@ lives more difficult.
     (require 'recentf)
     (require 'linum)
   #+END_SRC
-
 - Miscellaneous Preferences (move?) 
   #+BEGIN_SRC emacs-lisp
     (ido-mode 1)
@@ -59,7 +48,6 @@ lives more difficult.
                                             ;(setq scroll-conservatively 5) ; scroll the minimum amount
     (add-hook 'doc-view-mode-hook 'auto-revert-mode)
   #+END_SRC
-
 - Remote Editing
 #+BEGIN_SRC emacs-lisp
   (require 'tramp)
@@ -72,69 +60,29 @@ lives more difficult.
   :PROPERTIES:
   :CUSTOM_ID: core
   :END:
-- Web Browsing
+See each file for a description.
 #+BEGIN_SRC emacs-lisp
   (org-babel-load-file (expand-file-name "web.org" config-dir))
-#+END_SRC
-- Version Control
-#+BEGIN_SRC emacs-lisp
-    (org-babel-load-file (expand-file-name "vc.org" config-dir))
-#+END_SRC
-- Package Management
-  #+BEGIN_SRC emacs-lisp
-   (org-babel-load-file (expand-file-name "packages.org" config-dir))
-  #+END_SRC
-	
-- Function definitions in [[file:defuns.org][defuns]]
-  #+BEGIN_SRC emacs-lisp
-(org-babel-load-file (expand-file-name "defuns.org" config-dir))
-  #+END_SRC
-	
-- Global Key Bindings in [[file:global-keys.org][global-keys]] 
-  Note that mode-specific key bindings go in the specified mode file.
-  #+BEGIN_SRC emacs-lisp
-(org-babel-load-file (expand-file-name "global-keys.org" config-dir))
-  #+END_SRC
-- ***mark29
-	
-- Tab stuff in [[file:tabs.org][tabs]]
-  #+BEGIN_SRC emacs-lisp
-(org-babel-load-file (expand-file-name "tabs.org" config-dir))
-  #+END_SRC
-	
-- Programming Language settings in [[file:prog-mode.org][prog-mode]]
-  #+BEGIN_SRC emacs-lisp
-(org-babel-load-file (expand-file-name "prog-mode.org" config-dir))
-  #+END_SRC
-	
-- Org mode settings in [[file:org-mode.org][org-mode]]
-  #+BEGIN_SRC emacs-lisp
-(org-babel-load-file (expand-file-name "org-mode.org" config-dir))
-  #+END_SRC
-	
-- Miscellaneous settings in [[file:misc.org][misc]]
-  #+BEGIN_SRC emacs-lisp
-(org-babel-load-file (expand-file-name "misc.org" config-dir))
-  #+END_SRC
-	
-- Registers for jumping to commonly used files in [[file:registers.org][registers]]
-  #+BEGIN_SRC emacs-lisp
-    ; I should learn how to use this.
-    ;(org-babel-load-file (expand-file-name "registers.org" config-dir))
-  #+END_SRC
-	
-- Personal settings
-#+BEGIN_SRC emacs-lisp
+  (org-babel-load-file (expand-file-name "vc.org" config-dir))
+  (org-babel-load-file (expand-file-name "packages.org" config-dir))
+  (org-babel-load-file (expand-file-name "defuns.org" config-dir))
+  (org-babel-load-file (expand-file-name "global-keys.org" config-dir))
+  (org-babel-load-file (expand-file-name "tabs.org" config-dir))
+  (org-babel-load-file (expand-file-name "prog-mode.org" config-dir))
+  (org-babel-load-file (expand-file-name "org-mode.org" config-dir))
+  (org-babel-load-file (expand-file-name "misc.org" config-dir))
+  ;(org-babel-load-file (expand-file-name "registers.org" config-dir))
   (org-babel-load-file (expand-file-name "rob.org" config-dir))
+  (org-babel-load-file (expand-file-name "appearance.org" config-dir))
 #+END_SRC
-- Appearance settings in [[file:appearance.org][appearance]]
-  #+BEGIN_SRC emacs-lisp
-(org-babel-load-file (expand-file-name "appearance.org" config-dir))
-  #+END_SRC
 * Other Files
 #+BEGIN_SRC emacs-lisp
-;  (autoload 'pianobar "pianobar" nil t)
 ;  (load "~/.emacs.d/private.el")
+#+END_SRC
+* Helm
+#+BEGIN_SRC emacs-lisp
+  (require 'helm-config)
+  (helm-mode 1)
 #+END_SRC
 * Load User/System Specific Files
 ** System/User specific customizations
