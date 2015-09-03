@@ -13,3 +13,7 @@ hardstatus string "%w%=%m/%d %c"
 
 # Increase scrollback buffer to 30000 lines
 defscrollback 30000
+
+# Use an alternate screen for things like emacs
+# to make it easier to see history
+altscreen on
