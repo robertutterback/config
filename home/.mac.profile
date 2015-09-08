@@ -5,6 +5,7 @@
 
 # MacPorts Installer addition on 2012-08-22_at_15:30:35: adding an appropriate PATH variable for use with MacPorts.
 export PATH=$HOME/.cabal/bin:/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=$PATH:/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
 export MANPATH=/opt/local/share/man:$MANPATH
 export GMOCK_DIR=/opt/local/src/gmock-1.7.0
 export GTEST_DIR=$GMOCK_DIR/gtest
@@ -53,6 +54,8 @@ export MAILCONF='~/.mutt'
 
 alias junitc='javac -cp /usr/share/java/junit.jar:.'
 alias junit='java -cp .:/usr/share/java/junit.jar:. org.junit.runner.JUnitCore'
+
+alias hab=habitica
 
 #alias coursera-dl='python2.7 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/courseradownloader/courseradownloader.py'
 alias coursera-dl='~/src/coursera-dl/coursera-dl'
