@@ -27,6 +27,9 @@ source ~/.profile
 #autoload -Uz compinit
 #compinit
 autoload -U compinit && compinit -u
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^X^e' edit-command-line
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
