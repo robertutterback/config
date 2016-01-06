@@ -48,7 +48,10 @@ alias eg='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c'
 alias kille='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -e "(kill-emacs)"'
 alias starte='/Applications/Emacs.app/Contents/MacOS/Emacs --daemon &'
 
-export EDITOR='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t -c'
+# This does not get called correct because of the spaces, even with
+#quotes. So I made a little shell script hack.
+#export EDITOR='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t -c'
+export EDITOR='osx_emacsclient.sh'
 export MAILDIR='~/Mail'
 export MAILCONF='~/.mutt'
 
@@ -65,6 +68,8 @@ alias ll='ls -l'
 
 alias run='open -a'
 
+alias prm='source ~/.scripts/prm.sh'
+
 ### End Aliases
 
 ### Enhancements
@@ -75,6 +80,9 @@ compctl -f -x 'p[2]' -s "`/bin/ls -d1 /Applications/*/*.app \
 ### End Enhancements
 
 ## Autojump
-if [ -f /opt/local/etc/profile.d/autojump.zsh ]; then
-    . /opt/local/etc/profile.d/autojump.zsh
-fi
+# Disabled while a bug is fixed in the macports installation script
+# for autojump
+# if [ -f /opt/local/etc/profile.d/autojump.zsh ]; then
+#     . /opt/local/etc/profile.d/autojump.zsh
+# fi
+source $HOME/.iterm2_shell_integration.zsh
