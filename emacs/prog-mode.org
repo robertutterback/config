@@ -4,21 +4,21 @@ If any get too big, I'll put it in a separate file and load it from here.
 
 * General Programming Mode
 #+BEGIN_SRC emacs-lisp
-  (defun prepare-to-program ()
-           "Set up a general programming environment"
-           (flyspell-prog-mode)
-           (setq indent-tabs-mode nil)
-           (line-tail-highlight)
-           (show-paren-mode)
-           (auto-fill-mode)
-           (subword-mode)
-           (setq comment-auto-fill-only-comments t)
-           (highlight-current-line-minor-mode)
-           (highlight-current-line-set-bg-color "blue")
-           (highlight-current-line-set-fg-color "none")
-           (light-symbol-mode))
+  ;; (defun prepare-to-program ()
+  ;;          "Set up a general programming environment"
+  ;;          (flyspell-prog-mode)
+  ;;          (setq indent-tabs-mode nil)
+  ;;          (line-tail-highlight)
+  ;;          (show-paren-mode)
+  ;;          (auto-fill-mode)
+  ;;          (subword-mode)
+  ;;          (setq comment-auto-fill-only-comments t)
+  ;;          (highlight-current-line-minor-mode)
+  ;;          (highlight-current-line-set-bg-color "blue")
+  ;;          (highlight-current-line-set-fg-color "none")
+  ;;          (light-symbol-mode))
 
-         (add-hook 'prog-mode-hook 'prepare-to-program)
+  ;;        (add-hook 'prog-mode-hook 'prepare-to-program)
 
        ;; Close the compilation window if there was no error at all.
        (setq compilation-exit-message-function
@@ -38,41 +38,41 @@ If any get too big, I'll put it in a separate file and load it from here.
 * General Flymake stuff
 #+BEGIN_SRC emacs-lisp
   (require 'flymake)
-  ;; Overwrite flymake-display-warning so that no annoying dialog box is
-  ;; used.
+  ;; ;; Overwrite flymake-display-warning so that no annoying dialog box is
+  ;; ;; used.
 
-  ;; This doesn't seem to work:
-  ;; Using lwarn might be kind of annoying on its own, popping up windows and
-  ;; what not. If you prefer to recieve the warnings in the mini-buffer, use:
-  (defun flymake-display-warning (warning)
-    "Display a warning to the user, using lwarn"
-    (message warning))
+  ;; ;; This doesn't seem to work:
+  ;; ;; Using lwarn might be kind of annoying on its own, popping up windows and
+  ;; ;; what not. If you prefer to recieve the warnings in the mini-buffer, use:
+  ;; (defun flymake-display-warning (warning)
+  ;;   "Display a warning to the user, using lwarn"
+  ;;   (message warning))
 
-  (custom-set-variables
-   '(flymake-gui-warnings-enabled nil)
-   '(help-at-pt-timer-delay 0.9)
-   '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt)))'
+  ;; (custom-set-variables
+  ;;  '(flymake-gui-warnings-enabled nil)
+  ;;  '(help-at-pt-timer-delay 0.9)
+  ;;  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt)))'
 
-  (defun my-flymake-show-next-error()
-    (interactive)
-    (flymake-goto-next-error)
-    (flymake-display-err-menu-for-current-line))
+  ;; (defun my-flymake-show-next-error()
+  ;;   (interactive)
+  ;;   (flymake-goto-next-error)
+  ;;   (flymake-display-err-menu-for-current-line))
 
-  (add-hook 'prog-mode-hook
-            (lambda ()
-              (flymake-mode t)
-              (global-set-key "\M-p" 'flymake-goto-prev-error)
-              (global-set-key "\M-n" 'flymake-goto-next-error)))
+  ;; (add-hook 'prog-mode-hook
+  ;;           (lambda ()
+  ;;             (flymake-mode t)
+  ;;             (global-set-key "\M-p" 'flymake-goto-prev-error)
+  ;;             (global-set-key "\M-n" 'flymake-goto-next-error)))
 
 #+END_SRC
 * C
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'flymake-allowed-file-name-masks
-               '(".+\\.c$" flymake-simple-make-init
-                 flymake-simple-cleanup flymake-get-real-file-name))
+   (add-to-list 'flymake-allowed-file-name-masks
+                '(".+\\.c$" flymake-simple-make-init
+                  flymake-simple-cleanup flymake-get-real-file-name))
 
-  ;(eval-after-load "cc-mode"
- ;(add-hook 'c-mode-hook electric-case-c-init))
+   ;(eval-after-load "cc-mode"
+  ;(add-hook 'c-mode-hook electric-case-c-init))
 #+END_SRC
 * Cilk
 #+BEGIN_SRC emacs-lisp
@@ -104,24 +104,40 @@ If any get too big, I'll put it in a separate file and load it from here.
 * Python
 #+BEGIN_SRC emacs-lisp
   ;; pyflakes+flymake
-  (when (load "flymake" t)
-    (defun flymake-pyflakes-init ()
-      (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                         'flymake-create-temp-inplace))
-             (local-file (file-relative-name
-                          temp-file
-                          (file-name-directory buffer-file-name))))
-        (list "pyflakes" (list local-file))))
 
-    (add-to-list 'flymake-allowed-file-name-masks
-                 '("\\.py\\'" flymake-pyflakes-init)))
+  ;; Well, flymake + pyflakes *would* be nice, but it causes problems
+  ;; with sending code to an open python interpreter, plus it leaves an
+  ;; ugly temporary file IN THE THE SAME DIRECTORY as every file I
+  ;; visit! @todo fix the flymake and pyflakes problem so it actually
+  ;; behaves in a sane way
+  ;; (when (load "flymake" t) (defun
+  ;; flymake-pyflakes-init () (let* ((temp-file
+  ;; (flymake-init-create-temp-buffer-copy
+  ;; 'flymake-create-temp-inplace)) (local-file (file-relative-name
+  ;; temp-file (file-name-directory buffer-file-name)))) (list
+  ;; "pyflakes" (list local-file))))
+
+  ;; (defun flymake-create-temp-in-system-tempdir (filename prefix)
+  ;;   (make-temp-file (or prefix "flymake")))
+  ;;(defun flymake-pyflakes-init ()
+  ;;     ; Make sure it's not a remote buffer or flymake would not work
+  ;;     (when (not (subsetp (list (current-buffer)) (tramp-list-remote-buffers)))
+  ;;      (let* ((temp-file (flymake-init-create-temp-buffer-copy
+  ;;                    'flymake-create-temp-in-system-tempdir))
+  ;;             (local-file (file-relative-name
+  ;;                      temp-file
+  ;;                      (file-name-directory buffer-file-name))))
+  ;;    (list "pyflakes" (list temp-file)))))
+
+    ;; (add-to-list 'flymake-allowed-file-name-masks
+    ;;              '("\\.py\\'" flymake-pyflakes-init)))
 
 
-  (add-hook 'find-file-hook 'flymake-find-file-hook)
-  (add-hook 'python-mode-hook 'flymake-pyflakes-init)
+  ;; (add-hook 'find-file-hook 'flymake-find-file-hook)
+  ;; (add-hook 'python-mode-hook 'flymake-pyflakes-init)
   (add-hook 'python-mode-hook
             (lambda ()
-              ; (setq indent-tabs-mode t)
+              (setq indent-tabs-mode t)
               (setq tab-width 4)
               (setq python-indent 4)))
 
@@ -183,9 +199,9 @@ If any get too big, I'll put it in a separate file and load it from here.
 
 * LaTeX
 #+BEGIN_SRC emacs-lisp
-  ;; (add-to-list 'flymake-allowed-file-name-masks
-  ;;              '(".+\\.tex$" flymake-simple-make-init
-  ;;                flymake-simple-cleanup flymake-get-real-file-name))
+  (add-to-list 'flymake-allowed-file-name-masks
+               '(".+\\.tex$" flymake-simple-make-init
+                 flymake-simple-cleanup flymake-get-real-file-name))
 
   ;;(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
 #+END_SRC
