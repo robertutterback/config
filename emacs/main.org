@@ -62,18 +62,18 @@
   :END:
 See each file for a description.
 #+BEGIN_SRC emacs-lisp
-  (org-babel-load-file (expand-file-name "web.org" config-dir))
-  (org-babel-load-file (expand-file-name "vc.org" config-dir))
-  (org-babel-load-file (expand-file-name "packages.org" config-dir))
-  (org-babel-load-file (expand-file-name "defuns.org" config-dir))
-  (org-babel-load-file (expand-file-name "global-keys.org" config-dir))
-  (org-babel-load-file (expand-file-name "tabs.org" config-dir))
-  (org-babel-load-file (expand-file-name "prog-mode.org" config-dir))
-  (org-babel-load-file (expand-file-name "org-mode.org" config-dir))
-  (org-babel-load-file (expand-file-name "misc.org" config-dir))
-  ;(org-babel-load-file (expand-file-name "registers.org" config-dir))
-  (org-babel-load-file (expand-file-name "rob.org" config-dir))
-  (org-babel-load-file (expand-file-name "appearance.org" config-dir))
+      (org-babel-load-file (expand-file-name "web.org" config-dir))
+      (org-babel-load-file (expand-file-name "vc.org" config-dir))
+      (org-babel-load-file (expand-file-name "packages.org" config-dir))
+      (org-babel-load-file (expand-file-name "defuns.org" config-dir))
+      (org-babel-load-file (expand-file-name "global-keys.org" config-dir))
+      (org-babel-load-file (expand-file-name "tabs.org" config-dir))
+      (org-babel-load-file (expand-file-name "prog-mode.org" config-dir))
+      (org-babel-load-file (expand-file-name "org-mode.org" config-dir))
+      (org-babel-load-file (expand-file-name "misc.org" config-dir))
+      ;(org-babel-load-file (expand-file-name "registers.org" config-dir))
+      (org-babel-load-file (expand-file-name "rob.org" config-dir))
+      (org-babel-load-file (expand-file-name "appearance.org" config-dir))
 #+END_SRC
 * Other Files
 #+BEGIN_SRC emacs-lisp
