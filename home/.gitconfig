@@ -25,7 +25,7 @@
 	spull = !git pull && git submodule sync --recursive && git submodule update --init --recursive
 	spush = push --recursive-submodules=on-demand
 [push]
-	default = matching
+	default = current
 [status]
 	submoduleSummary = true
 [diff]
