@@ -99,8 +99,13 @@ See each file for a description.
 #+END_SRC
 * Helm
 #+BEGIN_SRC emacs-lisp
-  (require 'helm-config)
-  (helm-mode 1)
+  ;; (require 'helm-config)
+  ;; (helm-mode 1)
+  (add-hook
+   'after-init-hook
+   (lambda ()
+     (require 'helm-config)
+     (helm-mode 1)))
 #+END_SRC
 * Load User/System Specific Files
 ** System/User specific customizations
