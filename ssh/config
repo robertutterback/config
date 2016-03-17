@@ -14,18 +14,6 @@ Host scloud
      HostName cloud.seas.wustl.edu
      User utterbackr
 
-Host rig
-     HostName rigoletto.cse.wustl.edu
-     User utterbackr
-
-Host pag
-     HostName pagliacci.cse.wustl.edu
-     User utterbackr
-
-Host aida
-     HostName aida.cse.wustl.edu
-     User utterbackr
-
 Host austen
      HostName austen.cse.wustl.edu
      User utterbackr
@@ -42,6 +30,10 @@ Host stop
 		 HostName stoppard.seas.wustl.edu
 		 User rob
 
+Host adams
+		 HostName adams.cse.wustl.edu
+		 User robert.utterback
+
 Host onl
      HostName onl.arl.wustl.edu
      User rob
@@ -51,8 +43,13 @@ Host onlT
      User rob
      LocalForward 7070 onlsrv:7070
 
-#Host github.com
-#     IdentityFile ~/.ssh/github.key
+Host work
+		 HostName 172.16.21.221
+		 User rob
+
+Host pi
+		 HostName 192.168.1.2
+		 User rob
 
 HashKnownHosts no
 ForwardX11Trusted yes
