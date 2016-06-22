@@ -42,7 +42,7 @@ fi
 
 export PATH
 export LD_LIBRARY_PATH
-export EDITOR='emacsclient'
+export EDITOR="emacsclient -nw"
 export ALTERNATE_EDITOR="vim"
 
 # For the future:

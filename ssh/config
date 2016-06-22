@@ -16,7 +16,7 @@ Host scloud
 
 Host austen
      HostName austen.cse.wustl.edu
-     User utterbackr
+     User robert.utterback
 
 Host dickens
      HostName dickens.seas.wustl.edu
@@ -24,7 +24,7 @@ Host dickens
 
 Host shake
 		 HostName shakespeare.cse.wustl.edu
-		 User utterbackr
+		 User robert.utterback
 
 Host stop
 		 HostName stoppard.seas.wustl.edu
