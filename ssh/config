@@ -44,7 +44,7 @@ Host onlT
      LocalForward 7070 onlsrv:7070
 
 Host work
-		 HostName 172.16.21.221
+		 HostName 172.16.20.11
 		 User rob
 
 Host pi
