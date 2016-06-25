@@ -1,3 +1,6 @@
+Host *
+     ServerAliveInterval 240
+
 Host cec
      HostName shell.cec.wustl.edu
      User robert.utterback
