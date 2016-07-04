@@ -14,12 +14,11 @@ If any get too big, I'll put it in a separate file and load it from here.
            (setq comment-auto-fill-only-comments t) ;; ...but only comments
            (subword-mode) ;; e.g. treat GtkWindow as two words
            (highlight-current-line-minor-mode)
-  ;;          (highlight-current-line-set-bg-color "blue")
-  ;;          (highlight-current-line-set-fg-color "none")
+           (highlight-current-line-set-bg-color "color-235")
            (light-symbol-mode))
-  
+
          (add-hook 'prog-mode-hook 'prepare-to-program)
-  
+
        ;; Close the compilation window if there was no error at all.
        (setq compilation-exit-message-function
              (lambda (status code msg)
