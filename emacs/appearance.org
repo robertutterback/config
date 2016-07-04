@@ -1,7 +1,7 @@
 * Theme
 ** TODO set default to load cyberpunk theme and set current line highlight color
 #+BEGIN_SRC emacs-lisp
-
+  (load-theme 'cyberpunk t)
 #+END_SRC
 * Fonts
 #+BEGIN_SRC emacs-lisp
