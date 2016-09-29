@@ -21,7 +21,7 @@
       '(flymake-easy flymake-python-pyflakes pylint
                     ess writeroom-mode gnuplot gnuplot-mode solarized-theme
                     magit markdown-mode yasnippet tomatinho hlinum
-                    irfc highlight-current-line light-symbol)
+                    irfc highlight-current-line highlight-symbol helm)
       "List of packages I want installed at launch")
     ;; Maybe these are only available with marmalade?
     ;; Marmalade seems to be down as of 16082013 1502
