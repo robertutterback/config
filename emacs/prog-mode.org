@@ -19,8 +19,8 @@ If any get too big, I'll put it in a separate file and load it from here.
            ;; I don't need this on Linux, but for some reason I don't
            ;; understand, OSX sets this to black, making the highlighted
            ;; line nearly unreadable!
-           (highlight-current-line-set-fg-color "white")
-           (light-symbol-mode))
+           (highlight-current-line-set-fg-color "none")
+           (highlight-symbol-mode))
 
          (add-hook 'prog-mode-hook 'prepare-to-program)
 
@@ -244,7 +244,7 @@ If any get too big, I'll put it in a separate file and load it from here.
 #+END_SRC
 * Markdown
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.md$" . jekyll-markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 #+END_SRC
 * Poly
 #+BEGIN_SRC emacs-lisp
