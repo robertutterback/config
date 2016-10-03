@@ -16,7 +16,7 @@ If any get too big, I'll put it in a separate file and load it from here.
            (highlight-current-line-minor-mode)
            (highlight-current-line-set-bg-color "color-235")
            (highlight-current-line-set-fg-color "none")
-           (light-symbol-mode))
+           (highlight-symbol-mode))
 
          (add-hook 'prog-mode-hook 'prepare-to-program)
 
