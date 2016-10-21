@@ -252,4 +252,6 @@ If any get too big, I'll put it in a separate file and load it from here.
     (poly-markdown+r-mode))
 
   (add-to-list 'auto-mode-alist '("\\.Rmd$" . rmd-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rtex" . poly-noweb+r-mode))
 #+END_SRC
