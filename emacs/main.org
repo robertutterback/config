@@ -93,6 +93,27 @@ See each file for a description.
       (org-babel-load-file (expand-file-name "rob.org" config-dir))
       (org-babel-load-file (expand-file-name "appearance.org" config-dir))
 #+END_SRC
+* Convenience
+Should file a better place for this later.
+Someday, whenever I go through my Emacs config again (ever?).
+#+BEGIN_SRC emacs-lisp
+  ;; Decorate the cursor on scroll/buffer change
+  (use-package beacon
+    :ensure t
+    :config
+    (beacon-mode 1))
+
+  ;; Delete all whitespace on backspace/delete
+  (use-package hungry-delete
+    :ensure t
+    :config
+    (global-hungry-delete-mode))
+
+  (use-package expand-region
+    :ensure t
+    :config
+    (global-set-key (kbd "C-=") 'er/expand-region))
+#+END_SRC
 * Other Files
 #+BEGIN_SRC emacs-lisp
 ;  (load "~/.emacs.d/private.el")
