@@ -1,7 +1,6 @@
 #+TITLE: Package Management
 
   #+BEGIN_SRC emacs-lisp
-    (package-initialize)
     (setq package-user-dir (concat config-dir "elpa"))
   #+END_SRC
 
@@ -14,6 +13,13 @@
     ;                ("org"         . "http://orgmode.org/elpa/")))
             (package-initialize)
   #+END_SRC
+
+* Make packages easier to use
+#+BEGIN_SRC emacs-lisp
+(unless (package-installed-p 'use-package)
+	(package-refresh-contents)
+	(package-install 'use-package))
+#+END_SRC
 
 * Automatically install a list of packages
   #+BEGIN_SRC emacs-lisp
