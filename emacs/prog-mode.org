@@ -229,7 +229,7 @@ If any get too big, I'll put it in a separate file and load it from here.
   (defun rob/prepare-to-commit ()
     (interactive)
     (flyspell-mode 1)
-    (longlines-mode 1)
+    (visual-line-mode 1)
     (setq fill-column 72))
 
     (add-hook 'git-commit-mode-hook 'rob/prepare-to-commit)
