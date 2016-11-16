@@ -168,19 +168,16 @@ If any get too big, I'll put it in a separate file and load it from here.
 
 * Octave
 #+BEGIN_SRC emacs-lisp
-; Not sure what this does
-(autoload 'octave-mode "octave-mod" nil t)
+  ; Load octave mode for matlab
+  (setq auto-mode-alist
+        (cons '("\\.m$" . octave-mode) auto-mode-alist))
 
-; Load octave mode for matlab
-(setq auto-mode-alist
-      (cons '("\\.m$" . octave-mode) auto-mode-alist))
-
-(add-hook 'octave-mode-hook
-	  (lambda ()
-	    (abbrev-mode 1)
-	    (auto-fill-mode 1)
-	    (if (eq window-system 'x)
-		(font-lock-mode 1))))
+  ;; (add-hook 'octave-mode-hook
+  ;;     (lambda ()
+  ;;       (abbrev-mode 1)
+  ;;       (auto-fill-mode 1)
+  ;;       (if (eq window-system 'x)
+  ;;     (font-lock-mode 1))))
 
 #+END_SRC
 * Java
