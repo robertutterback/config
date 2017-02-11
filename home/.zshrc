@@ -31,6 +31,10 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^X^e' edit-command-line
 
+# Rather than kill the whole line, kill back to beginning, like bash
+# and emacs. (just just ^a^k or ^e^u to kill the whole line)
+bindkey \^u backward-kill-line
+
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
