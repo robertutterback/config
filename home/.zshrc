@@ -219,7 +219,12 @@ fi
 ### Aliases ###
 
 # zsh-specific aliases
-# none yet
+
+# Add help command like bash, to easily get info on builtins
+unalias run-help 2>/dev/null
+autoload run-help
+HELPDIR=/opt/local/share/zsh/5.2/help
+alias help=run-help
 
 ### End Aliases ###
 
