@@ -97,6 +97,8 @@ If any get too big, I'll put it in a separate file and load it from here.
             '(lambda ()
                (c-toggle-syntactic-indentation 1)
                (setq c-basic-offset 2)
+               (c-set-offset 'inextern-lang 0) ; Don't indent extern blocks
+               (c-set-offset 'innamespace 0) ; don't indent namespace blocks
                (setq c-set-style "Linux")
                (c-toggle-hungry-state 1)
                (c-toggle-electric-state 1)))
