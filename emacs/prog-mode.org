@@ -203,6 +203,9 @@ If any get too big, I'll put it in a separate file and load it from here.
                  flymake-simple-cleanup flymake-get-real-file-name))
 
   ;;(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
+  (require 'reftex)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  (add-hook 'latex-mode-hook 'turn-on-reftex)
 #+END_SRC
 * Makefiles
 #+BEGIN_SRC emacs-lisp
