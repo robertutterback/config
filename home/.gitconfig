@@ -24,6 +24,7 @@
 	visual = !gitk
 	spull = !git pull && git submodule sync --recursive && git submodule update --init --recursive
 	spush = push --recursive-submodules=on-demand
+	slab = log --oneline --decorate --graph --all
 [push]
 	default = current
 [status]
