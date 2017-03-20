@@ -90,6 +90,9 @@ If any get too big, I'll put it in a separate file and load it from here.
   (add-to-list 'flymake-allowed-file-name-masks
                '(".+\\.cpp$" flymake-simple-make-init
                  flymake-simple-cleanup flymake-get-real-file-name))
+
+  (add-to-list 'auto-mode-alist
+               '("\\.tpp\\'" . c++-mode))
 #+END_SRC
 * C common
 #+BEGIN_SRC emacs-lisp
