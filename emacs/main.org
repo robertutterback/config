@@ -80,39 +80,45 @@
   :END:
 See each file for a description.
 #+BEGIN_SRC emacs-lisp
-      (org-babel-load-file (expand-file-name "web.org" config-dir))
-      (org-babel-load-file (expand-file-name "vc.org" config-dir))
-      (org-babel-load-file (expand-file-name "packages.org" config-dir))
-      (org-babel-load-file (expand-file-name "defuns.org" config-dir))
-      (org-babel-load-file (expand-file-name "global-keys.org" config-dir))
-      (org-babel-load-file (expand-file-name "tabs.org" config-dir))
-      (org-babel-load-file (expand-file-name "prog-mode.org" config-dir))
-      (org-babel-load-file (expand-file-name "org-mode.org" config-dir))
-      (org-babel-load-file (expand-file-name "misc.org" config-dir))
-      ;(org-babel-load-file (expand-file-name "registers.org" config-dir))
-      (org-babel-load-file (expand-file-name "rob.org" config-dir))
-      (org-babel-load-file (expand-file-name "appearance.org" config-dir))
+  (org-babel-load-file (expand-file-name "web.org" config-dir))
+  (org-babel-load-file (expand-file-name "vc.org" config-dir))
+  (org-babel-load-file (expand-file-name "packages.org" config-dir))
+  (org-babel-load-file (expand-file-name "defuns.org" config-dir))
+  (org-babel-load-file (expand-file-name "global-keys.org" config-dir))
+  (org-babel-load-file (expand-file-name "tabs.org" config-dir))
+  (org-babel-load-file (expand-file-name "prog-mode.org" config-dir))
+  (org-babel-load-file (expand-file-name "org-mode.org" config-dir))
+  (org-babel-load-file (expand-file-name "misc.org" config-dir))
+  (org-babel-load-file (expand-file-name "rob.org" config-dir))
+  (org-babel-load-file (expand-file-name "appearance.org" config-dir))
+  ; (org-babel-load-file (expand-file-name "registers.org" config-dir))
 #+END_SRC
 * Convenience
 Should file a better place for this later.
 Someday, whenever I go through my Emacs config again (ever?).
 #+BEGIN_SRC emacs-lisp
-  ;; Decorate the cursor on scroll/buffer change
-  (use-package beacon
-    :ensure t
-    :config
-    (beacon-mode 1))
+	;; Decorate the cursor on scroll/buffer change
+	(use-package beacon
+		:ensure t
+		:config
+		(beacon-mode 1))
 
-  ;; Delete all whitespace on backspace/delete
-  (use-package hungry-delete
-    :ensure t
-    :config
-    (global-hungry-delete-mode))
+	;; Delete all whitespace on backspace/delete
+	(use-package hungry-delete
+		:ensure t
+		:config
+		(global-hungry-delete-mode))
 
-  (use-package expand-region
-    :ensure t
-    :config
-    (global-set-key (kbd "C-=") 'er/expand-region))
+	(use-package expand-region
+		:ensure t
+		:config
+		(global-set-key (kbd "C-=") 'er/expand-region))
+
+	;; See https://github.com/joodland/bm for more options
+	(use-package bm
+		:bind (("<C-f7>" . bm-toggle)
+					 ("<f7>" . bm-next)
+					 ("<S-f7>" . bm-previous)))
 #+END_SRC
 * Other Files
 #+BEGIN_SRC emacs-lisp
