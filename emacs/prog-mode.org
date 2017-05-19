@@ -93,6 +93,7 @@ If any get too big, I'll put it in a separate file and load it from here.
 
   (add-to-list 'auto-mode-alist
                '("\\.tpp\\'" . c++-mode))
+
 #+END_SRC
 * C common
 #+BEGIN_SRC emacs-lisp
@@ -199,17 +200,6 @@ If any get too big, I'll put it in a separate file and load it from here.
 
 #+END_SRC
 
-* LaTeX
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'flymake-allowed-file-name-masks
-               '(".+\\.tex$" flymake-simple-make-init
-                 flymake-simple-cleanup flymake-get-real-file-name))
-
-  ;;(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
-  (require 'reftex)
-  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-  (add-hook 'latex-mode-hook 'turn-on-reftex)
-#+END_SRC
 * Makefiles
 #+BEGIN_SRC emacs-lisp
   (add-hook 'makefile-mode-hook
@@ -242,21 +232,4 @@ If any get too big, I'll put it in a separate file and load it from here.
 * HTML
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.html" . jekyll-html-mode))
-#+END_SRC
-* Markdown
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-#+END_SRC
-* Poly
-#+BEGIN_SRC emacs-lisp
-  (defun rmd-mode ()
-    "ESS Markdown mode for rmd files"
-    (interactive)
-    (require 'poly-R)
-    (require 'poly-markdown)
-    (poly-markdown+r-mode))
-
-  (add-to-list 'auto-mode-alist '("\\.Rmd$" . rmd-mode))
-  (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
-  (add-to-list 'auto-mode-alist '("\\.Rtex" . poly-noweb+r-mode))
 #+END_SRC

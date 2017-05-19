@@ -87,11 +87,12 @@ See each file for a description.
   (org-babel-load-file (expand-file-name "global-keys.org" config-dir))
   (org-babel-load-file (expand-file-name "tabs.org" config-dir))
   (org-babel-load-file (expand-file-name "prog-mode.org" config-dir))
+  (org-babel-load-file (expand-file-name "writing.org" config-dir))
   (org-babel-load-file (expand-file-name "org-mode.org" config-dir))
   (org-babel-load-file (expand-file-name "misc.org" config-dir))
   (org-babel-load-file (expand-file-name "rob.org" config-dir))
   (org-babel-load-file (expand-file-name "appearance.org" config-dir))
-  ; (org-babel-load-file (expand-file-name "registers.org" config-dir))
+  ;; (org-babel-load-file (expand-file-name "registers.org" config-dir))
 #+END_SRC
 * Convenience
 Should file a better place for this later.
