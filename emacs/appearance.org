@@ -20,12 +20,8 @@
 #+END_SRC
 * Other minor stuff
 #+BEGIN_SRC emacs-lisp
-  (setq display-time-day-and-date t display-time-24hr-format t)
-  (display-time)
-
-  ;; Highlight line numbers
-  (require 'hlinum)
-  (hlinum-activate)
+	(setq display-time-day-and-date t display-time-24hr-format t)
+	(display-time)
 #+END_SRC
 * Text and org-mode appearance
 ** TODO I should really move this to a text.org file.
