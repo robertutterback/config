@@ -26,27 +26,23 @@
     (require 'uniquify)
     (require 'ansi-color)
     (require 'recentf)
-    (require 'linum)
+    (require 'nlinum)
   #+END_SRC
 - Miscellaneous Preferences (move?) 
   #+BEGIN_SRC emacs-lisp
-    (ido-mode 1)
-    (recentf-mode 1)
-    (menu-bar-mode -1)
-    (setq linum-format "%4d \u2502 ")
-    (line-number-mode 1)
-    (column-number-mode 1) ;; Line numbers on left most column
-    (global-linum-mode 1)
-    (fset 'yes-or-no-p 'y-or-n-p)
-    (setq read-file-name-completion-ignore-case t)
-    (setq shell-file-name "bash")
-    (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
-    (add-hook 'message-mode-hook 'turn-on-flyspell)
-    (setq visible-bell t)
-    (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-                                            ;(setq scroll-margin 10) ; scroll much sooner
-                                            ;(setq scroll-conservatively 5) ; scroll the minimum amount
-    (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+		(ido-mode 1)
+		(recentf-mode 1)
+		(menu-bar-mode -1)
+		(fset 'yes-or-no-p 'y-or-n-p)
+		(setq read-file-name-completion-ignore-case t)
+		(setq shell-file-name "bash")
+		(autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
+		(add-hook 'message-mode-hook 'turn-on-flyspell)
+		(setq visible-bell t)
+		(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+																						;(setq scroll-margin 10) ; scroll much sooner
+																						;(setq scroll-conservatively 5) ; scroll the minimum amount
+		(add-hook 'doc-view-mode-hook 'auto-revert-mode)
   #+END_SRC
 - Remote Editing
 #+BEGIN_SRC emacs-lisp
