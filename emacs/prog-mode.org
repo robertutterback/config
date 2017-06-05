@@ -97,15 +97,30 @@ If any get too big, I'll put it in a separate file and load it from here.
 #+END_SRC
 * C common
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'c-mode-common-hook
-            '(lambda ()
-               (c-toggle-syntactic-indentation 1)
-               (setq c-basic-offset 2)
-               (c-set-offset 'inextern-lang 0) ; Don't indent extern blocks
-               (c-set-offset 'innamespace 0) ; don't indent namespace blocks
-               (setq c-set-style "Linux")
-               (c-toggle-hungry-state 1)
-               (c-toggle-electric-state 1)))
+	(add-hook 'c-mode-common-hook
+						'(lambda ()
+							 (c-toggle-syntactic-indentation 1)
+							 (setq c-basic-offset 2)
+							 (c-set-offset 'inextern-lang 0) ; Don't indent extern blocks
+							 (c-set-offset 'innamespace 0) ; don't indent namespace blocks
+							 (setq c-set-style "Linux")
+							 (c-toggle-hungry-state 1)
+							 (c-toggle-electric-state 1)))
+
+	(require 'ggtags)
+	(add-hook 'c-mode-common-hook
+						(lambda ()
+							(when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+								(ggtags-mode 1))))
+
+	(define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
+	(define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
+	(define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
+	(define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
+	(define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
+	(define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
+
+	(define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
 #+END_SRC
 * Python
 #+BEGIN_SRC emacs-lisp
