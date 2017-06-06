@@ -10,6 +10,14 @@
              (add-to-list 'default-frame-alist
                           '(font . "Hermit"))))
 #+END_SRC
+* Line numbers and status bar
+#+BEGIN_SRC emacs-lisp
+	(setq nlinum-format "%4d \u2502 ")
+	(line-number-mode 1)
+	(column-number-mode 1) ;; Line numbers on left most column
+	(global-nlinum-mode 1)
+
+#+END_SRC
 * Doc-View
 #+BEGIN_SRC emacs-lisp
   (setq doc-view-continuous t)
@@ -20,12 +28,8 @@
 #+END_SRC
 * Other minor stuff
 #+BEGIN_SRC emacs-lisp
-  (setq display-time-day-and-date t display-time-24hr-format t)
-  (display-time)
-
-  ;; Highlight line numbers
-  (require 'hlinum)
-  (hlinum-activate)
+	(setq display-time-day-and-date t display-time-24hr-format t)
+	(display-time)
 #+END_SRC
 * Text and org-mode appearance
 ** TODO I should really move this to a text.org file.
