@@ -25,6 +25,8 @@
 	spull = !git pull && git submodule sync --recursive && git submodule update --init --recursive
 	spush = push --recursive-submodules=on-demand
 	slab = log --oneline --decorate --graph --all
+	recap = log --all --no-merges --oneline --author=robertu13@gmail.com
+	today = log --since=00:00:00 --all --no-merges --oneline --author=robertu13@gmail.com
 [push]
 	default = current
 [status]
