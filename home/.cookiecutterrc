@@ -1,0 +1,5 @@
+default_context:
+	full_name: "Robert Utterback"
+	email: "robertu13@gmail.com"
+	github_username: "robertutterback"
+cookiecutters_dir: "~/.cookiecutters/"
