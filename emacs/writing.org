@@ -2,24 +2,24 @@
 
 * Pure LaTeX
 #+BEGIN_SRC emacs-lisp
-  ;; (add-to-list 'flymake-allowed-file-name-masks
-  ;;              '(".+\\.tex$" flymake-simple-make-init
-  ;;                flymake-simple-cleanup flymake-get-real-file-name))
+	;; (add-to-list 'flymake-allowed-file-name-masks
+	;;              '(".+\\.tex$" flymake-simple-make-init
+	;;                flymake-simple-cleanup flymake-get-real-file-name))
 
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-  (setq-default TeX-master nil)
+	(setq TeX-auto-save t)
+	(setq TeX-parse-self t)
+	(setq-default TeX-master nil)
 
-  (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-  ;;(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
-  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+	(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+	(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+	;;(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
+	(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 
-  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-  (setq reftex-plug-into-AUCTeX t)
+	(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+	(setq reftex-plug-into-AUCTeX t)
 
-  (add-to-list 'auto-mode-alist
-               '("\\.Rnw\\'" . c++-mode))
+	(add-to-list 'auto-mode-alist
+							 '("\\.Rnw\\'" . c++-mode))
 
 #+END_SRC
 * Latex + R
@@ -57,4 +57,21 @@
    '((emacs-lisp . t)
      (python . t)
      (R . t)))
+#+END_SRC
+* General Writing
+#+BEGIN_SRC emacs-lisp
+    ;(setq synonyms-file "/opt/local/etc/thesaurus/mthesaur.txt")
+  ;  (setq synonyms-cache-file "~/.emacs.d/mthesaur.txt.cache")
+
+    (defun text-mode-appearance ()
+      (interactive)
+      (turn-on-visual-line-mode)
+      (flyspell-mode 1)
+      (line-tail-highlight-off)
+      (auto-fill-mode -1))
+  ;    (require 'synonyms))
+
+    (add-hook 'text-mode-hook 'text-mode-appearance)
+    (add-hook 'org-mode-hook 'text-mode-appearance)
+    (add-hook 'LaTeX-mode-hook 'text-mode-appearance)
 #+END_SRC
