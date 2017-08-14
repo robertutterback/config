@@ -88,7 +88,6 @@ See each file for a description.
 	(org-babel-load-file (expand-file-name "misc.org" config-dir))
 	(org-babel-load-file (expand-file-name "rob.org" config-dir))
 	(org-babel-load-file (expand-file-name "appearance.org" config-dir))
-	;; (org-babel-load-file (expand-file-name "registers.org" config-dir))
 
 	;; Private file (do *not* include in git repo)
 	(org-babel-load-file (expand-file-name "private.org" config-dir))
