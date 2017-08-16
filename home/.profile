@@ -83,3 +83,5 @@ cygwin)
 	@echo "Unsupported OS."
 	;;
 esac
+
+export PATH="$HOME/.cargo/bin:$PATH"
