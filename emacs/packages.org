@@ -6,12 +6,12 @@
 
 * ELPA archive repositories
   #+BEGIN_SRC emacs-lisp
-            (setq package-archives
-                  '(("melpa"       . "http://melpa.milkbox.net/packages/")
-                    ("gnu"         . "http://elpa.gnu.org/packages/")
-                    ("marmalade"   . "http://marmalade-repo.org/packages/")))
-    ;                ("org"         . "http://orgmode.org/elpa/")))
-            (package-initialize)
+      					(setq package-archives
+      								'(("melpa"       . "http://melpa.milkbox.net/packages/")
+      									("gnu"         . "http://elpa.gnu.org/packages/")
+;      								 ("marmalade" . "http://marmalade-repo.org/packages/")
+  			; ("org"         . "http://orgmode.org/elpa/")))
+      																	))
   #+END_SRC
 
 * Make packages easier to use
@@ -26,7 +26,7 @@
     (defvar packages-list
       '(flymake-easy flymake-python-pyflakes pylint
                     ess writeroom-mode gnuplot gnuplot-mode solarized-theme
-                    magit markdown-mode yasnippet tomatinho hlinum
+                    magit markdown-mode tomatinho hlinum
                     irfc highlight-current-line highlight-symbol helm iedit)
       "List of packages I want installed at launch")
     ;; Maybe these are only available with marmalade?

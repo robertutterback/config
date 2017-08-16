@@ -26,27 +26,23 @@
     (require 'uniquify)
     (require 'ansi-color)
     (require 'recentf)
-    (require 'linum)
+    (require 'nlinum)
   #+END_SRC
 - Miscellaneous Preferences (move?) 
   #+BEGIN_SRC emacs-lisp
-    (ido-mode 1)
-    (recentf-mode 1)
-    (menu-bar-mode -1)
-    (setq linum-format "%4d \u2502 ")
-    (line-number-mode 1)
-    (column-number-mode 1) ;; Line numbers on left most column
-    (global-linum-mode 1)
-    (fset 'yes-or-no-p 'y-or-n-p)
-    (setq read-file-name-completion-ignore-case t)
-    (setq shell-file-name "bash")
-    (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
-    (add-hook 'message-mode-hook 'turn-on-flyspell)
-    (setq visible-bell t)
-    (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-                                            ;(setq scroll-margin 10) ; scroll much sooner
-                                            ;(setq scroll-conservatively 5) ; scroll the minimum amount
-    (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+		(ido-mode 1)
+		(recentf-mode 1)
+		(menu-bar-mode -1)
+		(fset 'yes-or-no-p 'y-or-n-p)
+		(setq read-file-name-completion-ignore-case t)
+		(setq shell-file-name "bash")
+		(autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
+		(add-hook 'message-mode-hook 'turn-on-flyspell)
+		(setq visible-bell t)
+		(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+																						;(setq scroll-margin 10) ; scroll much sooner
+																						;(setq scroll-conservatively 5) ; scroll the minimum amount
+		(add-hook 'doc-view-mode-hook 'auto-revert-mode)
   #+END_SRC
 - Remote Editing
 #+BEGIN_SRC emacs-lisp
@@ -80,39 +76,48 @@
   :END:
 See each file for a description.
 #+BEGIN_SRC emacs-lisp
-      (org-babel-load-file (expand-file-name "web.org" config-dir))
-      (org-babel-load-file (expand-file-name "vc.org" config-dir))
-      (org-babel-load-file (expand-file-name "packages.org" config-dir))
-      (org-babel-load-file (expand-file-name "defuns.org" config-dir))
-      (org-babel-load-file (expand-file-name "global-keys.org" config-dir))
-      (org-babel-load-file (expand-file-name "tabs.org" config-dir))
-      (org-babel-load-file (expand-file-name "prog-mode.org" config-dir))
-      (org-babel-load-file (expand-file-name "org-mode.org" config-dir))
-      (org-babel-load-file (expand-file-name "misc.org" config-dir))
-      ;(org-babel-load-file (expand-file-name "registers.org" config-dir))
-      (org-babel-load-file (expand-file-name "rob.org" config-dir))
-      (org-babel-load-file (expand-file-name "appearance.org" config-dir))
+	(org-babel-load-file (expand-file-name "web.org" config-dir))
+	(org-babel-load-file (expand-file-name "vc.org" config-dir))
+	(org-babel-load-file (expand-file-name "packages.org" config-dir))
+	(org-babel-load-file (expand-file-name "defuns.org" config-dir))
+	(org-babel-load-file (expand-file-name "global-keys.org" config-dir))
+	(org-babel-load-file (expand-file-name "tabs.org" config-dir))
+	(org-babel-load-file (expand-file-name "prog-mode.org" config-dir))
+	(org-babel-load-file (expand-file-name "writing.org" config-dir))
+	(org-babel-load-file (expand-file-name "org-mode.org" config-dir))
+	(org-babel-load-file (expand-file-name "misc.org" config-dir))
+	(org-babel-load-file (expand-file-name "rob.org" config-dir))
+	(org-babel-load-file (expand-file-name "appearance.org" config-dir))
+
+	;; Private file (do *not* include in git repo)
+	(org-babel-load-file (expand-file-name "private.org" config-dir))
 #+END_SRC
 * Convenience
 Should file a better place for this later.
 Someday, whenever I go through my Emacs config again (ever?).
 #+BEGIN_SRC emacs-lisp
-  ;; Decorate the cursor on scroll/buffer change
-  (use-package beacon
-    :ensure t
-    :config
-    (beacon-mode 1))
+	;; Decorate the cursor on scroll/buffer change
+	(use-package beacon
+		:ensure t
+		:config
+		(beacon-mode 1))
 
-  ;; Delete all whitespace on backspace/delete
-  (use-package hungry-delete
-    :ensure t
-    :config
-    (global-hungry-delete-mode))
+	;; Delete all whitespace on backspace/delete
+	(use-package hungry-delete
+		:ensure t
+		:config
+		(global-hungry-delete-mode))
 
-  (use-package expand-region
-    :ensure t
-    :config
-    (global-set-key (kbd "C-=") 'er/expand-region))
+	(use-package expand-region
+		:ensure t
+		:config
+		(global-set-key (kbd "C-=") 'er/expand-region))
+
+	;; See https://github.com/joodland/bm for more options
+	(use-package bm
+		:bind (("<C-f7>" . bm-toggle)
+					 ("<f7>" . bm-next)
+					 ("<S-f7>" . bm-previous)))
 #+END_SRC
 * Other Files
 #+BEGIN_SRC emacs-lisp
@@ -179,19 +184,20 @@ Someday, whenever I go through my Emacs config again (ever?).
                         (directory-files user-dir t ".*\.\\(org\\|el\\)\\(\\.gpg\\)?$"))
                 :test #'string=)))))
    #+END_SRC
-
 ** Settings from M-x customize
    #+name: m-x-customize-customizations
    #+BEGIN_SRC emacs-lisp
   (load custom-file 'noerror)
    #+END_SRC
-
 ** Yasnippet
+I'm not really using yasnippet, and it takes a while to load
+initially. Maybe I'll return to it later if I really feel like I'm
+missing something.
 - Initialize
 #+BEGIN_SRC emacs-lisp
-    (require 'yasnippet)
-    (setq yas/load-directory (expand-file-name "snippets" config-dir))
-    (yas-global-mode 1)
+	;; (require 'yasnippet)
+	;; (setq yas/load-directory (expand-file-name "snippets" config-dir))
+	;; (yas-global-mode 1)
 #+END_SRC
 -   The latest version of yasnippets doesn't play well with Org-mode, the
 		following function allows these two to play nicely together.
@@ -209,6 +215,66 @@ Someday, whenever I go through my Emacs config again (ever?).
 ;    (add-hook 'org-mode-hook #'yas/org-setup)
   #+END_SRC
 		
+* Habitica
+#+BEGIN_SRC emacs-lisp
+	(add-to-list 'load-path (concat config-dir "habitrpg/habitrpg"))
+	(require 'habitrpg)
+	;; API key/token set in private.org
+
+	(add-hook 'org-after-todo-state-change-hook 'habitrpg-change-existing 'append)
+	;; For adding tasks from org mode
+	(global-set-key (kbd "C-c C-x h") 'habitrpg-add)
+	;; Status buffer - use C-h m to see the keybindings
+	;; C-c C-c - upvote task or buy reward
+	;; C-c C-d - downvote task
+	;; t - bring up manage menu, which adds or deletes tasks
+	(global-set-key (kbd "<f9> a") 'habitrpg-status)
+	;; Continuously update a habit attache to a clocking task
+	;;(add-hook 'org-clock-in-hook 'habitrpg-clock-in)
+	;;(add-hook 'org-clock-out-hook 'habitrpg-clock-out)
+	;; List of habits to check for when clocking a task
+	;;(add-to-list 'hrpg-tags-list "PROGRAMMING")
+	;;(add-to-list 'hrpg-tags-list "WORK")
+
+	;; I don't want to constantly be adding things to Habitica; I want to
+	;; manually mark things. So I'm making a new function based on
+	;; habitrpg-add, though I don't understand some parts of it.
+	(defun habitrpg-change-existing ()
+		"Change state of an existing habitica task."
+		(interactive)
+		(save-excursion
+			(save-window-excursion
+				(if (string= major-mode 'org-agenda-mode) (org-agenda-switch-to))
+				(lexical-let* ((task (nth 4 (org-heading-components)))
+											 (state (nth 2 (org-heading-components)))
+											 (in-habit (org-entry-get-with-inheritance "IN_HABITRPG"))
+											 (last-done-string
+												(if (org-is-habit-p (point))
+														(car (sort 
+																	(org-habit-done-dates
+																	 (org-habit-parse-todo))
+																	'>)))
+												nil)
+											 (last-done-day 
+												(if (and (member "hrpgdaily" (org-get-tags-at))
+																 last-done-string)
+														(butlast
+														 (nthcdr 3
+																		 (decode-time 
+																			(days-to-time last-done-string
+																										))) 4)
+													nil))
+											 type)
+					(habitrpg-get-id task
+													 (lambda (id)
+														 (when (or
+																		(and (equal last-done-day 
+																								(reverse (butlast (calendar-current-date))))
+																				 (not (string= state "DONE")))
+																		(string= state "DONE"))
+															 (habitrpg-upvote id)
+															 (message "Task \"%s\" completed!" task))))))))
+#+END_SRC
 * Improvements
   :PROPERTIES:
   :CUSTOM_ID: todo

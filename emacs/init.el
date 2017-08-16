@@ -24,3 +24,6 @@
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
+;; Added by Kite
+;; This really slows down org-mode files. Doesn't seem that useful anyway.
+;;(load-file "~/.emacs.d/kite.el")

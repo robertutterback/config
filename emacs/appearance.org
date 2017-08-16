@@ -1,5 +1,4 @@
 * Theme
-** TODO set default to load cyberpunk theme and set current line highlight color
 #+BEGIN_SRC emacs-lisp
   (load-theme 'cyberpunk t)
 #+END_SRC
@@ -9,6 +8,18 @@
       (progn (set-default-font "Hermit")
              (add-to-list 'default-frame-alist
                           '(font . "Hermit"))))
+#+END_SRC
+* Line numbers
+#+BEGIN_SRC emacs-lisp
+	(setq nlinum-format "%4d \u2502 ")
+	(line-number-mode 1)
+	(column-number-mode 1) ;; Line numbers on left most column
+	(global-nlinum-mode 1)
+#+END_SRC
+* Status bar
+#+BEGIN_SRC emacs-lisp
+	(setq display-time-day-and-date t display-time-24hr-format t)
+	(display-time)
 #+END_SRC
 * Doc-View
 #+BEGIN_SRC emacs-lisp
@@ -20,31 +31,6 @@
 #+END_SRC
 * Other minor stuff
 #+BEGIN_SRC emacs-lisp
-  (setq display-time-day-and-date t display-time-24hr-format t)
-  (display-time)
-
-  ;; Highlight line numbers
-  (require 'hlinum)
-  (hlinum-activate)
-#+END_SRC
-* Text and org-mode appearance
-** TODO I should really move this to a text.org file.
-** TODO Only load the synonyms file if it exists!
-#+BEGIN_SRC emacs-lisp
-    ;(setq synonyms-file "/opt/local/etc/thesaurus/mthesaur.txt")
-  ;  (setq synonyms-cache-file "~/.emacs.d/mthesaur.txt.cache")
-
-    (defun text-mode-appearance ()
-      (interactive)
-      (turn-on-visual-line-mode)
-      (flyspell-mode 1)
-      (line-tail-highlight-off)
-      (auto-fill-mode -1))
-  ;    (require 'synonyms))
-
-    (add-hook 'text-mode-hook 'text-mode-appearance)
-    (add-hook 'org-mode-hook 'text-mode-appearance)
-    (add-hook 'LaTeX-mode-hook 'text-mode-appearance)
 #+END_SRC
 * Web Browsing in Emacs
 - w3 won't work in an OSX graphical frame

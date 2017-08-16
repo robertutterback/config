@@ -50,44 +50,49 @@
 #+END_SRC
 * Agenda Management
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-skip-scheduled-if-done t)
-  (setq org-agenda-skip-deadline-if-done t)
+	(setq org-agenda-skip-scheduled-if-done t)
+	(setq org-agenda-skip-deadline-if-done t)
 
-  ;; Probably want to modify this later to selectively inherit some tags
-  (setq org-use-tag-inheritance nil)
+	;; Agenda display
+	(setq org-agenda-span 10
+				org-agenda-start-on-weekday nil
+				org-agenda-start-day "-3d")
 
-  (setq org-agenda-custom-commands
-        '(("w" "Weekly tasks" tags "+weekly")
-          ("W" "Waiting tasks" todo-tree "WAITING")
-          ("c" "Cleaning tasks" tags "+cleaning")
-          ("d" "Daily tasks" tags "+daily")
-          ("l" "Everything but daily tasks"
-           ((agenda "" ((org-agenda-skip-function
-                         '(org-agenda-skip-entry-if 'regexp ":daily:"))
-                        (org-agenda-ndays 5)))))))
-  
-  (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(i)" "|" "DONE(d)")
-                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|"
-                          "CANCELLED(c@/!)"))))
-  
-  (setq org-todo-keyword-faces
-        (quote (("TODO" :foreground "red" :weight bold)
-                ("NEXT" :foreground "blue" :weight bold)
-                ("IN-PROGRESS" :foreground "yellow" :weight bold)
-                ("DONE" :foreground "forest green" :weight bold)
-                ("WAITING" :foreground "orange" :weight bold)
-                ("HOLD" :foreground "magenta" :weight bold)
-                ("CANCELLED" :foreground "forest green" :weight bold))))
-  (setq org-todo-state-tags-triggers
-        (quote (("CANCELLED" ("CANCELLED" . t))
-                ("WAITING" ("WAITING" . t))
-                ("HOLD" ("WAITING" . t) ("HOLD" . t))
-                (done ("WAITING") ("HOLD"))
-                ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
-                ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
-                ("IN-PROGRESS" ("WAITING") ("CANCELLED") ("HOLD") ("NEXT"))
-                ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+	;; Probably want to modify this later to selectively inherit some tags
+	(setq org-use-tag-inheritance nil)
+
+	(setq org-agenda-custom-commands
+				'(("w" "Weekly tasks" tags "+weekly")
+					("W" "Waiting tasks" todo-tree "WAITING")
+					("c" "Cleaning tasks" tags "+cleaning")
+					("d" "Daily tasks" tags "+daily")
+					("l" "Everything but daily tasks"
+					 ((agenda "" ((org-agenda-skip-function
+												 '(org-agenda-skip-entry-if 'regexp ":daily:"))
+												(org-agenda-ndays 5)))))))
+
+	(setq org-todo-keywords
+				(quote ((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(i)" "|" "DONE(d)")
+								(sequence "WAITING(w@/!)" "HOLD(h@/!)" "|"
+													"CANCELLED(c@/!)"))))
+
+	(setq org-todo-keyword-faces
+				(quote (("TODO" :foreground "red" :weight bold)
+								("NEXT" :foreground "blue" :weight bold)
+								("IN-PROGRESS" :foreground "yellow" :weight bold)
+								("DONE" :foreground "forest green" :weight bold)
+								("WAITING" :foreground "orange" :weight bold)
+								("HOLD" :foreground "magenta" :weight bold)
+								("CANCELLED" :foreground "forest green" :weight bold))))
+	(setq org-todo-state-tags-triggers
+				(quote (("CANCELLED" ("CANCELLED" . t))
+								("WAITING" ("WAITING" . t))
+								("HOLD" ("WAITING" . t) ("HOLD" . t))
+								(done ("WAITING") ("HOLD"))
+								("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
+								("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
+								("IN-PROGRESS" ("WAITING") ("CANCELLED") ("HOLD") ("NEXT"))
+								("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 #+END_SRC
 * Tracking Habits
 #+BEGIN_SRC emacs-lisp

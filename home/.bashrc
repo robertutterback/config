@@ -44,3 +44,6 @@ if [[ ! -n ${INSIDE_EMACS} ]]; then
 		echo -ne "${Purple}Sysinfo: ";uptime ;echo ""
     ### End Welcome Message ###
 fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

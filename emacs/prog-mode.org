@@ -93,18 +93,34 @@ If any get too big, I'll put it in a separate file and load it from here.
 
   (add-to-list 'auto-mode-alist
                '("\\.tpp\\'" . c++-mode))
+
 #+END_SRC
 * C common
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'c-mode-common-hook
-            '(lambda ()
-               (c-toggle-syntactic-indentation 1)
-               (setq c-basic-offset 2)
-               (c-set-offset 'inextern-lang 0) ; Don't indent extern blocks
-               (c-set-offset 'innamespace 0) ; don't indent namespace blocks
-               (setq c-set-style "Linux")
-               (c-toggle-hungry-state 1)
-               (c-toggle-electric-state 1)))
+	(add-hook 'c-mode-common-hook
+						'(lambda ()
+							 (c-toggle-syntactic-indentation 1)
+							 (setq c-basic-offset 2)
+							 (c-set-offset 'inextern-lang 0) ; Don't indent extern blocks
+							 (c-set-offset 'innamespace 0) ; don't indent namespace blocks
+							 (setq c-set-style "Linux")
+							 (c-toggle-hungry-state 1)
+							 (c-toggle-electric-state 1)))
+
+	(require 'ggtags)
+	(add-hook 'c-mode-common-hook
+						(lambda ()
+							(when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+								(ggtags-mode 1))))
+
+	(define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
+	(define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
+	(define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
+	(define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
+	(define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
+	(define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
+
+	(define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
 #+END_SRC
 * Python
 #+BEGIN_SRC emacs-lisp
@@ -199,17 +215,6 @@ If any get too big, I'll put it in a separate file and load it from here.
 
 #+END_SRC
 
-* LaTeX
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'flymake-allowed-file-name-masks
-               '(".+\\.tex$" flymake-simple-make-init
-                 flymake-simple-cleanup flymake-get-real-file-name))
-
-  ;;(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
-  (require 'reftex)
-  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-  (add-hook 'latex-mode-hook 'turn-on-reftex)
-#+END_SRC
 * Makefiles
 #+BEGIN_SRC emacs-lisp
   (add-hook 'makefile-mode-hook
@@ -242,21 +247,4 @@ If any get too big, I'll put it in a separate file and load it from here.
 * HTML
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.html" . jekyll-html-mode))
-#+END_SRC
-* Markdown
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-#+END_SRC
-* Poly
-#+BEGIN_SRC emacs-lisp
-  (defun rmd-mode ()
-    "ESS Markdown mode for rmd files"
-    (interactive)
-    (require 'poly-R)
-    (require 'poly-markdown)
-    (poly-markdown+r-mode))
-
-  (add-to-list 'auto-mode-alist '("\\.Rmd$" . rmd-mode))
-  (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
-  (add-to-list 'auto-mode-alist '("\\.Rtex" . poly-noweb+r-mode))
 #+END_SRC

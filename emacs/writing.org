@@ -1,0 +1,77 @@
+#+TITLE: Modes for Writing
+
+* Pure LaTeX
+#+BEGIN_SRC emacs-lisp
+	;; (add-to-list 'flymake-allowed-file-name-masks
+	;;              '(".+\\.tex$" flymake-simple-make-init
+	;;                flymake-simple-cleanup flymake-get-real-file-name))
+
+	(setq TeX-auto-save t)
+	(setq TeX-parse-self t)
+	(setq-default TeX-master nil)
+
+	(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+	(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+	;;(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
+	(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+
+	(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+	(setq reftex-plug-into-AUCTeX t)
+
+	(add-to-list 'auto-mode-alist
+							 '("\\.Rnw\\'" . c++-mode))
+
+#+END_SRC
+* Latex + R
+#+BEGIN_SRC emacs-lisp
+  ;; (require 'ess-site)
+  ;; (setq ess-swv-processor 'knitr)
+  ;; (setq ess-swv-plug-into-AUCTeX-p t)
+#+END_SRC
+* Markdown
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+#+END_SRC
+* Poly
+#+BEGIN_SRC emacs-lisp
+  (defun rmd-mode ()
+    "ESS Markdown mode for rmd files"
+    (interactive)
+    (require 'poly-R)
+    (require 'poly-markdown)
+    (poly-markdown+r-mode))
+
+  (defun Rnw-mode ()
+    "Mode for Rnw (bad name) mode"
+    (interactive)
+    (require 'poly-noweb))
+
+  (add-to-list 'auto-mode-alist '("\\.Rmd$" . rmd-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rtex" . poly-noweb+r-mode))
+#+END_SRC
+* Org mode
+#+BEGIN_SRC emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (python . t)
+     (R . t)))
+#+END_SRC
+* General Writing
+#+BEGIN_SRC emacs-lisp
+    ;(setq synonyms-file "/opt/local/etc/thesaurus/mthesaur.txt")
+  ;  (setq synonyms-cache-file "~/.emacs.d/mthesaur.txt.cache")
+
+    (defun text-mode-appearance ()
+      (interactive)
+      (turn-on-visual-line-mode)
+      (flyspell-mode 1)
+      (line-tail-highlight-off)
+      (auto-fill-mode -1))
+  ;    (require 'synonyms))
+
+    (add-hook 'text-mode-hook 'text-mode-appearance)
+    (add-hook 'org-mode-hook 'text-mode-appearance)
+    (add-hook 'LaTeX-mode-hook 'text-mode-appearance)
+#+END_SRC
