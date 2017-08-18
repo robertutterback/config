@@ -26,18 +26,18 @@
     (defvar packages-list
       '(flymake-easy flymake-python-pyflakes pylint
                     ess writeroom-mode gnuplot gnuplot-mode solarized-theme
-                    magit markdown-mode tomatinho hlinum
+                    magit markdown-mode tomatinho hlinum nlinum ggtags cyberpunk-theme
                     irfc highlight-current-line highlight-symbol helm iedit)
       "List of packages I want installed at launch")
     ;; Maybe these are only available with marmalade?
     ;; Marmalade seems to be down as of 16082013 1502
     ;; python-mode pyflakes pymacs python-pylint
-    
+
     (defun packages-installed-p ()
       (loop for p in packages-list
             when (not (package-installed-p p)) do (return nil)
             finally (return t)))
-    
+
     (unless (packages-installed-p)
       ;; check for new packages (package versions)
       (message "%s" "Now refreshing package database...")
