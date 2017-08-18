@@ -1,5 +1,2 @@
 #+TITLE: Linux-Specific Configuration
 
-#+BEGIN_SRC emacs-lisp
-  (setq ispell-program-name "aspell")
-#+END_SRC
