@@ -1,11 +1,8 @@
 #+TITLE: Package Management
 
-  #+BEGIN_SRC emacs-lisp
-    (setq package-user-dir (concat config-dir "elpa"))
-  #+END_SRC
-
 * ELPA archive repositories
   #+BEGIN_SRC emacs-lisp
+    (setq package-user-dir (concat config-dir "elpa"))
       					(setq package-archives
       								'(("melpa"       . "http://melpa.milkbox.net/packages/")
       									("gnu"         . "http://elpa.gnu.org/packages/")
@@ -23,28 +20,29 @@
 
 * Automatically install a list of packages
   #+BEGIN_SRC emacs-lisp
-    (defvar packages-list
-      '(flymake-easy flymake-python-pyflakes pylint
-                    ess writeroom-mode gnuplot gnuplot-mode solarized-theme
-                    magit markdown-mode tomatinho hlinum nlinum ggtags cyberpunk-theme
-                    irfc highlight-current-line highlight-symbol helm iedit)
-      "List of packages I want installed at launch")
-    ;; Maybe these are only available with marmalade?
-    ;; Marmalade seems to be down as of 16082013 1502
-    ;; python-mode pyflakes pymacs python-pylint
+        (defvar packages-list
+          '(flymake-easy flymake-python-pyflakes pylint
+                        ess writeroom-mode gnuplot gnuplot-mode solarized-theme
+                        magit markdown-mode hlinum nlinum ggtags cyberpunk-theme
+                        irfc highlight-current-line highlight-symbol helm iedit
+                        yaml-mode)
+          "List of packages I want installed at launch")
+        ;; Maybe these are only available with marmalade?
+        ;; Marmalade seems to be down as of 16082013 1502
+        ;; python-mode pyflakes pymacs python-pylint
 
-    (defun packages-installed-p ()
-      (loop for p in packages-list
-            when (not (package-installed-p p)) do (return nil)
-            finally (return t)))
+        (defun packages-installed-p ()
+          (loop for p in packages-list
+                when (not (package-installed-p p)) do (return nil)
+                finally (return t)))
 
-    (unless (packages-installed-p)
-      ;; check for new packages (package versions)
-      (message "%s" "Now refreshing package database...")
-      (package-refresh-contents)
-      (message "%s" " done.")
-      ;; Install the missing packages
-      (dolist (p packages-list)
-        (when (not (package-installed-p p))
-          (package-install p))))
+        (unless (packages-installed-p)
+          ;; check for new packages (package versions)
+          (message "%s" "Now refreshing package database...")
+          (package-refresh-contents)
+          (message "%s" " done.")
+          ;; Install the missing packages
+          (dolist (p packages-list)
+            (when (not (package-installed-p p))
+              (package-install p))))
   #+END_SRC

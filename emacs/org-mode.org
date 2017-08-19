@@ -101,93 +101,77 @@
   (setq org-habit-graph-column 80)
   (setq org-log-into-drawer "LOGBOOK")
 #+END_SRC
-* Time Tracking and Pomodoro
+* Time Tracking
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'org-modules 'org-timer)
-  (autoload 'tomatinho "tomatinho" nil t)
   (setq org-timer-default-timer 25)
-  (setq org-timer-current-timer nil)
 
-  (add-hook 'org-clock-in-hook
-            (lambda ()
-              (if (not org-timer-current-timer)
-                  (org-timer-set-timer '(16)))))
-  (add-hook 'org-clock-out-hook
-            (lambda ()
-              (setq org-mode-line-string nil)))
-  ;; This will need to be changed, since growlnotify is OS X only
-  (add-hook 'org-timer-done-hook
-            (lambda ()
-              (start-process "orgmode" nil
-                             "/ usr / local / bin / growlnotify"
-                             "-t Orgmode -m 'Time to take a break'")))
   (add-hook 'org-after-todo-state-change-hook 'my-todo-state-change)
-  ;; (defun my-todo-state-change ()
-  ;;   (when (string-equal org-state "IN-PROGRESS")
-  ;;     (org-clock-in)))
   (defun my-todo-state-change ()
-    (cond ((string-equal org-state "IN-PROGRESS") (org-clock-in))
-          ((and (not (string-equal org-state "IN-PROGRESS"))
-                org-timer-current-timer)
-           (org-clock-out))))
+    (when (string-equal org-state "IN-PROGRESS")
+      (org-clock-in)))
 #+END_SRC
 * Habitica
 #+BEGIN_SRC emacs-lisp
-	(add-to-list 'load-path (concat config-dir "habitrpg/habitrpg"))
-	(require 'habitrpg)
-	;; API key/token set in private.org
+  (add-to-list 'load-path (concat config-dir "habitrpg/habitrpg"))
+  (require 'habitrpg) ;; API key/token set in private.org
 
-	(add-hook 'org-after-todo-state-change-hook 'habitrpg-change-existing 'append)
-	;; For adding tasks from org mode
-	(global-set-key (kbd "C-c C-x h") 'habitrpg-add)
-	;; Status buffer - use C-h m to see the keybindings
-	;; C-c C-c - upvote task or buy reward
-	;; C-c C-d - downvote task
-	;; t - bring up manage menu, which adds or deletes tasks
-	(global-set-key (kbd "<f9> a") 'habitrpg-status)
-	;; Continuously update a habit attache to a clocking task
-	;;(add-hook 'org-clock-in-hook 'habitrpg-clock-in)
-	;;(add-hook 'org-clock-out-hook 'habitrpg-clock-out)
-	;; List of habits to check for when clocking a task
-	;;(add-to-list 'hrpg-tags-list "PROGRAMMING")
-	;;(add-to-list 'hrpg-tags-list "WORK")
 
-	;; I don't want to constantly be adding things to Habitica; I want to
-	;; manually mark things. So I'm making a new function based on
-	;; habitrpg-add, though I don't understand some parts of it.
-	(defun habitrpg-change-existing ()
-		"Change state of an existing habitica task."
-		(interactive)
-		(save-excursion
-			(save-window-excursion
-				(if (string= major-mode 'org-agenda-mode) (org-agenda-switch-to))
-				(lexical-let* ((task (nth 4 (org-heading-components)))
-											 (state (nth 2 (org-heading-components)))
-											 (in-habit (org-entry-get-with-inheritance "IN_HABITRPG"))
-											 (last-done-string
-												(if (org-is-habit-p (point))
-														(car (sort 
-																	(org-habit-done-dates
-																	 (org-habit-parse-todo))
-																	'>)))
-												nil)
-											 (last-done-day 
-												(if (and (member "hrpgdaily" (org-get-tags-at))
-																 last-done-string)
-														(butlast
-														 (nthcdr 3
-																		 (decode-time 
-																			(days-to-time last-done-string
-																										))) 4)
-													nil))
-											 type)
-					(habitrpg-get-id task
-													 (lambda (id)
-														 (when (or
-																		(and (equal last-done-day 
-																								(reverse (butlast (calendar-current-date))))
-																				 (not (string= state "DONE")))
-																		(string= state "DONE"))
-															 (habitrpg-upvote id)
-															 (message "Task \"%s\" completed!" task))))))))
+  (add-hook 'org-after-todo-state-change-hook 'habitrpg-change-existing 'append)
+  ;; For adding tasks from org mode
+  (global-set-key (kbd "C-c C-x h") 'habitrpg-add)
+  ;; Status buffer - use C-h m to see the keybindings
+  ;; C-c C-c - upvote task or buy reward
+  ;; C-c C-d - downvote task
+  ;; t - bring up manage menu, which adds or deletes tasks
+  (global-set-key (kbd "<f9> a") 'habitrpg-status)
+  ;; Continuously update a habit attache to a clocking task
+  ;;(add-hook 'org-clock-in-hook 'habitrpg-clock-in)
+  ;;(add-hook 'org-clock-out-hook 'habitrpg-clock-out)
+  ;; List of habits to check for when clocking a task
+  ;;(add-to-list 'hrpg-tags-list "PROGRAMMING")
+  ;;(add-to-list 'hrpg-tags-list "WORK")
+
+  ;; I don't want to constantly be adding things to Habitica; I want to
+  ;; manually mark things. So I'm making a new function based on
+  ;; habitrpg-add, though I don't understand some parts of it.
+  (defun habitrpg-change-existing ()
+    "Change state of an existing habitica task."
+    (interactive)
+    (save-excursion
+      (save-window-excursion
+        (if (string= major-mode 'org-agenda-mode) (org-agenda-switch-to))
+        (lexical-let* ((task (nth 4 (org-heading-components)))
+                       (state (nth 2 (org-heading-components)))
+                       (in-habit (org-entry-get-with-inheritance "IN_HABITRPG"))
+                       (last-done-string
+                        (if (org-is-habit-p (point))
+                            (car (sort 
+                                  (org-habit-done-dates
+                                   (org-habit-parse-todo))
+                                  '>)))
+                        nil)
+                       (last-done-day 
+                        (if (and (member "hrpgdaily" (org-get-tags-at))
+                                 last-done-string)
+                            (butlast
+                             (nthcdr 3
+                                     (decode-time 
+                                      (days-to-time last-done-string
+                                                    ))) 4)
+                          nil))
+                       type)
+          (habitrpg-get-id task
+                           (lambda (id)
+                             (when (or
+                                    (and (equal last-done-day 
+                                                (reverse (butlast (calendar-current-date))))
+                                         (not (string= state "DONE")))
+                                    (string= state "DONE"))
+                               (habitrpg-upvote id)
+                               (message "Task \"%s\" completed!" task))))))))
 #+END_SRC
+(defun org-clocking-p ()
+  "Return t when clocking a task."
+  (not (equal (org-clocking-buffer) nil)))
+
