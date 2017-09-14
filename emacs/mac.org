@@ -1,5 +1,1 @@
 #+TITLE: MAC-Specific Configuration
-
-#+BEGIN_SRC emacs-lisp
-  (setq ispell-program-name "/opt/local/bin/ispell")
-#+END_SRC

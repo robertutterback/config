@@ -26,23 +26,27 @@
     (require 'uniquify)
     (require 'ansi-color)
     (require 'recentf)
-    (require 'nlinum)
   #+END_SRC
 - Miscellaneous Preferences (move?) 
   #+BEGIN_SRC emacs-lisp
-		(ido-mode 1)
-		(recentf-mode 1)
-		(menu-bar-mode -1)
-		(fset 'yes-or-no-p 'y-or-n-p)
-		(setq read-file-name-completion-ignore-case t)
-		(setq shell-file-name "bash")
-		(autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
-		(add-hook 'message-mode-hook 'turn-on-flyspell)
-		(setq visible-bell t)
-		(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-																						;(setq scroll-margin 10) ; scroll much sooner
-																						;(setq scroll-conservatively 5) ; scroll the minimum amount
-		(add-hook 'doc-view-mode-hook 'auto-revert-mode)
+    (ido-mode 1)
+    (recentf-mode 1)
+    (menu-bar-mode -1)
+    (fset 'yes-or-no-p 'y-or-n-p)
+    (setq read-file-name-completion-ignore-case t)
+    (setq shell-file-name "bash")
+    (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
+    (add-hook 'message-mode-hook 'turn-on-flyspell)
+    (setq visible-bell t)
+    (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+                                            ;(setq scroll-margin 10) ; scroll much sooner
+                                            ;(setq scroll-conservatively 5) ; scroll the minimum amount
+    (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+    (setq ispell-program-name "aspell")
+    ;; -C makes aspell accept run-together words
+    ;; --run-together-limit is maximum number of words that can be strung together.
+    (setq ispell-extra-args '("-C" "--sug-mode=ultra" "--run-together-limit=5"))
+
   #+END_SRC
 - Remote Editing
 #+BEGIN_SRC emacs-lisp
@@ -215,66 +219,6 @@ missing something.
 ;    (add-hook 'org-mode-hook #'yas/org-setup)
   #+END_SRC
 		
-* Habitica
-#+BEGIN_SRC emacs-lisp
-	(add-to-list 'load-path (concat config-dir "habitrpg/habitrpg"))
-	(require 'habitrpg)
-	;; API key/token set in private.org
-
-	(add-hook 'org-after-todo-state-change-hook 'habitrpg-change-existing 'append)
-	;; For adding tasks from org mode
-	(global-set-key (kbd "C-c C-x h") 'habitrpg-add)
-	;; Status buffer - use C-h m to see the keybindings
-	;; C-c C-c - upvote task or buy reward
-	;; C-c C-d - downvote task
-	;; t - bring up manage menu, which adds or deletes tasks
-	(global-set-key (kbd "<f9> a") 'habitrpg-status)
-	;; Continuously update a habit attache to a clocking task
-	;;(add-hook 'org-clock-in-hook 'habitrpg-clock-in)
-	;;(add-hook 'org-clock-out-hook 'habitrpg-clock-out)
-	;; List of habits to check for when clocking a task
-	;;(add-to-list 'hrpg-tags-list "PROGRAMMING")
-	;;(add-to-list 'hrpg-tags-list "WORK")
-
-	;; I don't want to constantly be adding things to Habitica; I want to
-	;; manually mark things. So I'm making a new function based on
-	;; habitrpg-add, though I don't understand some parts of it.
-	(defun habitrpg-change-existing ()
-		"Change state of an existing habitica task."
-		(interactive)
-		(save-excursion
-			(save-window-excursion
-				(if (string= major-mode 'org-agenda-mode) (org-agenda-switch-to))
-				(lexical-let* ((task (nth 4 (org-heading-components)))
-											 (state (nth 2 (org-heading-components)))
-											 (in-habit (org-entry-get-with-inheritance "IN_HABITRPG"))
-											 (last-done-string
-												(if (org-is-habit-p (point))
-														(car (sort 
-																	(org-habit-done-dates
-																	 (org-habit-parse-todo))
-																	'>)))
-												nil)
-											 (last-done-day 
-												(if (and (member "hrpgdaily" (org-get-tags-at))
-																 last-done-string)
-														(butlast
-														 (nthcdr 3
-																		 (decode-time 
-																			(days-to-time last-done-string
-																										))) 4)
-													nil))
-											 type)
-					(habitrpg-get-id task
-													 (lambda (id)
-														 (when (or
-																		(and (equal last-done-day 
-																								(reverse (butlast (calendar-current-date))))
-																				 (not (string= state "DONE")))
-																		(string= state "DONE"))
-															 (habitrpg-upvote id)
-															 (message "Task \"%s\" completed!" task))))))))
-#+END_SRC
 * Improvements
   :PROPERTIES:
   :CUSTOM_ID: todo
@@ -282,13 +226,6 @@ missing something.
 ** Packages to mess around with/utilize:
 *** TODO electric case (new-function => new_function)
 *** TODO string-inflection (underscore => UPCASE => camelCase)
-*** TODO Switch to aspell:
-#+BEGIN_SRC emacs-lisp
-  ;; (setq ispell-program-name "aspell")
-  ;;   ;; -C makes aspell accept run-together words
-  ;;   ;; --run-together-limit is maximum number of words that can be strung together.
-  ;;   (setq ispell-extra-args '("-C" "--sug-mode=ultra" "--run-together-limit=5"))
-#+END_SRC
 ** TODO Smex package
 ** TODO Make everything look pretty in the org files
 - Especially the way code is displayed

@@ -4,6 +4,7 @@ If any get too big, I'll put it in a separate file and load it from here.
 
 * General Programming Mode
 #+BEGIN_SRC emacs-lisp
+(require 'nlinum)
   (defun prepare-to-program ()
            "Set up a general programming environment"
   ;;          (flyspell-prog-mode)

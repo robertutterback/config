@@ -5,6 +5,8 @@
 alias ..='cd ..'
 alias ...='cd ../..'
 alias grep='grep --color=auto'
+alias la='ls -A'
+alias ll='ls -lhA'
 
 mkcd () { mkdir -p "$@" && cd "$@"; }
 
@@ -44,6 +46,12 @@ export PATH
 export LD_LIBRARY_PATH
 export EDITOR="emacsclient -nw"
 export ALTERNATE_EDITOR="vim"
+
+# Python setup
+VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/devel
+source /usr/local/bin/virtualenvwrapper.sh
 
 # For the future:
 # @TODO
