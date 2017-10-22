@@ -2,13 +2,13 @@
 
 * ELPA archive repositories
   #+BEGIN_SRC emacs-lisp
-    (setq package-user-dir (concat config-dir "elpa"))
-      					(setq package-archives
-      								'(("melpa"       . "http://melpa.milkbox.net/packages/")
-      									("gnu"         . "http://elpa.gnu.org/packages/")
-;      								 ("marmalade" . "http://marmalade-repo.org/packages/")
-  			; ("org"         . "http://orgmode.org/elpa/")))
-      																	))
+        (setq package-user-dir (concat config-dir "elpa"))
+                    (setq package-archives
+                          '(("melpa"       . "http://melpa.milkbox.net/packages/")
+                            ("gnu"         . "http://elpa.gnu.org/packages/")
+                            ("org" . "http://orgmode.org/elpa/")
+    ;                      ("marmalade" . "http://marmalade-repo.org/packages/")
+                                            ))
   #+END_SRC
 
 * Make packages easier to use
