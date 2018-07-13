@@ -1,0 +1,25 @@
+#+TITLE: My Emacs Configuration
+#+AUTHOR: Robert Utterback
+
+Previously I had my Emacs configuration is a whole set of =.org= files
+and used babael to load them. But I have come to the conclusion that
+such a setup is not really worthwhile since I'm writing the files in
+org mode anyway. So I've switched back to a single file and used it as
+an opportunity to reevaluate my config.
+
+Notes to self:
+- don't put keybindings in their own place. Put them in related sections.
+
+* Meta
+
+Stuff to help me configure, especially things that will keep my code clean and bug-free.
+load path, require package stuff
+load private.org here
+
+* General Editing
+* Remote Editing
+* Version Control
+* Programming
+* Org Mode
+* Appearance
+* Miscellaneous
